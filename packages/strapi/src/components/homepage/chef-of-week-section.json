@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_homepage_chef_of_week_sections",
+  "info": {
+    "displayName": "ChefOfWeekSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "chef": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::chef.chef"
+    }
+  },
+  "config": {}
+}

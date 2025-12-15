@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_dish_side_options",
+  "info": {
+    "displayName": "SideOption",
+    "icon": "plus"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
