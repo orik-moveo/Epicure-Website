@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dishes",
+  "info": {
+    "singularName": "dish",
+    "pluralName": "dishes",
+    "displayName": "Dish"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "dietType": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "spicy",
+        "vegeterian",
+        "vegan"
+      ]
+    },
+    "sides": {
+      "type": "component",
+      "component": "dish.side-option",
+      "repeatable": true
+    },
+    "changes": {
+      "type": "component",
+      "component": "dish.changes-option",
+      "repeatable": true
+    },
+    "restaurant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::restaurant.restaurant",
+      "inversedBy": "dishes"
+    }
+  }
+}
