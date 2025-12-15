@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_dish_changes_options",
+  "info": {
+    "displayName": "ChangesOption"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

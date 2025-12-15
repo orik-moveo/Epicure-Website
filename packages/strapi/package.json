@@ -1,0 +1,68 @@
+{
+  "name": "@my-app/strapi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Strapi application",
+  "nx": {
+    "name": "strapi",
+    "targets": {
+      "develop": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "strapi develop",
+          "cwd": "packages/strapi"
+        }
+      },
+      "start": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "strapi start",
+          "cwd": "packages/strapi"
+        }
+      },
+      "build": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "strapi build",
+          "cwd": "packages/strapi"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "strapi build",
+    "console": "strapi console",
+    "deploy": "strapi deploy",
+    "dev": "strapi develop",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+  },
+  "dependencies": {
+    "@strapi/plugin-cloud": "5.31.3",
+    "@strapi/plugin-users-permissions": "5.31.3",
+    "@strapi/provider-upload-cloudinary": "^5.31.3",
+    "@strapi/strapi": "5.31.3",
+    "better-sqlite3": "12.4.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.0.0 <=24.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": "40d259c3-3056-43e5-9c9e-a4aa34d411b7",
+    "installId": "c1e2e822d7aa5d006bfd8c594b512985ff0faabe80ac091d33c1277f52802f6a"
+  }
+}

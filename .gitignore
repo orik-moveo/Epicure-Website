@@ -40,3 +40,16 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+vite.config.*.timestamp*
+test-output
+
+# Strapi
+packages/strapi/.env
+packages/strapi/.strapi
+packages/strapi/.strapi-updater.json
+packages/strapi/.strapi-cloud.json
+packages/strapi/build
+packages/strapi/dist
+packages/strapi/exports
+packages/strapi/license.txt

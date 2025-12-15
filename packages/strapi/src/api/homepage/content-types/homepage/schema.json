@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "homepage.hero-section",
+      "repeatable": false
+    },
+    "popularRestaurants": {
+      "type": "component",
+      "component": "homepage.popular-restaurants-section",
+      "repeatable": false
+    },
+    "popularDishes": {
+      "type": "component",
+      "component": "homepage.popular-dishes-section",
+      "repeatable": false
+    },
+    "chefOfWeek": {
+      "type": "component",
+      "component": "homepage.chef-of-week-section",
+      "repeatable": false
+    },
+    "about": {
+      "type": "component",
+      "component": "homepage.about-section",
+      "repeatable": false
+    }
+  }
+}
