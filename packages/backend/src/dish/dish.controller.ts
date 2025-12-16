@@ -10,3 +10,5 @@ export class DishController extends BaseStrapiController {
     super();
   }
 }
+
+
