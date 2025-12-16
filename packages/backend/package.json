@@ -56,23 +56,52 @@
         ],
         "executor": "nx:noop"
       },
+      "dev": {
+        "continuous": true,
+        "executor": "nx:run-commands",
+        "defaultConfiguration": "development",
+        "options": {
+          "commands": [
+            "webpack-cli build --node-env=development --watch",
+            "nodemon --watch dist dist/main.js"
+          ],
+          "parallel": true,
+          "cwd": "packages/backend"
+        },
+        "configurations": {
+          "development": {
+            "commands": [
+              "webpack-cli build --node-env=development --watch",
+              "nodemon --watch dist dist/main.js"
+            ]
+          },
+          "production": {
+            "commands": [
+              "webpack-cli build --node-env=production --watch",
+              "NODE_ENV=production nodemon --watch dist dist/main.js"
+            ]
+          }
+        }
+      },
       "serve": {
         "continuous": true,
-        "executor": "@nx/js:node",
+        "executor": "nx:run-commands",
         "defaultConfiguration": "development",
         "dependsOn": [
           "build"
         ],
         "options": {
-          "buildTarget": "backend:build",
-          "runBuildTargetDependencies": false
+          "command": "node dist/main.js",
+          "cwd": "packages/backend"
         },
         "configurations": {
           "development": {
-            "buildTarget": "backend:build:development"
+            "dependsOn": ["build:development"],
+            "command": "NODE_ENV=development node dist/main.js"
           },
           "production": {
-            "buildTarget": "backend:build:production"
+            "dependsOn": ["build:production"],
+            "command": "NODE_ENV=production node dist/main.js"
           }
         }
       },
