@@ -10,3 +10,5 @@ export class RestaurantController extends BaseStrapiController {
     super();
   }
 }
+
+
