@@ -53,3 +53,7 @@ packages/strapi/build
 packages/strapi/dist
 packages/strapi/exports
 packages/strapi/license.txt
+
+# Next.js
+.next
+out
