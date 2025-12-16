@@ -6,6 +6,13 @@
   "nx": {
     "name": "strapi",
     "targets": {
+      "dev": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "strapi develop",
+          "cwd": "packages/strapi"
+        }
+      },
       "develop": {
         "executor": "nx:run-commands",
         "options": {
