@@ -2,7 +2,18 @@
   "name": "@my-app/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx run-many --target=dev --projects=backend,web,strapi --parallel",
+    "dev:backend": "nx dev backend",
+    "dev:web": "nx dev web",
+    "dev:strapi": "nx dev strapi",
+    "build": "nx run-many --target=build --projects=backend,web,strapi",
+    "build:backend": "nx build backend",
+    "build:web": "nx build web",
+    "build:strapi": "nx build strapi",
+    "test": "nx run-many --target=test --all",
+    "lint": "nx run-many --target=lint --all"
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",
