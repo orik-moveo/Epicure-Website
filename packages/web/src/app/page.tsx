@@ -1,5 +1,12 @@
-import { redirect } from 'next/navigation';
+import { getHomepage } from '../lib/api';
+import HomepageClient from './HomepageClient';
 
-export default function RootPage() {
-  redirect('/homepage');
+export default async function HomepagePage() {
+  const data = await getHomepage();
+
+  return (
+    <main>
+      <HomepageClient data={data} />
+    </main>
+  );
 }
