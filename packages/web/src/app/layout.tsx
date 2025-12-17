@@ -1,5 +1,7 @@
 import './global.css';
 import { Providers } from './providers';
+import Header from '../components/layout/header/Header';
+import Footer from '../components/layout/footer/Footer';
 
 export const metadata = {
   title: 'Epicure',
@@ -14,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
