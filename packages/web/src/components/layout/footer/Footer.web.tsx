@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './Footer.web.module.css';
+import styles from './Footer.web.module.scss';
 
 export default function FooterWeb() {
   return (

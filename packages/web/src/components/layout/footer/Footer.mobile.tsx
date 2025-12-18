@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './Footer.mobile.module.css';
+import styles from './Footer.mobile.module.scss';
 
 export default function FooterMobile() {
   return (

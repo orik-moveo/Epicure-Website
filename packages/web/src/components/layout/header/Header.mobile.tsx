@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './Header.mobile.module.css';
+import styles from './Header.mobile.module.scss';
 
 export default function HeaderMobile() {
   return (
