@@ -14,12 +14,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" style={{ margin: 0, padding: 0 }}>
+      <body style={{ margin: 0, padding: 0 }}>
         <Providers>
-          <Header />
-          {children}
-          <Footer />
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', margin: 0, padding: 0, width: '100%' }}>
+            <Header />
+            <main style={{ flex: 1, margin: 0, padding: 0, width: '100%' }}>
+              {children}
+            </main>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>
