@@ -1,0 +1,93 @@
+// Variables
+$color-black: #000000;
+$color-gray: #979797;
+$color-cream: #F9F4EA;
+$color-gold: #E19D1A;
+$color-offwhite: #FAFAFA;
+$color-white: #ffffff;
+$container-max: 1200px;
+$container-pad-desktop: 24px;
+$container-pad-mobile: 20px;
+$header-height: 64px;
+$header-pad-x: 32px;
+$header-pad-top: 17px;
+$header-pad-bottom: 16px;
+$header-gap: 16px;
+$search-width: 410px;
+$search-height: 41px;
+$search-pad-y: 6px;
+$search-pad-x: 12px;
+$search-radius: 4px;
+$search-border: 0.5px;
+$icon-size: 24px;
+$icon-gap: 16px;
+$font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+:root {
+  /* Colors */
+  --c-black: #{$color-black};
+  --c-gray: #{$color-gray};
+  --c-cream: #{$color-cream};
+  --c-gold: #{$color-gold};
+  --c-offwhite: #{$color-offwhite};
+
+  /* Layout */
+  --container-max: #{$container-max};
+  --container-pad-desktop: #{$container-pad-desktop};
+  --container-pad-mobile: #{$container-pad-mobile};
+
+  /* Header (Desktop) */
+  --header-height: #{$header-height};
+  --header-pad-x: #{$header-pad-x};
+  --header-pad-top: #{$header-pad-top};
+  --header-pad-bottom: #{$header-pad-bottom};
+  --header-gap: #{$header-gap};
+
+  /* Search (Desktop) */
+  --search-width: #{$search-width};
+  --search-height: #{$search-height};
+  --search-pad-y: #{$search-pad-y};
+  --search-pad-x: #{$search-pad-x};
+  --search-radius: #{$search-radius};
+  --search-border: #{$search-border};
+
+  /* Icons */
+  --icon-size: #{$icon-size};
+  --icon-gap: #{$icon-gap};
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  color: var(--c-black);
+  background: $color-white;
+  font-family: $font-family;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad-desktop);
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 var(--container-pad-mobile);
+  }
+}

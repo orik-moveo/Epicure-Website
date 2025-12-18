@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRef } from 'react';
-import styles from './Header.web.module.css';
+import styles from './Header.web.module.scss';
 
 export default function HeaderWeb() {
   const searchInputRef = useRef<HTMLInputElement>(null);

@@ -1,4 +1,5 @@
-import './global.css';
+import './global.scss';
+import styles from './layout.module.scss';
 import { Providers } from './providers';
 import Header from '../components/layout/header/Header';
 import Footer from '../components/layout/footer/Footer';
@@ -14,12 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" style={{ margin: 0, padding: 0 }}>
-      <body style={{ margin: 0, padding: 0 }}>
+    <html lang="en">
+      <body>
         <Providers>
-          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', margin: 0, padding: 0, width: '100%' }}>
+          <div className={styles.wrapper}>
             <Header />
-            <main style={{ flex: 1, margin: 0, padding: 0, width: '100%' }}>
+            <main className={styles.main}>
               {children}
             </main>
             <Footer />
