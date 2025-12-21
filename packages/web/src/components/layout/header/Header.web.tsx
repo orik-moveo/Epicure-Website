@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslation } from '../../../hooks/useTranslation';
 import styles from './Header.web.module.scss';
 
 export default function HeaderWeb() {
-  const t = useTranslations('header');
+  const nav = useTranslation('header.nav');
+  const search = useTranslation('header.search');
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearchBarClick = () => {
@@ -22,10 +23,10 @@ export default function HeaderWeb() {
 
         <nav className={styles.nav}>
           <span className={styles.navLink}>
-            {t('nav.restaurants')}
+            {nav.restaurants}
           </span>
           <span className={styles.navLink}>
-            {t('nav.chefs')}
+            {nav.chefs}
           </span>
         </nav>
 
@@ -35,7 +36,7 @@ export default function HeaderWeb() {
             <input
               ref={searchInputRef}
               type="text"
-              placeholder={t('search.placeholder')}
+              placeholder={search.placeholder}
               className={styles.searchInput}
             />
           </div>
