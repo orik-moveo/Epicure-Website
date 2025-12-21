@@ -1,23 +1,23 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslation } from '../../../hooks/useTranslation';
 import styles from './Footer.mobile.module.scss';
 
 export default function FooterMobile() {
-  const t = useTranslations('footer');
+  const footer = useTranslation('footer');
 
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.links}>
           <span className={styles.link}>
-            {t('contactUs')}
+            {footer.contactUs}
           </span>
           <span className={styles.link}>
-            {t('termOfUse')}
+            {footer.termOfUse}
           </span>
           <span className={styles.link}>
-            {t('privacyPolicy')}
+            {footer.privacyPolicy}
           </span>
         </div>
       </div>
