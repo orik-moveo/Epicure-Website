@@ -1,0 +1,57 @@
+// Variables
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray: #979797;
+$footer-height: 85px;
+$spacing-xl: 40px;
+$font-family: 'Helvetica Neue', sans-serif;
+$font-size-nav: 18px;
+$font-weight-thin: 100;
+$transition-fast: 0.2s;
+
+.footer {
+  width: 100%;
+  max-width: 1440px;
+  height: $footer-height;
+  background-color: $color-white;
+  border-top: 0.2px solid $color-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 127px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.links {
+  width: 419px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-xl;
+}
+
+.link {
+  font-family: $font-family;
+  font-size: $font-size-nav;
+  font-weight: $font-weight-thin;
+  color: $color-black;
+  text-decoration: none;
+  height: 22px;
+  transition: opacity $transition-fast;
+  white-space: nowrap;
+  cursor: default;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

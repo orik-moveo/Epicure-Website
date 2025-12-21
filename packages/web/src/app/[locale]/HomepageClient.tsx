@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAppDispatch } from '../lib/hooks';
-import { setHomepage } from '../lib/slices/homepageSlice';
+import { useAppDispatch } from '../../lib/hooks';
+import { setHomepage } from '../../lib/slices/homepageSlice';
 
 interface HomepageClientProps {
   data: any;

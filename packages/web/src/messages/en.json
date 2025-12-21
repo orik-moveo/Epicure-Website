@@ -1,0 +1,16 @@
+{
+  "header": {
+    "nav": {
+      "restaurants": "Restaurants",
+      "chefs": "Chefs"
+    },
+    "search": {
+      "placeholder": "Search for restaurant cuisine, chef"
+    }
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "termOfUse": "Term of Use",
+    "privacyPolicy": "Privacy Policy"
+  }
+}
