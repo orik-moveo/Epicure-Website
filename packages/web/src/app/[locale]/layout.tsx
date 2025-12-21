@@ -3,6 +3,8 @@ import styles from './layout.module.scss';
 import { Providers } from '../providers';
 import Header from '../../components/layout/header/Header';
 import Footer from '../../components/layout/footer/Footer';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 export const metadata = {
   title: 'Epicure',
@@ -17,16 +19,19 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const messages = await getMessages();
 
   return (
-    <Providers>
-      <div className={styles.wrapper}>
-        <Header />
-        <main className={styles.main}>
-          {children}
-        </main>
-        <Footer />
-      </div>
-    </Providers>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Providers>
+        <div className={styles.wrapper}>
+          <Header />
+          <main className={styles.main}>
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </Providers>
+    </NextIntlClientProvider>
   );
 }
