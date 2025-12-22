@@ -1,5 +1,6 @@
 'use client';
 
+import Card from '../Card/Card';
 import styles from './RestaurantCard.module.scss';
 
 interface RestaurantCardProps {
@@ -11,7 +12,6 @@ interface RestaurantCardProps {
   name: string;
   chefName: string;
   rating: number;
-  isMobile?: boolean;
 }
 
 export default function RestaurantCard({
@@ -19,13 +19,7 @@ export default function RestaurantCard({
   name,
   chefName,
   rating,
-  isMobile = false,
 }: RestaurantCardProps) {
-  if (!image?.url && !isMobile) {
-    console.error('RestaurantCard: image.url is missing', image);
-    return null;
-  }
-
   // Render star rating (1-5)
   const renderStars = () => {
     const stars = [];
@@ -57,27 +51,11 @@ export default function RestaurantCard({
   };
 
   return (
-    <div className={isMobile ? styles.mobileCard : styles.card}>
-      <div
-        className={
-          isMobile ? styles.mobileImageContainer : styles.imageContainer
-        }
-      >
-        {image?.url && (
-          <img src={image.url} alt={name} className={styles.image} />
-        )}
-      </div>
-      <div
-        className={isMobile ? styles.mobileBottomSection : styles.bottomSection}
-      >
-        <div className={styles.nameChefContainer}>
-          <h3 className={styles.restaurantName}>{name}</h3>
-          <p className={styles.chefName}>{chefName}</p>
-        </div>
-        {!isMobile && (
-          <div className={styles.starsContainer}>{renderStars()}</div>
-        )}
-      </div>
-    </div>
+    <Card
+      image={image}
+      title={name}
+      subtitle={chefName}
+      bottomContent={renderStars()}
+    />
   );
 }
