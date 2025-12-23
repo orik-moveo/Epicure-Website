@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../lib/hooks';
 import { setHomepage } from '../../lib/slices/homepageSlice';
 import Hero from '../../components/homepage/hero/Hero';
 import PopularRestaurants from '../../components/homepage/popularRestaurants/PopularRestaurants';
+import PopularDishes from '../../components/homepage/popularDishes/PopularDishes';
 
 interface HomepageClientProps {
   data: any;
@@ -19,11 +20,13 @@ export default function HomepageClient({ data }: HomepageClientProps) {
 
   const hero = data?.data?.hero || null;
   const popularRestaurants = data?.data?.popularRestaurants || null;
+  const popularDishes = data?.data?.popularDishes || null;
 
   return (
     <>
       {hero && <Hero {...hero} />}
       {popularRestaurants && <PopularRestaurants {...popularRestaurants} />}
+      {popularDishes && <PopularDishes {...popularDishes} />}
     </>
   );
 }

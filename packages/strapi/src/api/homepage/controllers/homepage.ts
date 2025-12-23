@@ -34,6 +34,7 @@ export default factories.createCoreController('api::homepage.homepage', {
             dishes: {
               populate: {
                 image: true,
+                ingredients: true,
               },
             },
           },
