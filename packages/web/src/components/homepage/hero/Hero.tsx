@@ -14,7 +14,11 @@ interface HeroProps {
   };
 }
 
-export default function Hero({ title, searchPlaceholder, backgroundImage }: HeroProps) {
+export default function Hero({
+  title,
+  searchPlaceholder,
+  backgroundImage,
+}: HeroProps) {
   const isMobile = useIsMobile();
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -32,7 +36,7 @@ export default function Hero({ title, searchPlaceholder, backgroundImage }: Hero
   }
 
   return (
-    <section 
+    <section
       className={isMobile ? styles.mobile : styles.desktop}
       style={{
         backgroundImage: `url(${backgroundImage.url})`,
@@ -40,7 +44,11 @@ export default function Hero({ title, searchPlaceholder, backgroundImage }: Hero
     >
       <div className={styles.centerInfo}>
         <h1 className={styles.title}>{title}</h1>
-        <div className={styles.searchBar} onClick={handleSearchBarClick} tabIndex={0}>
+        <div
+          className={styles.searchBar}
+          onClick={handleSearchBarClick}
+          tabIndex={0}
+        >
           <img src="/assets/icons/search.svg" alt="Search" />
           <input
             ref={searchInputRef}
@@ -53,6 +61,3 @@ export default function Hero({ title, searchPlaceholder, backgroundImage }: Hero
     </section>
   );
 }
-
-
-

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_dish_ingredients",
+  "info": {
+    "displayName": "ingredient"
+  },
+  "options": {},
+  "attributes": {
+    "ingredient": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
