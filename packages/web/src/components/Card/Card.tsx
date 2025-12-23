@@ -2,6 +2,11 @@
 
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { CardVariant } from './Card.types';
+import {
+  getCardClass,
+  getImageContainerClass,
+  getBottomSectionClass,
+} from './Card.utils';
 import styles from './Card.module.scss';
 
 interface CardImage {
@@ -33,27 +38,9 @@ export default function Card({
     return null;
   }
 
-  const cardClass = isMobile
-    ? variant === CardVariant.Dish
-      ? `${styles.mobileCard} ${styles.mobileCardDish}`
-      : styles.mobileCard
-    : variant === CardVariant.Dish
-    ? `${styles.card} ${styles.cardDish}`
-    : styles.card;
-  const imageContainerClass = isMobile
-    ? variant === CardVariant.Dish
-      ? `${styles.mobileImageContainer} ${styles.mobileImageContainerDish}`
-      : styles.mobileImageContainer
-    : variant === CardVariant.Dish
-    ? `${styles.imageContainer} ${styles.cardDishImageContainer}`
-    : styles.imageContainer;
-  const bottomSectionClass = isMobile
-    ? variant === CardVariant.Dish
-      ? `${styles.mobileBottomSection} ${styles.mobileBottomSectionDish}`
-      : styles.mobileBottomSection
-    : variant === CardVariant.Dish
-    ? styles.bottomSectionDish
-    : styles.bottomSection;
+  const cardClass = getCardClass(isMobile, variant);
+  const imageContainerClass = getImageContainerClass(isMobile, variant);
+  const bottomSectionClass = getBottomSectionClass(isMobile, variant);
 
   return (
     <div className={cardClass}>
