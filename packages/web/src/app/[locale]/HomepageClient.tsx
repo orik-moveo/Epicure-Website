@@ -6,6 +6,7 @@ import { setHomepage } from '../../lib/slices/homepageSlice';
 import Hero from '../../components/homepage/hero/Hero';
 import PopularRestaurants from '../../components/homepage/popularRestaurants/PopularRestaurants';
 import PopularDishes from '../../components/homepage/popularDishes/PopularDishes';
+import IconLegend from '../../components/homepage/iconLegend/IconLegend';
 
 interface HomepageClientProps {
   data: any;
@@ -27,6 +28,7 @@ export default function HomepageClient({ data }: HomepageClientProps) {
       {hero && <Hero {...hero} />}
       {popularRestaurants && <PopularRestaurants {...popularRestaurants} />}
       {popularDishes && <PopularDishes {...popularDishes} />}
+      <IconLegend />
     </>
   );
 }
