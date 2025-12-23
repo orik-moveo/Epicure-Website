@@ -1,22 +1,11 @@
 'use client';
 
 import { useIsMobile } from '../../../hooks/useIsMobile';
+import { useTranslation } from '../../../hooks/useTranslation';
+import { Restaurant } from '../../../app/types/restaurants.types';
 import CardsCarousel from '../../CardsCarousel/CardsCarousel';
 import RestaurantCard from '../../restaurants/RestaurantCard';
 import styles from './PopularRestaurants.module.scss';
-
-interface Restaurant {
-  image: Array<{
-    url: string;
-    width?: number;
-    height?: number;
-  }>;
-  name: string;
-  chef: {
-    name: string;
-  };
-  rating: number;
-}
 
 interface PopularRestaurantsProps {
   title: string;
@@ -28,6 +17,7 @@ export default function PopularRestaurants({
   restaurants,
 }: PopularRestaurantsProps) {
   const isMobile = useIsMobile();
+  const popularRestaurants = useTranslation('popularRestaurants');
 
   if (!restaurants || restaurants.length === 0) {
     return null;
@@ -55,7 +45,7 @@ export default function PopularRestaurants({
       </div>
       {!isMobile && (
         <div className={styles.allRestaurantsLink}>
-          All Restaurants &gt;&gt;
+          {popularRestaurants.allRestaurants}
         </div>
       )}
     </section>
