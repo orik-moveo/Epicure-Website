@@ -15,12 +15,22 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   box-sizing: border-box;
 }
 
+.cardDish {
+  width: 380px;
+  height: 654px;
+}
+
 .imageContainer {
   width: 379px;
   height: 235.8222198486328px;
   overflow: hidden;
   opacity: 1;
   box-sizing: border-box;
+}
+
+.cardDishImageContainer {
+  width: 380px;
+  height: 306px;
 }
 
 .image {
@@ -44,6 +54,20 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   box-sizing: border-box;
 }
 
+.bottomSectionDish {
+  width: 380px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  gap: 8px;
+  background-color: $color-bg-beige;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
 .titleSubtitleContainer {
   width: 145px;
   height: 85px;
@@ -53,6 +77,24 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   gap: 8px;
   opacity: 1;
   box-sizing: border-box;
+}
+
+.bottomSectionDish .titleSubtitleContainer {
+  width: 100%;
+  height: auto;
+  padding: 0 16px;
+}
+
+.middleContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.bottomSectionDish .middleContent {
+  min-height: 31px;
 }
 
 .title {
@@ -78,6 +120,12 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   opacity: 1;
 }
 
+.bottomSectionDish .subtitle {
+  width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+}
+
 .bottomContent {
   width: 216px;
   height: 40px;
@@ -87,6 +135,11 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   gap: 4px;
   opacity: 1;
   box-sizing: border-box;
+}
+
+.bottomSectionDish .bottomContent {
+  margin-top: auto;
+  width: 100%;
 }
 
 // Mobile styles
@@ -113,8 +166,9 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   height: 81px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 16px;
   gap: 8px;
   background-color: $color-bg-beige;
   opacity: 1;
@@ -122,18 +176,73 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
 }
 
 .mobileCard .titleSubtitleContainer {
-  width: 104px;
-  height: 49px;
+  width: 100%;
+  height: auto;
+  align-items: flex-start;
   gap: 8px;
 }
 
 .mobileCard .title {
   font-size: 18px;
   font-weight: 400;
+  text-align: left;
 }
 
 .mobileCard .subtitle {
   font-size: 16px;
   font-weight: 100;
+  text-align: left;
 }
 
+// Mobile dish card styles
+.mobileCardDish {
+  width: 245px;
+  height: 340px;
+}
+
+.mobileImageContainerDish {
+  width: 245px;
+  height: 152px;
+}
+
+.mobileBottomSectionDish {
+  width: 245px;
+  height: 236px;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 8px;
+}
+
+.mobileCardDish .titleSubtitleContainer {
+  width: 100%;
+  height: auto;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.mobileCardDish .title {
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.mobileCardDish .subtitle {
+  font-size: 16px;
+  font-weight: 100;
+  text-align: left;
+}
+
+.mobileCardDish .middleContent {
+  width: 30px;
+  height: 23px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.mobileCardDish .bottomContent {
+  width: auto;
+  height: auto;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: auto;
+}
