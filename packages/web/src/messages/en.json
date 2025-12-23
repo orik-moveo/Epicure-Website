@@ -18,5 +18,11 @@
   },
   "popularDishes": {
     "title": "SIGNATURE DISH OF:"
+  },
+  "iconLegend": {
+    "title": "THE MEANING OF OUR ICONS:",
+    "spicy": "Spicy",
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan"
   }
 }
