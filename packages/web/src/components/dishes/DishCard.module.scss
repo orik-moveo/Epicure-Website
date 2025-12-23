@@ -1,0 +1,97 @@
+// Variables
+$color-black: #000000;
+
+// Diet icon styles
+.dietIcon {
+  width: 40px;
+  height: 31px;
+  display: block;
+  flex-shrink: 0;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+// Price container styles
+.priceContainer {
+  width: 287px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.priceContainer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: calc(50% - 30px);
+  height: 1px;
+  background-color: #808080;
+  opacity: 1;
+}
+
+.priceContainer::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: calc(50% - 30px);
+  height: 1px;
+  background-color: #808080;
+  opacity: 1;
+}
+
+.shekelIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.price {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  line-height: 1;
+  text-align: center;
+  color: $color-black;
+  opacity: 1;
+}
+
+// Mobile dish card styles
+.mobileDishCard {
+  :global(.dietIcon) {
+    width: 30px;
+    height: 23px;
+  }
+
+  .priceContainer {
+    width: auto;
+    height: auto;
+    gap: 4px;
+    justify-content: flex-start;
+  }
+
+  .priceContainer::before,
+  .priceContainer::after {
+    display: none;
+  }
+
+  .shekelIcon {
+    width: 8px;
+    height: 11px;
+  }
+
+  .price {
+    font-weight: 400;
+    font-size: 18px;
+    text-align: left;
+  }
+}
+

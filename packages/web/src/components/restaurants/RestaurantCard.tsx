@@ -1,19 +1,15 @@
 'use client';
 
 import Card from '../Card/Card';
+import { CardVariant } from '../Card/Card.types';
+import { Restaurant } from '../../app/types/restaurants.types';
 import { renderStars } from './restaurants.utils';
 import styles from './RestaurantCard.module.scss';
 
-interface RestaurantCardProps {
-  image: {
-    url: string;
-    width?: number;
-    height?: number;
-  };
-  name: string;
-  chefName: string;
-  rating: number;
-}
+type RestaurantCardProps = Omit<Restaurant, 'image' | 'chef'> & {
+  image: Restaurant['image'][0];
+  chefName: Restaurant['chef']['name'];
+};
 
 export default function RestaurantCard({
   image,
@@ -26,6 +22,7 @@ export default function RestaurantCard({
       image={image}
       title={name}
       subtitle={chefName}
+      variant={CardVariant.Restaurant}
       bottomContent={
         <div className={styles.starsContainer}>
           {renderStars({ rating, starClassName: styles.star })}
