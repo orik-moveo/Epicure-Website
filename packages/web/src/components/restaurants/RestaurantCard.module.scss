@@ -1,0 +1,21 @@
+// Variables
+$color-black: #000000;
+
+// Restaurant-specific styles (star rating)
+.starsContainer {
+  width: 216px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.star {
+  width: 39px;
+  height: 37px;
+  display: block;
+  flex-shrink: 0;
+}
