@@ -10,6 +10,16 @@ export interface DishChangesOption extends Struct.ComponentSchema {
   };
 }
 
+export interface DishIngredient extends Struct.ComponentSchema {
+  collectionName: 'components_dish_ingredients';
+  info: {
+    displayName: 'ingredient';
+  };
+  attributes: {
+    ingredient: Schema.Attribute.String;
+  };
+}
+
 export interface DishSideOption extends Struct.ComponentSchema {
   collectionName: 'components_dish_side_options';
   info: {
@@ -122,6 +132,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'dish.changes-option': DishChangesOption;
+      'dish.ingredient': DishIngredient;
       'dish.side-option': DishSideOption;
       'homepage.about-section': HomepageAboutSection;
       'homepage.chef-of-week-section': HomepageChefOfWeekSection;
