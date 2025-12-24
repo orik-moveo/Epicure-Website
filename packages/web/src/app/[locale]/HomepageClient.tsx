@@ -8,6 +8,7 @@ import PopularRestaurants from '../../components/homepage/popularRestaurants/Pop
 import PopularDishes from '../../components/homepage/popularDishes/PopularDishes';
 import IconLegend from '../../components/homepage/iconLegend/IconLegend';
 import ChefOfWeek from '../../components/homepage/chefOfWeek/ChefOfWeek';
+import AboutUs from '../../components/homepage/aboutUs/AboutUs';
 
 interface HomepageClientProps {
   data: any;
@@ -24,6 +25,7 @@ export default function HomepageClient({ data }: HomepageClientProps) {
   const popularRestaurants = data?.data?.popularRestaurants || null;
   const popularDishes = data?.data?.popularDishes || null;
   const chefOfWeek = data?.data?.chefOfWeek || null;
+  const about = data?.data?.about || null;
 
   return (
     <>
@@ -32,6 +34,7 @@ export default function HomepageClient({ data }: HomepageClientProps) {
       {popularDishes && <PopularDishes {...popularDishes} />}
       <IconLegend />
       {chefOfWeek && <ChefOfWeek {...chefOfWeek} />}
+      {about && <AboutUs title={about.title} description={about.body} />}
     </>
   );
 }
