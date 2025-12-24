@@ -20,6 +20,11 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   height: 654px;
 }
 
+.cardChefRestaurant {
+  width: 231px;
+  height: 357px;
+}
+
 .imageContainer {
   width: 379px;
   height: 235.8222198486328px;
@@ -31,6 +36,11 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
 .cardDishImageContainer {
   width: 380px;
   height: 306px;
+}
+
+.cardChefRestaurantImageContainer {
+  width: 231px;
+  height: 220px;
 }
 
 .image {
@@ -62,6 +72,20 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   align-items: center;
   padding-top: 24px;
   padding-bottom: 8px;
+  gap: 8px;
+  background-color: $color-bg-beige;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.bottomSectionChefRestaurant {
+  width: 231px;
+  height: 137px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
   gap: 8px;
   background-color: $color-bg-beige;
   opacity: 1;
@@ -118,6 +142,14 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   text-align: center;
   color: $color-black;
   opacity: 1;
+}
+
+.cardChefRestaurant .subtitle {
+  display: none;
+}
+
+.cardChefRestaurant .title {
+  font-size: 30px;
 }
 
 .bottomSectionDish .subtitle {
@@ -245,4 +277,34 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   align-items: center;
   justify-content: flex-start;
   margin-top: auto;
+}
+
+// Mobile chef restaurant card styles
+.mobileCardChefRestaurant {
+  width: 245px;
+  height: 233px;
+}
+
+.mobileImageContainerChefRestaurant {
+  width: 245px;
+  height: 152px;
+}
+
+.mobileBottomSectionChefRestaurant {
+  width: 245px;
+  height: 81px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 16px;
+  gap: 8px;
+}
+
+.mobileCardChefRestaurant .subtitle {
+  display: none;
+}
+
+.mobileCardChefRestaurant .title {
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
 }
