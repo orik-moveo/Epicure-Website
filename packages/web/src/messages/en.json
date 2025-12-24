@@ -24,5 +24,9 @@
     "spicy": "Spicy",
     "vegetarian": "Vegetarian",
     "vegan": "Vegan"
+  },
+  "chefOfWeek": {
+    "title": "CHEF OF THE WEEK:",
+    "restaurants": "Restaurants"
   }
 }
