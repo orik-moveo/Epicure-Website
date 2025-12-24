@@ -55,14 +55,16 @@ export default function Card({
             <div className={styles.titleSubtitleContainer}>
               <h3 className={styles.title}>{title}</h3>
               <p className={styles.subtitle}>{subtitle}</p>
-              {middleContent ? (
-                <div className={styles.middleContent}>{middleContent}</div>
-              ) : (
-                <div className={styles.middleContent}></div>
-              )}
             </div>
-            {bottomContent && (
-              <div className={styles.bottomContent}>{bottomContent}</div>
+            {(middleContent || bottomContent) && (
+              <div className={styles.mobileDishBottomWrapper}>
+                {middleContent && (
+                  <div className={styles.middleContent}>{middleContent}</div>
+                )}
+                {bottomContent && (
+                  <div className={styles.bottomContent}>{bottomContent}</div>
+                )}
+              </div>
             )}
           </>
         ) : (
