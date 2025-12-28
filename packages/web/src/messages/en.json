@@ -1,0 +1,32 @@
+{
+  "header": {
+    "nav": {
+      "restaurants": "Restaurants",
+      "chefs": "Chefs"
+    },
+    "search": {
+      "placeholder": "Search for restaurant cuisine, chef"
+    }
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "termOfUse": "Term of Use",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "popularRestaurants": {
+    "allRestaurants": "All Restaurants >>"
+  },
+  "popularDishes": {
+    "title": "SIGNATURE DISH OF:"
+  },
+  "iconLegend": {
+    "title": "THE MEANING OF OUR ICONS:",
+    "spicy": "Spicy",
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan"
+  },
+  "chefOfWeek": {
+    "title": "CHEF OF THE WEEK:",
+    "restaurants": "Restaurants"
+  }
+}

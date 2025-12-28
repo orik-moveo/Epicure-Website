@@ -1,0 +1,22 @@
+// Desktop styles
+.desktop {
+  display: flex;
+  gap: 24px;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+// Mobile styles - horizontal scroll carousel
+.mobile {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  margin-left: 20px;
+  padding-left: 0;
+  padding-right: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
