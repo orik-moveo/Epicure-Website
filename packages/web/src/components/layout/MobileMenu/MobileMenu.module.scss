@@ -24,7 +24,16 @@ $transition-speed: 0.3s;
   z-index: 200;
   display: flex;
   flex-direction: column;
-  animation: slideInLeft $transition-speed ease-out;
+  transform: translateX(-100%);
+}
+
+.menu.open {
+  animation: slideInLeft $transition-speed ease-out forwards;
+}
+
+.menu.closed {
+  animation: slideOutLeft $transition-speed ease-out forwards;
+  pointer-events: none;
 }
 
 @keyframes slideInLeft {
@@ -33,6 +42,15 @@ $transition-speed: 0.3s;
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }
 

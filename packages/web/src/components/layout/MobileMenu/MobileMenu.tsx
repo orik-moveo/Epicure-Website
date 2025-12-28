@@ -12,12 +12,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const nav = useTranslation('header.nav');
   const footer = useTranslation('footer');
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    <div className={styles.menu}>
+    <div className={`${styles.menu} ${isOpen ? styles.open : styles.closed}`}>
       <div className={styles.topRow}>
         <button
           className={styles.closeButton}
