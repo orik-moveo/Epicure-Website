@@ -18,7 +18,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   return (
     <div className={styles.menu}>
-      {/* Top row with X icon */}
       <div className={styles.topRow}>
         <button
           className={styles.closeButton}
@@ -29,16 +28,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </button>
       </div>
 
-      {/* Navigation items */}
       <div className={styles.navSection}>
         <span className={styles.navItem}>{nav.restaurants}</span>
         <span className={styles.navItem}>{nav.chefs}</span>
       </div>
 
-      {/* Divider */}
       <div className={styles.divider}></div>
 
-      {/* Footer links */}
       <div className={styles.footerSection}>
         <span className={styles.footerItem}>{footer.contactUs}</span>
         <span className={styles.footerItem}>{footer.termOfUse}</span>
