@@ -98,6 +98,11 @@ $transition-speed: 0.3s;
   color: $color-black;
   text-align: left;
   line-height: 1.5;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .footerSection {

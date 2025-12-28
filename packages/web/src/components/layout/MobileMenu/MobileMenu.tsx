@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import { useTranslation } from '../../../hooks/useTranslation';
 import styles from './MobileMenu.module.scss';
 
@@ -9,6 +11,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const locale = useLocale();
   const nav = useTranslation('header.nav');
   const footer = useTranslation('footer');
 
@@ -25,7 +28,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       </div>
 
       <div className={styles.navSection}>
-        <span className={styles.navItem}>{nav.restaurants}</span>
+        <Link
+          href={`/${locale}/restaurants`}
+          className={styles.navItem}
+          onClick={onClose}
+        >
+          {nav.restaurants}
+        </Link>
         <span className={styles.navItem}>{nav.chefs}</span>
       </div>
 
