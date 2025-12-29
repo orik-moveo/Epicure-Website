@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useTranslation } from '../../hooks/useTranslation';
-import { FilterOption } from '../../app/types/filters.types';
+import {
+  FilterOption,
+  primaryFilterOptions,
+} from '../../app/types/filters.types';
 import styles from './PrimaryFilters.module.scss';
 
 export interface PrimaryFiltersProps {
@@ -18,18 +21,11 @@ export default function PrimaryFilters({
   const isMobile = useIsMobile();
   const filters = useTranslation('restaurants.filters');
   const [activeFilter, setActiveFilter] = useState<FilterOption>(defaultFilter);
+  const filterOptions = primaryFilterOptions;
 
   if (isMobile === null) {
     return null;
   }
-
-  const filterOptions: FilterOption[] = [
-    'all',
-    'new',
-    'mostPopular',
-    'openNow',
-    'mapView',
-  ];
 
   const handleFilterClick = (filter: FilterOption) => {
     setActiveFilter(filter);
