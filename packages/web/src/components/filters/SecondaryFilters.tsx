@@ -1,7 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useTranslation } from '../../hooks/useTranslation';
+import { secondaryFilterOptions } from '../../app/types/secondaryFilters.types';
 import styles from './SecondaryFilters.module.scss';
 
 export interface SecondaryFiltersProps {
@@ -11,12 +13,11 @@ export interface SecondaryFiltersProps {
 export default function SecondaryFilters({}: SecondaryFiltersProps) {
   const isMobile = useIsMobile();
   const filters = useTranslation('restaurants.secondaryFilters');
+  const filterOptions = secondaryFilterOptions;
 
   if (isMobile === null) {
     return null;
   }
-
-  const filterOptions = ['priceRange', 'distance', 'rating'];
 
   const getFilterLabel = (filter: string): string => {
     return filters[filter] || '';
@@ -33,9 +34,11 @@ export default function SecondaryFilters({}: SecondaryFiltersProps) {
           }}
         >
           {getFilterLabel(filter)}
-          <img
+          <Image
             src="/assets/icons/arrow.svg"
             alt=""
+            width={24}
+            height={24}
             className={styles.arrowIcon}
           />
         </button>
@@ -43,4 +46,3 @@ export default function SecondaryFilters({}: SecondaryFiltersProps) {
     </div>
   );
 }
-

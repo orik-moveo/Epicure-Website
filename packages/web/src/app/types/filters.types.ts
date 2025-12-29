@@ -4,3 +4,11 @@ export type FilterOption =
   | 'mostPopular'
   | 'openNow'
   | 'mapView';
+
+export const primaryFilterOptions: FilterOption[] = [
+  'all',
+  'new',
+  'mostPopular',
+  'openNow',
+  'mapView',
+];
