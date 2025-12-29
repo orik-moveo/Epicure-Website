@@ -55,6 +55,11 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   color: $color-black;
   cursor: default;
   opacity: 1;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 // Mobile styles
