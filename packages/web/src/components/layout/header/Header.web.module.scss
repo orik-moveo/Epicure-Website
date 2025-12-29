@@ -90,9 +90,10 @@ $font-weight-thin: 100;
       position: absolute;
       bottom: -4px;
       left: 0;
-      right: 0;
-      height: 2px;
-      background-color: $color-active-link;
+      width: 87px;
+      height: 0;
+      border-bottom: 1.8px solid #de9200e5;
+      background-color: transparent;
     }
   }
 }
@@ -151,7 +152,8 @@ $font-weight-thin: 100;
   width: 0;
   opacity: 0;
   padding: 0;
-  transition: width $transition-fast, opacity $transition-fast, padding $transition-fast;
+  transition: width $transition-fast, opacity $transition-fast,
+    padding $transition-fast;
 
   &::placeholder {
     color: $color-black;
