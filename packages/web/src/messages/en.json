@@ -28,5 +28,20 @@
   "chefOfWeek": {
     "title": "CHEF OF THE WEEK:",
     "restaurants": "Restaurants"
+  },
+  "restaurants": {
+    "title": "Restaurants",
+    "filters": {
+      "all": "All",
+      "new": "New",
+      "mostPopular": "Most Popular",
+      "openNow": "Open Now",
+      "mapView": "Map View"
+    },
+    "secondaryFilters": {
+      "priceRange": "Price Range",
+      "distance": "Distance",
+      "rating": "Rating"
+    }
   }
 }

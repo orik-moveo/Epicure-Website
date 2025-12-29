@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
 import { Restaurant } from '../../../app/types/restaurants.types';
@@ -16,6 +18,7 @@ export default function PopularRestaurants({
   title,
   restaurants,
 }: PopularRestaurantsProps) {
+  const locale = useLocale();
   const isMobile = useIsMobile();
   const popularRestaurants = useTranslation('popularRestaurants');
 
@@ -44,9 +47,12 @@ export default function PopularRestaurants({
         </CardsCarousel>
       </div>
       {!isMobile && (
-        <div className={styles.allRestaurantsLink}>
+        <Link
+          href={`/${locale}/restaurants`}
+          className={styles.allRestaurantsLink}
+        >
           {popularRestaurants.allRestaurants}
-        </div>
+        </Link>
       )}
     </section>
   );

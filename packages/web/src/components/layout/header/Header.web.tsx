@@ -2,13 +2,19 @@
 
 import Link from 'next/link';
 import { useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useTranslation } from '../../../hooks/useTranslation';
 import styles from './Header.web.module.scss';
 
 export default function HeaderWeb() {
+  const locale = useLocale();
+  const pathname = usePathname();
   const nav = useTranslation('header.nav');
   const search = useTranslation('header.search');
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const isRestaurantsPage = pathname?.includes('/restaurants');
 
   const handleSearchBarClick = () => {
     searchInputRef.current?.focus();
@@ -22,16 +28,23 @@ export default function HeaderWeb() {
         </Link>
 
         <nav className={styles.nav}>
-          <span className={styles.navLink}>
+          <Link
+            href={`/${locale}/restaurants`}
+            className={`${styles.navLink} ${
+              isRestaurantsPage ? styles.active : ''
+            }`}
+          >
             {nav.restaurants}
-          </span>
-          <span className={styles.navLink}>
-            {nav.chefs}
-          </span>
+          </Link>
+          <span className={styles.navLink}>{nav.chefs}</span>
         </nav>
 
         <div className={styles.rightSection}>
-          <div className={styles.searchBar} onClick={handleSearchBarClick} tabIndex={0}>
+          <div
+            className={styles.searchBar}
+            onClick={handleSearchBarClick}
+            tabIndex={0}
+          >
             <img src="/assets/icons/search.svg" alt="Search" />
             <input
               ref={searchInputRef}
