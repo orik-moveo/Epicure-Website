@@ -56,6 +56,10 @@
     },
     "maxPrice": {
       "type": "decimal"
+    },
+    "isPopular": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
