@@ -3,6 +3,7 @@
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
 import { Restaurant } from '../../types/restaurants.types';
+import { FilterOption } from '../../types/filters.types';
 import RestaurantCard from '../../../components/restaurants/RestaurantCard';
 import PrimaryFilters from '../../../components/filters/PrimaryFilters';
 import SecondaryFilters from '../../../components/filters/SecondaryFilters';
@@ -12,9 +13,13 @@ interface RestaurantsClientProps {
   data: {
     data?: Restaurant[];
   };
+  filter: FilterOption;
 }
 
-export default function RestaurantsClient({ data }: RestaurantsClientProps) {
+export default function RestaurantsClient({
+  data,
+  filter,
+}: RestaurantsClientProps) {
   const isMobile = useIsMobile();
   const translations = useTranslation('restaurants');
 
@@ -24,27 +29,27 @@ export default function RestaurantsClient({ data }: RestaurantsClientProps) {
 
   const restaurants = data?.data || [];
 
-  if (restaurants.length === 0) {
-    return null;
-  }
-
   return (
     <section className={isMobile ? styles.mobile : styles.desktop}>
       {isMobile && <h2 className={styles.title}>{translations.title}</h2>}
-      <PrimaryFilters />
+      <PrimaryFilters activeFilter={filter} />
       <SecondaryFilters />
-      <div className={styles.cardsContainer}>
-        {restaurants.map((restaurant, index) => (
-          <div key={index} className={styles.cardWrapper}>
-            <RestaurantCard
-              image={restaurant.image[0]}
-              name={restaurant.name}
-              chefName={restaurant.chef.name}
-              rating={restaurant.rating}
-            />
-          </div>
-        ))}
-      </div>
+      {filter === 'mapView' ? (
+        <div>Map View Placeholder</div>
+      ) : (
+        <div className={styles.cardsContainer}>
+          {restaurants.map((restaurant, index) => (
+            <div key={index} className={styles.cardWrapper}>
+              <RestaurantCard
+                image={restaurant.image[0]}
+                name={restaurant.name}
+                chefName={restaurant.chef.name}
+                rating={restaurant.rating}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

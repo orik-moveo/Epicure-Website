@@ -11,8 +11,13 @@ export async function getHomepage() {
   return response.json();
 }
 
-export async function getRestaurants() {
-  const response = await fetch(`${BACKEND_URL}/api/restaurants`, {
+export async function getRestaurants(filter?: string) {
+  const url = new URL(`${BACKEND_URL}/api/restaurants`);
+  if (filter && filter !== 'all') {
+    url.searchParams.set('filter', filter);
+  }
+
+  const response = await fetch(url.toString(), {
     cache: 'no-store',
   });
   if (!response.ok) {
