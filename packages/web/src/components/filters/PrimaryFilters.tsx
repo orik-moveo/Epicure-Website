@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useTranslation } from '../../hooks/useTranslation';
 import {
@@ -10,17 +10,15 @@ import {
 import styles from './PrimaryFilters.module.scss';
 
 export interface PrimaryFiltersProps {
-  defaultFilter?: FilterOption;
-  onFilterChange?: (filter: FilterOption) => void;
+  activeFilter: FilterOption;
 }
 
-export default function PrimaryFilters({
-  defaultFilter = 'all',
-  onFilterChange,
-}: PrimaryFiltersProps) {
+export default function PrimaryFilters({ activeFilter }: PrimaryFiltersProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const isMobile = useIsMobile();
   const filters = useTranslation('restaurants.filters');
-  const [activeFilter, setActiveFilter] = useState<FilterOption>(defaultFilter);
   const filterOptions = primaryFilterOptions;
 
   if (isMobile === null) {
@@ -28,8 +26,23 @@ export default function PrimaryFilters({
   }
 
   const handleFilterClick = (filter: FilterOption) => {
-    setActiveFilter(filter);
-    onFilterChange?.(filter);
+    // Create new URLSearchParams object from current search params
+    const params = new URLSearchParams(searchParams.toString());
+
+    // Only add filter param if it's not 'all' (cleaner URLs)
+    if (filter === 'all') {
+      params.delete('filter');
+    } else {
+      params.set('filter', filter);
+    }
+
+    // Construct new URL with updated params
+    const newUrl = params.toString()
+      ? `${pathname}?${params.toString()}`
+      : pathname;
+
+    // Update URL using router.replace (no history entry)
+    router.replace(newUrl);
   };
 
   const getFilterLabel = (filter: FilterOption): string => {

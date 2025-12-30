@@ -1,4 +1,10 @@
-import { Get, Param, NotFoundException, BadGatewayException, ServiceUnavailableException } from '@nestjs/common';
+import {
+  Get,
+  Param,
+  NotFoundException,
+  BadGatewayException,
+  ServiceUnavailableException,
+} from '@nestjs/common';
 
 export interface StrapiService {
   getAll(): Promise<any>;
@@ -27,10 +33,10 @@ export abstract class BaseStrapiController {
     }
   }
 
-  private handleError(error: any, id?: string) {
+  protected handleError(error: any, id?: string) {
     if (error.status === 404 || error.response?.status === 404) {
-      const resource = id 
-        ? `${this.resourcePath} with id ${id}` 
+      const resource = id
+        ? `${this.resourcePath} with id ${id}`
         : this.resourcePath;
       throw new NotFoundException(`${resource} not found`);
     }
@@ -46,11 +52,3 @@ export abstract class BaseStrapiController {
     throw error;
   }
 }
-
-
-
-
-
-
-
-
