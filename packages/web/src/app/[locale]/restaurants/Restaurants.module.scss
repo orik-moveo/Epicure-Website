@@ -19,8 +19,8 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   width: 1200px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0;
+  justify-content: flex-start;
+  gap: 31px;
   row-gap: 40px;
   opacity: 1;
   box-sizing: border-box;

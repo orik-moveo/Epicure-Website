@@ -14,8 +14,10 @@
     "name": {
       "type": "string"
     },
-    "description": {
-      "type": "blocks"
+    "ingredients": {
+      "type": "component",
+      "component": "dish.ingredient",
+      "repeatable": true
     },
     "image": {
       "type": "media",

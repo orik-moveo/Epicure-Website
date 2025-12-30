@@ -12,3 +12,12 @@ export const primaryFilterOptions: FilterOption[] = [
   'openNow',
   'mapView',
 ];
+
+export function isValidFilterOption(
+  value: string | string[] | undefined
+): value is FilterOption {
+  if (typeof value !== 'string') {
+    return false;
+  }
+  return primaryFilterOptions.includes(value as FilterOption);
+}

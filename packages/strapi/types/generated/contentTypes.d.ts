@@ -476,7 +476,6 @@ export interface ApiDishDish extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks;
     dietType: Schema.Attribute.Enumeration<
       ['none', 'spicy', 'vegeterian', 'vegan']
     >;
@@ -484,6 +483,7 @@ export interface ApiDishDish extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    ingredients: Schema.Attribute.Component<'dish.ingredient', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::dish.dish'> &
       Schema.Attribute.Private;
