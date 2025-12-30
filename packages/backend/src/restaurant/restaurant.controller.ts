@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { BaseStrapiController } from '../common/base-strapi.controller';
 import { RestaurantService } from './restaurant.service';
 
@@ -9,11 +9,13 @@ export class RestaurantController extends BaseStrapiController {
   constructor(protected readonly service: RestaurantService) {
     super();
   }
+
+  @Get()
+  override async getAll(@Query('filter') filter?: string) {
+    try {
+      return await this.service.getAll(filter);
+    } catch (error: any) {
+      return this.handleError(error);
+    }
+  }
 }
-
-
-
-
-
-
-
