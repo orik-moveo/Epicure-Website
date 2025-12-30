@@ -36,3 +36,22 @@ export function renderStars({
 
   return stars;
 }
+
+export const TEL_AVIV_CENTER = {
+  lat: 32.0853,
+  lng: 34.7818,
+} as const;
+
+export const MAP_OPTIONS = {
+  disableDefaultUI: false, // Keep default UI
+  zoomControl: true, // Show zoom controls
+  streetViewControl: false, // Hide street view control
+  mapTypeControl: false, // Hide map type control (satellite/terrain)
+  fullscreenControl: false, // Hide fullscreen control
+} as const;
+
+export const MAP_ZOOM_LEVEL = 13;
+
+export function getGoogleMapsApiKey(): string | null {
+  return process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || null;
+}

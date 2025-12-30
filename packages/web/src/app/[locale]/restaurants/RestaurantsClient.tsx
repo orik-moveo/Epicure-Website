@@ -2,9 +2,10 @@
 
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
-import { Restaurant } from '../../types/restaurants.types';
+import { Restaurant, RestaurantLocation } from '../../types/restaurants.types';
 import { FilterOption } from '../../types/filters.types';
 import RestaurantCard from '../../../components/restaurants/RestaurantCard';
+import RestaurantMapView from '../../../components/restaurants/RestaurantMapView';
 import PrimaryFilters from '../../../components/filters/PrimaryFilters';
 import SecondaryFilters from '../../../components/filters/SecondaryFilters';
 import styles from './Restaurants.module.scss';
@@ -13,11 +14,15 @@ interface RestaurantsClientProps {
   data: {
     data?: Restaurant[];
   };
+  locationsData?: {
+    data?: RestaurantLocation[];
+  };
   filter: FilterOption;
 }
 
 export default function RestaurantsClient({
   data,
+  locationsData,
   filter,
 }: RestaurantsClientProps) {
   const isMobile = useIsMobile();
@@ -35,7 +40,7 @@ export default function RestaurantsClient({
       <PrimaryFilters activeFilter={filter} />
       <SecondaryFilters />
       {filter === 'mapView' ? (
-        <div>Map View Placeholder</div>
+        <RestaurantMapView locations={locationsData?.data || []} />
       ) : (
         <div className={styles.cardsContainer}>
           {restaurants.map((restaurant, index) => (

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { strapiConfig } from '../config/strapi.config';
-import { filterOpenNow } from './utils/restaurant.utils';
+import { filterOpenNow, extractLocationData } from './utils/restaurant.utils';
 
 @Injectable()
 export class RestaurantService {
@@ -50,5 +50,11 @@ export class RestaurantService {
     const url = `${this.baseUrl}/api/${this.resource}/${id}?populate=*`;
     const response = await firstValueFrom(this.httpService.get(url));
     return response.data;
+  }
+
+  async getLocations(): Promise<any> {
+    const url = `${this.baseUrl}/api/${this.resource}?populate=location`;
+    const response = await firstValueFrom(this.httpService.get(url));
+    return extractLocationData(response.data);
   }
 }

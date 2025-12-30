@@ -18,6 +18,12 @@ export interface Location {
   lng: number;
 }
 
+export interface RestaurantLocation {
+  id: number;
+  name: string;
+  location: Location;
+}
+
 export interface Restaurant {
   image: Array<{
     url: string;
