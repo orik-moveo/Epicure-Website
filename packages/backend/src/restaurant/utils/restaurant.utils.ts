@@ -79,3 +79,30 @@ export function filterOpenNow(data: RestaurantData): RestaurantData {
 
   return { data: openRestaurants };
 }
+
+//Extract location data from restaurant data
+export function extractLocationData(data: any): any {
+  if (!data?.data || !Array.isArray(data.data)) {
+    return { data: [], lastModified: new Date().toISOString() };
+  }
+
+  const locations = data.data
+    .filter((restaurant: any) => restaurant.location)
+    .map((restaurant: any) => ({
+      id: restaurant.id,
+      name: restaurant.name,
+      location: restaurant.location,
+    }));
+
+  // Get the latest updatedAt from restaurants for lastModified
+  const lastModified =
+    data.data
+      .map((r: any) => r.updatedAt)
+      .sort()
+      .reverse()[0] || new Date().toISOString();
+
+  return {
+    data: locations,
+    lastModified,
+  };
+}

@@ -1,4 +1,4 @@
-import { getRestaurants } from '../../../lib/api';
+import { getRestaurants, getRestaurantLocations } from '../../../lib/api';
 import RestaurantsClient from './RestaurantsClient';
 import { FilterOption, isValidFilterOption } from '../../types/filters.types';
 
@@ -23,9 +23,16 @@ export default async function RestaurantsPage({
   const data =
     filter === 'mapView' ? { data: [] } : await getRestaurants(filter);
 
+  const locationsData =
+    filter === 'mapView' ? await getRestaurantLocations() : null;
+
   return (
     <main>
-      <RestaurantsClient data={data} filter={filter} />
+      <RestaurantsClient
+        data={data}
+        locationsData={locationsData}
+        filter={filter}
+      />
     </main>
   );
 }

@@ -18,4 +18,13 @@ export class RestaurantController extends BaseStrapiController {
       return this.handleError(error);
     }
   }
+
+  @Get('locations')
+  async getLocations() {
+    try {
+      return await this.service.getLocations();
+    } catch (error: any) {
+      return this.handleError(error);
+    }
+  }
 }
