@@ -5,9 +5,9 @@ import { useTranslation } from '../../../hooks/useTranslation';
 import { Restaurant, RestaurantLocation } from '../../types/restaurants.types';
 import { FilterOption } from '../../types/filters.types';
 import RestaurantCard from '../../../components/restaurants/RestaurantCard';
-import RestaurantMapView from '../../../components/restaurants/RestaurantMapView';
-import PrimaryFilters from '../../../components/filters/PrimaryFilters';
-import SecondaryFilters from '../../../components/filters/SecondaryFilters';
+import RestaurantMapView from '../../../components/filters/primaryFilters/mapView/RestaurantMapView';
+import PrimaryFilters from '../../../components/filters/primaryFilters/PrimaryFilters';
+import SecondaryFilters from '../../../components/filters/secondaryFilters/SecondaryFilters';
 import styles from './Restaurants.module.scss';
 
 interface RestaurantsClientProps {

@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useIsMobile } from '../../hooks/useIsMobile';
-import { useTranslation } from '../../hooks/useTranslation';
-import { secondaryFilterOptions } from '../../app/types/secondaryFilters.types';
+import { useIsMobile } from '../../../hooks/useIsMobile';
+import { useTranslation } from '../../../hooks/useTranslation';
+import { secondaryFilterOptions } from '../../../app/types/secondaryFilters.types';
 import styles from './SecondaryFilters.module.scss';
 
 export interface SecondaryFiltersProps {
