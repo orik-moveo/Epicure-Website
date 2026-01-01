@@ -4,6 +4,7 @@ import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useTranslation } from '../../../../hooks/useTranslation';
 import { useRatingFilter } from '../../../../hooks/useRatingFilter';
 import { useDropdown } from '../../../../hooks/useDropdown';
+import { ClickAwayListener } from '@mui/material';
 import FilterToggleButton from '../../../ui/FilterToggleButton/FilterToggleButton';
 import { renderStars } from '../../../restaurants/restaurants.utils';
 import styles from './RatingFilter.module.scss';
@@ -12,7 +13,7 @@ export default function RatingFilter() {
   const isMobile = useIsMobile();
   const translations = useTranslation('restaurants.secondaryFilters');
   const { selectedRatings, handleRatingToggle } = useRatingFilter();
-  const { isOpen, toggle, dropdownRef } = useDropdown();
+  const { isOpen, toggle, close } = useDropdown();
 
   if (isMobile === null) {
     return null;
@@ -21,40 +22,39 @@ export default function RatingFilter() {
   const ratingOptions = [1, 2, 3, 4, 5];
 
   return (
-    <div
-      ref={dropdownRef}
-      className={isMobile ? styles.mobile : styles.desktop}
-    >
-      <FilterToggleButton
-        label={translations.rating || 'Rating'}
-        isOpen={isOpen}
-        onClick={toggle}
-        isMobile={isMobile}
-      />
+    <ClickAwayListener onClickAway={close}>
+      <div className={isMobile ? styles.mobile : styles.desktop}>
+        <FilterToggleButton
+          label={translations.rating || 'Rating'}
+          isOpen={isOpen}
+          onClick={toggle}
+          isMobile={isMobile}
+        />
 
-      {isOpen && (
-        <div className={styles.dropdown}>
-          <h3 className={styles.title}>{translations.rating || 'Rating'}</h3>
-          {ratingOptions.map((rating) => (
-            <div
-              key={rating}
-              className={styles.ratingRow}
-              onClick={() => handleRatingToggle(rating)}
-            >
-              <input
-                type="checkbox"
-                checked={selectedRatings.includes(rating)}
-                readOnly
-                className={styles.checkbox}
-                aria-label={`${rating} star rating`}
-              />
-              <div className={styles.starsContainer}>
-                {renderStars({ rating, starClassName: styles.star })}
+        {isOpen && (
+          <div className={styles.dropdown}>
+            <h3 className={styles.title}>{translations.rating || 'Rating'}</h3>
+            {ratingOptions.map((rating) => (
+              <div
+                key={rating}
+                className={styles.ratingRow}
+                onClick={() => handleRatingToggle(rating)}
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedRatings.includes(rating)}
+                  readOnly
+                  className={styles.checkbox}
+                  aria-label={`${rating} star rating`}
+                />
+                <div className={styles.starsContainer}>
+                  {renderStars({ rating, starClassName: styles.star })}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </ClickAwayListener>
   );
 }
