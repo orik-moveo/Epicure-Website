@@ -21,6 +21,9 @@ $icon-size: 24px;
   gap: $spacing-lg;
   opacity: 1;
   box-sizing: border-box;
+  position: sticky;
+  top: 114px;
+  z-index: 98;
 }
 
 .filterButton {
@@ -62,6 +65,9 @@ $icon-size: 24px;
   padding: 0 $spacing-md;
   opacity: 1;
   box-sizing: border-box;
+  position: sticky;
+  top: 68px;
+  z-index: 98;
 }
 
 .mobile .filterButton {
