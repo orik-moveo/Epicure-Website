@@ -1,0 +1,50 @@
+// Variables
+$color-black: #000000;
+$font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+  Arial, sans-serif;
+$font-size-nav: 18px;
+$font-weight-thin: 100;
+$transition-fast: 0.2s;
+$icon-size: 24px;
+
+.filterButton {
+  font-family: $font-family;
+  font-weight: $font-weight-thin;
+  color: $color-black;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 60px;
+  padding: 0 16px;
+  transition: background-color $transition-fast, opacity $transition-fast;
+  opacity: 1;
+  box-sizing: border-box;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &.isOpen {
+    background-color: #d0cfcf;
+  }
+
+  // Desktop styles
+  &.desktop {
+    font-size: $font-size-nav;
+  }
+
+  // Mobile styles
+  &.mobile {
+    font-size: 14px;
+  }
+}
+
+.arrowIcon {
+  width: $icon-size;
+  height: $icon-size;
+  display: block;
+}
