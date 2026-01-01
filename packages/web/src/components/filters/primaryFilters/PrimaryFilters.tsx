@@ -1,12 +1,12 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useIsMobile } from '../../hooks/useIsMobile';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useIsMobile } from '../../../hooks/useIsMobile';
+import { useTranslation } from '../../../hooks/useTranslation';
 import {
   FilterOption,
   primaryFilterOptions,
-} from '../../app/types/filters.types';
+} from '../../../app/types/filters.types';
 import styles from './PrimaryFilters.module.scss';
 
 export interface PrimaryFiltersProps {

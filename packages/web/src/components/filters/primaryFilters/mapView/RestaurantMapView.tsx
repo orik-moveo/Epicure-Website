@@ -1,14 +1,14 @@
 'use client';
 
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { RestaurantLocation } from '../../app/types/restaurants.types';
+import { RestaurantLocation } from '../../../../app/types/restaurants.types';
 import CustomMapMarker from './CustomMapMarker';
 import {
   TEL_AVIV_CENTER,
   MAP_OPTIONS,
   MAP_ZOOM_LEVEL,
   getGoogleMapsApiKey,
-} from './restaurants.utils';
+} from '../../../../components/restaurants/restaurants.utils';
 import styles from './RestaurantMapView.module.scss';
 
 interface RestaurantMapViewProps {
