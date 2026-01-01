@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { parseRatingParam } from '../components/filters/secondaryFilters/utils/filterRestaurants';
 
 export function useRatingFilter() {
   const router = useRouter();
@@ -13,15 +14,8 @@ export function useRatingFilter() {
   // Sync selected ratings from URL on mount and when URL changes
   useEffect(() => {
     const ratingParam = searchParams.get('rating');
-    if (ratingParam) {
-      const ratings = ratingParam
-        .split(',')
-        .map((r) => parseInt(r.trim(), 10))
-        .filter((r) => !isNaN(r) && r >= 1 && r <= 5);
-      setSelectedRatings(ratings);
-    } else {
-      setSelectedRatings([]);
-    }
+    const ratings = parseRatingParam(ratingParam);
+    setSelectedRatings(ratings);
   }, [searchParams]);
 
   const updateUrlParams = (ratings: number[]) => {

@@ -34,13 +34,7 @@ export default function SecondaryFilters({}: SecondaryFiltersProps) {
 
         // Keep other filters as placeholder buttons
         return (
-          <button
-            key={filter}
-            className={styles.filterButton}
-            onClick={() => {
-              // Reserved for future dropdown logic
-            }}
-          >
+          <button key={filter} className={styles.filterButton}>
             {getFilterLabel(filter)}
             <Image
               src="/assets/icons/arrow.svg"
