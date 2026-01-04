@@ -42,6 +42,10 @@
       "priceRange": "Price Range",
       "priceRangeSelected": "Price Range Selected",
       "distance": "Distance",
+      "distanceSelected": "Distance Selected",
+      "myLocation": "my location",
+      "locationRequired": "Please share your location to use distance filter",
+      "shareLocation": "Share Location",
       "rating": "Rating",
       "clear": "CLEAR"
     }

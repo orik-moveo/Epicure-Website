@@ -14,6 +14,7 @@ import {
   parseRatingParam,
   filterRestaurantsByPriceRange,
   parseRangeParam,
+  filterRestaurantsByDistance,
 } from '../../../components/filters/secondaryFilters/utils/filterRestaurants';
 import styles from './Restaurants.module.scss';
 
@@ -50,6 +51,16 @@ export default function RestaurantsClient({
   const priceRangeParam = searchParams.get('priceRange');
   const priceRange = parseRangeParam(priceRangeParam);
 
+  // Parse distance filter from URL
+  const distanceParam = searchParams.get('distance');
+  const distanceRange = parseRangeParam(distanceParam);
+
+  // Parse user location from URL
+  const userLatParam = searchParams.get('userLat');
+  const userLngParam = searchParams.get('userLng');
+  const userLat = userLatParam ? parseFloat(userLatParam) : null;
+  const userLng = userLngParam ? parseFloat(userLngParam) : null;
+
   // Apply filters sequentially
   let restaurants = filterRestaurantsByRating(allRestaurants, selectedRatings);
 
@@ -57,6 +68,13 @@ export default function RestaurantsClient({
     restaurants,
     priceRange?.[0] ?? null,
     priceRange?.[1] ?? null
+  );
+
+  restaurants = filterRestaurantsByDistance(
+    restaurants,
+    userLat,
+    userLng,
+    distanceRange?.[1] ?? null
   );
 
   return (

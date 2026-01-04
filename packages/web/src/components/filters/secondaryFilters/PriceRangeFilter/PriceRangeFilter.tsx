@@ -18,7 +18,7 @@ export default function PriceRangeFilter() {
       initialValue={[MIN, MAX]}
       formatValue={(v) => `₪${v}`}
       titleKey={translations.priceRangeSelected || 'Price Range Selected'}
-      step={10}
+      stepSize={10}
     />
   );
 }

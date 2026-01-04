@@ -1,18 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { Slider } from '@mui/material';
+import { useState } from 'react';
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useDropdown } from '../../../../hooks/useDropdown';
 import { ClickAwayListener } from '@mui/material';
 import FilterToggleButton from '../../../ui/FilterToggleButton/FilterToggleButton';
-import {
-  parseRangeParam,
-  formatRangeForUrl,
-  isDefaultRange,
-} from '../utils/filterRestaurants';
 import { useTranslation } from '../../../../hooks/useTranslation';
+import { useRangeFromUrl } from './hooks/useRangeFromUrl';
+import { useUrlUpdater } from './hooks/useUrlUpdater';
+import { getInitialRange } from './helpers/rangeHelpers';
+import ErrorDisplay from './components/ErrorDisplay';
+import SliderContent from './components/SliderContent';
 import styles from './RangeFilter.module.scss';
 
 export interface RangeFilterProps {
@@ -23,7 +21,13 @@ export interface RangeFilterProps {
   initialValue?: [number, number];
   formatValue?: (value: number) => string;
   titleKey?: string;
-  step?: number;
+  stepSize?: number;
+  singleHandle?: boolean;
+  leftLabel?: string;
+  hideSubtitle?: boolean;
+  error?: string;
+  onRetryLocation?: () => void;
+  isLoadingLocation?: boolean;
 }
 
 export default function RangeFilter({
@@ -34,58 +38,39 @@ export default function RangeFilter({
   initialValue,
   formatValue = (v) => v.toString(),
   titleKey,
-  step = 1,
+  stepSize = 1,
+  singleHandle = false,
+  leftLabel,
+  hideSubtitle = false,
+  error,
+  onRetryLocation,
+  isLoadingLocation = false,
 }: RangeFilterProps) {
   const isMobile = useIsMobile();
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const { isOpen, toggle, close } = useDropdown();
   const translations = useTranslation('restaurants.secondaryFilters');
 
-  const [range, setRange] = useState<[number, number]>(
-    initialValue || [min, max]
-  );
+  const [range, setRange] = useRangeFromUrl({
+    queryParam,
+    min,
+    max,
+    initialValue,
+    singleHandle,
+  });
   const [isClearPressed, setIsClearPressed] = useState(false);
+  const updateUrl = useUrlUpdater({ queryParam, min, max, initialValue });
 
-  useEffect(() => {
-    const param = searchParams.get(queryParam);
-    const parsed = parseRangeParam(param);
-    setRange(parsed || initialValue || [min, max]);
-  }, [searchParams, queryParam, initialValue, min, max]);
-
-  const updateUrl = (newRange: [number, number]) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (isDefaultRange(newRange, min, max, initialValue)) {
-      params.delete(queryParam);
-    } else {
-      params.set(queryParam, formatRangeForUrl(newRange));
-    }
-
-    const newUrl = params.toString()
-      ? `${pathname}?${params.toString()}`
-      : pathname;
-
-    router.replace(newUrl);
+  const handleChange = (newRange: [number, number]) => {
+    setRange(newRange);
   };
 
-  const handleChange = (_event: Event, newValue: number | number[]) => {
-    const [minVal, maxVal] = newValue as number[];
-    setRange([minVal, maxVal]);
-  };
-
-  const handleChangeCommitted = (
-    _event: Event | React.SyntheticEvent,
-    newValue: number | number[]
-  ) => {
-    const [minVal, maxVal] = newValue as number[];
-    updateUrl([minVal, maxVal]);
+  const handleChangeCommitted = (newRange: [number, number]) => {
+    updateUrl(newRange);
   };
 
   const handleClear = () => {
     setIsClearPressed(true);
-    const defaultRange: [number, number] = initialValue || [min, max];
+    const defaultRange = getInitialRange(min, max, initialValue, singleHandle);
     setRange(defaultRange);
     updateUrl(defaultRange);
     setTimeout(() => setIsClearPressed(false), 200);
@@ -108,37 +93,36 @@ export default function RangeFilter({
         {isOpen && (
           <div className={styles.dropdown}>
             {titleKey && <h3 className={styles.title}>{titleKey}</h3>}
-            <div className={styles.subtitle}>
-              {formatValue(min)} – {formatValue(max)}
-            </div>
-            <div className={styles.sliderContainer}>
-              <div className={styles.currentMinValue}>
-                {formatValue(range[0])}
-              </div>
-              <div className={styles.sliderWrapper}>
-                <Slider
+            {error ? (
+              <ErrorDisplay
+                error={error}
+                onRetry={onRetryLocation}
+                isLoading={isLoadingLocation}
+              />
+            ) : (
+              <>
+                <SliderContent
+                  range={range}
                   min={min}
                   max={max}
-                  step={step}
-                  value={range}
+                  stepSize={stepSize}
+                  singleHandle={singleHandle}
+                  leftLabel={leftLabel}
+                  formatValue={formatValue}
+                  hideSubtitle={hideSubtitle}
                   onChange={handleChange}
                   onChangeCommitted={handleChangeCommitted}
-                  valueLabelDisplay="off"
-                  className={styles.slider}
                 />
-              </div>
-              <div className={styles.currentMaxValue}>
-                {formatValue(range[1])}
-              </div>
-            </div>
-            <button
-              className={`${styles.clearButton} ${
-                isClearPressed ? styles.clearButtonActive : ''
-              }`}
-              onClick={handleClear}
-            >
-              {translations.clear || 'CLEAR'}
-            </button>
+                <button
+                  className={`${styles.clearButton} ${
+                    isClearPressed ? styles.clearButtonActive : ''
+                  }`}
+                  onClick={handleClear}
+                >
+                  {translations.clear || 'CLEAR'}
+                </button>
+              </>
+            )}
           </div>
         )}
       </div>

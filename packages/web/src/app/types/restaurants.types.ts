@@ -18,6 +18,11 @@ export interface Location {
   lng: number;
 }
 
+export interface UserLocation {
+  lat: number;
+  lng: number;
+}
+
 export interface RestaurantLocation {
   id: number;
   name: string;

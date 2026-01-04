@@ -1,3 +1,4 @@
+import { distance, point } from '@turf/turf';
 import { Restaurant } from '../../../../app/types/restaurants.types';
 
 export function filterRestaurantsByRating(
@@ -74,6 +75,36 @@ export function isDefaultRange(
     return range[0] === min && range[1] === max;
   }
   return range[0] === initialValue[0] && range[1] === initialValue[1];
+}
+
+export function filterRestaurantsByDistance(
+  restaurants: Restaurant[],
+  userLat: number | null,
+  userLng: number | null,
+  maxDistance: number | null
+): Restaurant[] {
+  if (!userLat || !userLng || maxDistance === null) {
+    return restaurants;
+  }
+
+  const userPoint = point([userLng, userLat]);
+
+  return restaurants.filter((restaurant) => {
+    if (!restaurant.location) {
+      return false;
+    }
+
+    const restaurantPoint = point([
+      restaurant.location.lng,
+      restaurant.location.lat,
+    ]);
+
+    const distanceInKm = distance(userPoint, restaurantPoint, {
+      units: 'kilometers',
+    });
+
+    return distanceInKm >= 0 && distanceInKm <= maxDistance;
+  });
 }
 
 // for future use?
