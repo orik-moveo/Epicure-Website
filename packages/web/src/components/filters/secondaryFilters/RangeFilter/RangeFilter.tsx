@@ -12,6 +12,7 @@ import {
   formatRangeForUrl,
   isDefaultRange,
 } from '../utils/filterRestaurants';
+import { useTranslation } from '../../../../hooks/useTranslation';
 import styles from './RangeFilter.module.scss';
 
 export interface RangeFilterProps {
@@ -22,6 +23,7 @@ export interface RangeFilterProps {
   initialValue?: [number, number];
   formatValue?: (value: number) => string;
   titleKey?: string;
+  step?: number;
 }
 
 export default function RangeFilter({
@@ -32,16 +34,19 @@ export default function RangeFilter({
   initialValue,
   formatValue = (v) => v.toString(),
   titleKey,
+  step = 1,
 }: RangeFilterProps) {
   const isMobile = useIsMobile();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { isOpen, toggle, close } = useDropdown();
+  const translations = useTranslation('restaurants.secondaryFilters');
 
   const [range, setRange] = useState<[number, number]>(
     initialValue || [min, max]
   );
+  const [isClearPressed, setIsClearPressed] = useState(false);
 
   useEffect(() => {
     const param = searchParams.get(queryParam);
@@ -78,6 +83,14 @@ export default function RangeFilter({
     updateUrl([minVal, maxVal]);
   };
 
+  const handleClear = () => {
+    setIsClearPressed(true);
+    const defaultRange: [number, number] = initialValue || [min, max];
+    setRange(defaultRange);
+    updateUrl(defaultRange);
+    setTimeout(() => setIsClearPressed(false), 200);
+  };
+
   if (isMobile === null) {
     return null;
   }
@@ -96,19 +109,36 @@ export default function RangeFilter({
           <div className={styles.dropdown}>
             {titleKey && <h3 className={styles.title}>{titleKey}</h3>}
             <div className={styles.subtitle}>
-              {formatValue(range[0])} – {formatValue(range[1])}
+              {formatValue(min)} – {formatValue(max)}
             </div>
             <div className={styles.sliderContainer}>
-              <Slider
-                min={min}
-                max={max}
-                value={range}
-                onChange={handleChange}
-                onChangeCommitted={handleChangeCommitted}
-                valueLabelDisplay="off"
-                className={styles.slider}
-              />
+              <div className={styles.currentMinValue}>
+                {formatValue(range[0])}
+              </div>
+              <div className={styles.sliderWrapper}>
+                <Slider
+                  min={min}
+                  max={max}
+                  step={step}
+                  value={range}
+                  onChange={handleChange}
+                  onChangeCommitted={handleChangeCommitted}
+                  valueLabelDisplay="off"
+                  className={styles.slider}
+                />
+              </div>
+              <div className={styles.currentMaxValue}>
+                {formatValue(range[1])}
+              </div>
             </div>
+            <button
+              className={`${styles.clearButton} ${
+                isClearPressed ? styles.clearButtonActive : ''
+              }`}
+              onClick={handleClear}
+            >
+              {translations.clear || 'CLEAR'}
+            </button>
           </div>
         )}
       </div>

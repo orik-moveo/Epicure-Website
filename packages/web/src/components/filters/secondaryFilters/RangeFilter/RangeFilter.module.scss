@@ -21,7 +21,7 @@ $border-color: #e0e0e0;
   border: 1px solid $border-color;
   box-shadow: 0 2px 8px $dropdown-shadow;
   width: 353px;
-  height: 162px;
+  height: 210px;
   z-index: 1000;
   padding: 16px;
   box-sizing: border-box;
@@ -64,14 +64,44 @@ $border-color: #e0e0e0;
   border-radius: 4px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 18px;
   box-sizing: border-box;
+  position: relative;
+}
+
+.currentMinValue,
+.currentMaxValue {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 200;
+  color: $color-black;
+  white-space: nowrap;
+  position: absolute;
+  top: 8px;
+}
+
+.currentMinValue {
+  left: 18px;
+}
+
+.currentMaxValue {
+  right: 18px;
+}
+
+.sliderWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  padding-top: 12px;
 }
 
 .slider {
   width: 100%;
-  max-width: 272px;
+  max-width: none;
 }
 
 // Override MUI Slider styles using :global()
@@ -118,6 +148,38 @@ $border-color: #e0e0e0;
   border-radius: 1px;
 }
 
+.clearButton {
+  width: 160px;
+  height: 30px;
+  background-color: $color-white;
+  color: $color-black;
+  border: 1px solid $color-black;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all $transition-fast;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: $color-black;
+    color: $color-white;
+  }
+
+  &:active {
+    background-color: $color-black;
+    color: $color-white;
+  }
+}
+
+.clearButtonActive {
+  background-color: $color-black;
+  color: $color-white;
+}
+
 // Mobile styles
 .mobile {
   position: relative;
@@ -126,7 +188,7 @@ $border-color: #e0e0e0;
 
 .mobile .dropdown {
   width: 280px;
-  height: 140px;
+  height: 180px;
   left: 0;
   right: auto;
   transform: none;
@@ -166,17 +228,54 @@ $border-color: #e0e0e0;
   border-radius: 4px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 12px;
   box-sizing: border-box;
+  position: relative;
+}
+
+.mobile .currentMinValue,
+.mobile .currentMaxValue {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 200;
+  color: $color-black;
+  white-space: nowrap;
+  position: absolute;
+  top: 6px;
+}
+
+.mobile .currentMinValue {
+  left: 12px;
+}
+
+.mobile .currentMaxValue {
+  right: 12px;
+}
+
+.mobile .sliderWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 6px;
+  padding-top: 10px;
 }
 
 .mobile .slider {
   width: 100%;
-  max-width: 216px;
+  max-width: none;
 }
 
 .mobile .slider :global(.MuiSlider-thumb) {
   width: 20px;
   height: 20px;
+}
+
+.mobile .clearButton {
+  width: 140px;
+  height: 30px;
+  font-size: 14px;
+  margin-top: 12px;
 }
