@@ -40,8 +40,10 @@
     },
     "secondaryFilters": {
       "priceRange": "Price Range",
+      "priceRangeSelected": "Price Range Selected",
       "distance": "Distance",
-      "rating": "Rating"
+      "rating": "Rating",
+      "clear": "CLEAR"
     }
   }
 }

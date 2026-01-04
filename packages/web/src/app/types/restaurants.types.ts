@@ -39,4 +39,6 @@ export interface Restaurant {
   location?: Location;
   isPopular?: boolean;
   createdAt?: string;
+  minPrice: number;
+  maxPrice: number;
 }

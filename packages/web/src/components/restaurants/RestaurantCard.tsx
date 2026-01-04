@@ -6,9 +6,11 @@ import { Restaurant } from '../../app/types/restaurants.types';
 import { renderStars } from './restaurants.utils';
 import styles from './RestaurantCard.module.scss';
 
-type RestaurantCardProps = Omit<Restaurant, 'image' | 'chef'> & {
+type RestaurantCardProps = {
   image: Restaurant['image'][0];
-  chefName: Restaurant['chef']['name'];
+  name: string;
+  chefName: string;
+  rating: number;
 };
 
 export default function RestaurantCard({

@@ -12,6 +12,8 @@ import SecondaryFilters from '../../../components/filters/secondaryFilters/Secon
 import {
   filterRestaurantsByRating,
   parseRatingParam,
+  filterRestaurantsByPriceRange,
+  parseRangeParam,
 } from '../../../components/filters/secondaryFilters/utils/filterRestaurants';
 import styles from './Restaurants.module.scss';
 
@@ -44,10 +46,17 @@ export default function RestaurantsClient({
   const ratingParam = searchParams.get('rating');
   const selectedRatings = parseRatingParam(ratingParam);
 
-  // Apply rating filter
-  const restaurants = filterRestaurantsByRating(
-    allRestaurants,
-    selectedRatings
+  // Parse price range filter from URL
+  const priceRangeParam = searchParams.get('priceRange');
+  const priceRange = parseRangeParam(priceRangeParam);
+
+  // Apply filters sequentially
+  let restaurants = filterRestaurantsByRating(allRestaurants, selectedRatings);
+
+  restaurants = filterRestaurantsByPriceRange(
+    restaurants,
+    priceRange?.[0] ?? null,
+    priceRange?.[1] ?? null
   );
 
   return (
