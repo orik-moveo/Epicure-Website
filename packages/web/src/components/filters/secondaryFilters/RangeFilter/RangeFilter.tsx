@@ -7,13 +7,22 @@ import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useDropdown } from '../../../../hooks/useDropdown';
 import { ClickAwayListener } from '@mui/material';
 import FilterToggleButton from '../../../ui/FilterToggleButton/FilterToggleButton';
-import { RangeFilterProps } from '../../../../app/types/filters.types';
 import {
   parseRangeParam,
   formatRangeForUrl,
   isDefaultRange,
 } from '../utils/filterRestaurants';
 import styles from './RangeFilter.module.scss';
+
+export interface RangeFilterProps {
+  label: string;
+  queryParam: string;
+  min: number;
+  max: number;
+  initialValue?: [number, number];
+  formatValue?: (value: number) => string;
+  titleKey?: string;
+}
 
 export default function RangeFilter({
   label,

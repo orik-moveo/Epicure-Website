@@ -21,13 +21,3 @@ export function isValidFilterOption(
   }
   return primaryFilterOptions.includes(value as FilterOption);
 }
-
-export interface RangeFilterProps {
-  label: string;
-  queryParam: string;
-  min: number;
-  max: number;
-  initialValue?: [number, number];
-  formatValue?: (value: number) => string;
-  titleKey?: string;
-}
