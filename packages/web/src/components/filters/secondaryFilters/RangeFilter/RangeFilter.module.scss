@@ -1,0 +1,182 @@
+// Variables
+$color-white: #ffffff;
+$color-black: #000000;
+$color-bg-light: #f9f4ea;
+$color-track: rgba(151, 151, 151, 0.5);
+$transition-fast: 0.2s;
+$dropdown-shadow: rgba(0, 0, 0, 0.1);
+$border-color: #e0e0e0;
+
+// Desktop styles
+.desktop {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background-color: $color-white;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $dropdown-shadow;
+  width: 353px;
+  height: 162px;
+  z-index: 1000;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 1.92px;
+  color: $color-black;
+  text-align: center;
+  margin: 0 0 8px 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  color: $color-black;
+  text-align: center;
+  margin: 0 0 16px 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sliderContainer {
+  width: 309px;
+  height: 56px;
+  background-color: $color-bg-light;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+
+.slider {
+  width: 100%;
+  max-width: 272px;
+}
+
+// Override MUI Slider styles using :global()
+.slider :global(.MuiSlider-root) {
+  color: $color-black;
+  height: 4px;
+  padding: 13px 0;
+}
+
+.slider :global(.MuiSlider-thumb) {
+  width: 23px;
+  height: 23px;
+  background-color: $color-black;
+  border: none;
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &.Mui-active {
+    box-shadow: none;
+  }
+
+  &.Mui-focusVisible {
+    box-shadow: none;
+  }
+}
+
+.slider :global(.MuiSlider-track) {
+  height: 2px;
+  background-color: $color-track;
+  border: none;
+  border-radius: 1px;
+}
+
+.slider :global(.MuiSlider-rail) {
+  height: 2px;
+  background-color: $color-track;
+  border-radius: 1px;
+}
+
+// Mobile styles
+.mobile {
+  position: relative;
+  display: inline-block;
+}
+
+.mobile .dropdown {
+  width: 280px;
+  height: 140px;
+  left: 0;
+  right: auto;
+  transform: none;
+  padding: 12px;
+}
+
+.mobile .title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 1.7px;
+  color: $color-black;
+  text-align: center;
+  margin: 0 0 6px 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mobile .subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 200;
+  color: $color-black;
+  text-align: center;
+  margin: 0 0 12px 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mobile .sliderContainer {
+  width: 240px;
+  height: 48px;
+  background-color: $color-bg-light;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.mobile .slider {
+  width: 100%;
+  max-width: 216px;
+}
+
+.mobile .slider :global(.MuiSlider-thumb) {
+  width: 20px;
+  height: 20px;
+}
