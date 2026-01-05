@@ -28,6 +28,7 @@ export interface RangeFilterProps {
   error?: string;
   onRetryLocation?: () => void;
   isLoadingLocation?: boolean;
+  onClear?: () => void;
 }
 
 export default function RangeFilter({
@@ -45,6 +46,7 @@ export default function RangeFilter({
   error,
   onRetryLocation,
   isLoadingLocation = false,
+  onClear,
 }: RangeFilterProps) {
   const isMobile = useIsMobile();
   const { isOpen, toggle, close } = useDropdown();
@@ -72,7 +74,11 @@ export default function RangeFilter({
     setIsClearPressed(true);
     const defaultRange = getInitialRange(min, max, initialValue, singleHandle);
     setRange(defaultRange);
-    updateUrl(defaultRange);
+    if (onClear) {
+      onClear();
+    } else {
+      updateUrl(defaultRange);
+    }
     setTimeout(() => setIsClearPressed(false), 200);
   };
 
