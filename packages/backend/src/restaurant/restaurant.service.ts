@@ -47,7 +47,8 @@ export class RestaurantService {
   }
 
   async getOne(id: string): Promise<any> {
-    const url = `${this.baseUrl}/api/${this.resource}/${id}?populate=*`;
+    // The populate is now handled by the custom controller in Strapi
+    const url = `${this.baseUrl}/api/${this.resource}/${id}`;
     const response = await firstValueFrom(this.httpService.get(url));
     return response.data;
   }
