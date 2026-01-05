@@ -97,6 +97,20 @@ $border-color: #e0e0e0;
   justify-content: center;
   margin: 0 8px;
   padding-top: 12px;
+  position: relative;
+}
+
+.fixedLeftThumb {
+  width: 15px;
+  height: 15px;
+  background-color: #c8c5c0;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 62%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .slider {
@@ -261,6 +275,20 @@ $border-color: #e0e0e0;
   justify-content: center;
   margin: 0 6px;
   padding-top: 10px;
+  position: relative;
+}
+
+.mobile .fixedLeftThumb {
+  width: 13px;
+  height: 13px;
+  background-color: #c8c5c0;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 62%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .mobile .slider {
@@ -278,4 +306,62 @@ $border-color: #e0e0e0;
   height: 30px;
   font-size: 14px;
   margin-top: 12px;
+}
+
+// Error styles
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.errorMessage {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: $color-black;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.shareLocationButton {
+  background-color: $color-black;
+  color: $color-white;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+  min-width: 140px;
+
+  &:hover:not(:disabled) {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.mobile .errorContainer {
+  padding: 16px;
+  gap: 12px;
+}
+
+.mobile .errorMessage {
+  font-size: 12px;
+}
+
+.mobile .shareLocationButton {
+  font-size: 12px;
+  padding: 8px 16px;
+  min-width: 120px;
 }
