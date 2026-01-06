@@ -1,6 +1,8 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
 import { Restaurant, RestaurantLocation } from '../../types/restaurants.types';
@@ -34,6 +36,7 @@ export default function RestaurantsClient({
   filter,
 }: RestaurantsClientProps) {
   const isMobile = useIsMobile();
+  const locale = useLocale();
   const translations = useTranslation('restaurants');
   const searchParams = useSearchParams();
 
@@ -86,16 +89,22 @@ export default function RestaurantsClient({
         <RestaurantMapView locations={locationsData?.data || []} />
       ) : (
         <div className={styles.cardsContainer}>
-          {restaurants.map((restaurant, index) => (
-            <div key={index} className={styles.cardWrapper}>
-              <RestaurantCard
-                image={restaurant.image[0]}
-                name={restaurant.name}
-                chefName={restaurant.chef.name}
-                rating={restaurant.rating}
-              />
-            </div>
-          ))}
+          {restaurants.map((restaurant, index) => {
+            const restaurantId =
+              (restaurant as any).documentId || index.toString();
+            return (
+              <div key={index} className={styles.cardWrapper}>
+                <Link href={`/${locale}/restaurants/${restaurantId}`}>
+                  <RestaurantCard
+                    image={restaurant.image[0]}
+                    name={restaurant.name}
+                    chefName={restaurant.chef.name}
+                    rating={restaurant.rating}
+                  />
+                </Link>
+              </div>
+            );
+          })}
         </div>
       )}
     </section>

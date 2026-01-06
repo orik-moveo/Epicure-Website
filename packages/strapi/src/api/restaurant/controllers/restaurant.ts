@@ -17,6 +17,8 @@ export default factories.createCoreController('api::restaurant.restaurant', {
         dishes: {
           populate: {
             meal_types: true,
+            ingredients: true,
+            image: true,
           },
         },
       },

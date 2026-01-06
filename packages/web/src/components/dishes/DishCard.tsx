@@ -13,6 +13,7 @@ import styles from './DishCard.module.scss';
 
 type DishCardProps = Omit<Dish, 'image'> & {
   image: Dish['image'][0];
+  size?: 'default' | 'small';
 };
 
 export default function DishCard({
@@ -21,6 +22,7 @@ export default function DishCard({
   ingredients,
   price,
   dietType,
+  size = 'default',
 }: DishCardProps) {
   const isMobile = useIsMobile();
   const ingredientsText = formatIngredients(ingredients);
@@ -31,7 +33,11 @@ export default function DishCard({
     <img src={dietIconPath} alt={dietType} className={styles.dietIcon} />
   ) : null;
 
-  const cardClassName = isMobile ? styles.mobileDishCard : '';
+  const cardClassName = isMobile
+    ? styles.mobileDishCard
+    : size === 'small'
+    ? styles.cardSmall
+    : '';
 
   return (
     <div className={cardClassName}>
@@ -40,6 +46,7 @@ export default function DishCard({
         title={name}
         subtitle={ingredientsText}
         variant={CardVariant.Dish}
+        size={size}
         middleContent={middleContent}
         bottomContent={
           <div className={styles.priceContainer}>

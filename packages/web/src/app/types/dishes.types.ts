@@ -10,4 +10,7 @@ export interface Dish {
   }>;
   price: number;
   dietType: 'none' | 'spicy' | 'vegetarian' | 'vegan';
+  meal_types?: Array<{
+    name: string;
+  }>;
 }

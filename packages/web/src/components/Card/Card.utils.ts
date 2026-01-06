@@ -9,6 +9,9 @@ export function getCardClass(isMobile: boolean, variant?: CardVariant): string {
     if (variant === CardVariant.ChefRestaurant) {
       return `${styles.mobileCard} ${styles.mobileCardChefRestaurant}`;
     }
+    if (variant === CardVariant.Restaurant) {
+      return `${styles.mobileCard} ${styles.mobileCardRestaurant}`;
+    }
     return styles.mobileCard;
   }
   if (variant === CardVariant.Dish) {
@@ -31,6 +34,9 @@ export function getImageContainerClass(
     if (variant === CardVariant.ChefRestaurant) {
       return `${styles.mobileImageContainer} ${styles.mobileImageContainerChefRestaurant}`;
     }
+    if (variant === CardVariant.Restaurant) {
+      return `${styles.mobileImageContainer} ${styles.mobileImageContainerRestaurant}`;
+    }
     return styles.mobileImageContainer;
   }
   if (variant === CardVariant.Dish) {
@@ -52,6 +58,9 @@ export function getBottomSectionClass(
     }
     if (variant === CardVariant.ChefRestaurant) {
       return `${styles.mobileBottomSection} ${styles.mobileBottomSectionChefRestaurant}`;
+    }
+    if (variant === CardVariant.Restaurant) {
+      return `${styles.mobileBottomSection} ${styles.mobileBottomSectionRestaurant}`;
     }
     return styles.mobileBottomSection;
   }

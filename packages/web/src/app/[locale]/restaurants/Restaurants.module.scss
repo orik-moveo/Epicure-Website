@@ -70,6 +70,14 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   box-sizing: border-box;
 }
 
+// Card wrapper - remove link styling
+.cardWrapper {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
 // Mobile card wrapper
 .mobile .cardWrapper {
   width: 335px;

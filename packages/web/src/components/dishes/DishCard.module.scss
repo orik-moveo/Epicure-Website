@@ -54,14 +54,34 @@ $color-black: #000000;
 }
 
 .price {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-    Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 100;
   font-size: 24px;
   line-height: 1;
   text-align: center;
   color: $color-black;
   opacity: 1;
+}
+
+.cardSmall {
+  .dietIcon {
+    width: 29px !important;
+    height: 22px !important;
+  }
+
+  .priceContainer {
+    width: 205px !important;
+    height: 22px !important;
+  }
+
+  .shekelIcon {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .price {
+    font-size: 17px !important;
+  }
 }
 
 // Mobile dish card styles
@@ -94,4 +114,3 @@ $color-black: #000000;
     text-align: left;
   }
 }
-

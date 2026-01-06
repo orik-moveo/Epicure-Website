@@ -20,6 +20,7 @@ interface CardProps {
   title: string;
   subtitle: string;
   variant?: CardVariant;
+  size?: 'default' | 'small';
   middleContent?: React.ReactNode;
   bottomContent?: React.ReactNode;
 }
@@ -29,6 +30,7 @@ export default function Card({
   title,
   subtitle,
   variant,
+  size = 'default',
   middleContent,
   bottomContent,
 }: CardProps) {
@@ -38,9 +40,21 @@ export default function Card({
     return null;
   }
 
-  const cardClass = getCardClass(isMobile, variant);
-  const imageContainerClass = getImageContainerClass(isMobile, variant);
-  const bottomSectionClass = getBottomSectionClass(isMobile, variant);
+  let cardClass = getCardClass(isMobile, variant);
+  if (size === 'small' && variant === CardVariant.Dish) {
+    if (isMobile) {
+      cardClass += ` ${styles.mobileCardDishSmall}`;
+    } else {
+      cardClass += ` ${styles.cardDishSmall}`;
+    }
+  }
+  let imageContainerClass = getImageContainerClass(isMobile, variant);
+  let bottomSectionClass = getBottomSectionClass(isMobile, variant);
+
+  if (isMobile && size === 'small' && variant === CardVariant.Dish) {
+    imageContainerClass += ` ${styles.mobileImageContainerDishSmall}`;
+    bottomSectionClass += ` ${styles.mobileBottomSectionDishSmall}`;
+  }
 
   return (
     <div className={cardClass}>
