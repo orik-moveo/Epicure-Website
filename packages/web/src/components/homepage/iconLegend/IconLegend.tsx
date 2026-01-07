@@ -1,16 +1,10 @@
 'use client';
 
-import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
 import styles from './IconLegend.module.scss';
 
 export default function IconLegend() {
-  const isMobile = useIsMobile();
   const iconLegend = useTranslation('iconLegend');
-
-  if (isMobile === null) {
-    return null;
-  }
 
   const dietTypes = [
     { type: 'spicy', label: iconLegend.spicy },
@@ -19,7 +13,7 @@ export default function IconLegend() {
   ];
 
   return (
-    <section className={isMobile ? styles.mobile : styles.desktop}>
+    <section className={styles.section}>
       <h2 className={styles.title}>{iconLegend.title}</h2>
       <div className={styles.iconsContainer}>
         {dietTypes.map((dietType) => (
@@ -36,4 +30,3 @@ export default function IconLegend() {
     </section>
   );
 }
-

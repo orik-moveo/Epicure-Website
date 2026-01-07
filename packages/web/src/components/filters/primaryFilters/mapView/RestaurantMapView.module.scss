@@ -1,19 +1,32 @@
+@import '@/app/variables';
+
+$color-bg-light: #f5f5f5;
+$color-marker: #de9200;
+$color-gray-dark: #666;
+$color-error: #d32f2f;
+$color-text-dark: #333;
+
 .container {
-  width: 1184px;
-  height: 582px;
+  width: 100%;
+  height: 300px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: $color-bg-light;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 1184px;
+    height: 582px;
+  }
 }
 
 .customMarker {
   position: absolute;
   transform: translate(-50%, -100%);
-  background-color: #de9200;
+  background-color: $color-marker;
   padding: 8px 16px;
   border-radius: 8px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* #00000040 = rgba(0, 0, 0, 0.25) */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
   pointer-events: auto;
   cursor: pointer;
@@ -29,14 +42,18 @@
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid #de9200;
+  border-top: 8px solid $color-marker;
 }
 
 .markerText {
-  color: #000;
-  font-size: 30px;
-  font-weight: 400;
+  color: $color-black;
+  font-size: $fontSizemobileH3;
+  font-weight: $fontWeightRegular;
   line-height: 1.2;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: 30px;
+  }
 }
 
 .loading,
@@ -46,12 +63,18 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 18px;
-  color: #666;
+  font-family: $font-family;
+  font-size: $fontSizeBodymobile;
+  color: $color-gray-dark;
+  margin: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizemobileH3;
+  }
 }
 
 .error {
-  color: #d32f2f;
+  color: $color-error;
 }
 
 .placeholder {
@@ -62,8 +85,13 @@
 
 .placeholder p {
   margin: 10px 0;
-  font-size: 16px;
+  font-family: $font-family;
+  font-size: $fontSizeBodymobile;
   text-align: center;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeBodymobile;
+  }
 }
 
 .markersList {
@@ -75,14 +103,19 @@
 
 .markerItem {
   padding: 12px;
-  background-color: white;
+  background-color: $color-white;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
+  font-family: $font-family;
+  font-size: $fontSizeBodymobile;
   line-height: 1.5;
-}
 
-.markerItem strong {
-  color: #333;
-  font-size: 16px;
+  strong {
+    color: $color-text-dark;
+    font-size: $fontSizeBodymobile;
+
+    @media (min-width: $breakpointDesktop) {
+      font-size: $fontSizeBodymobile;
+    }
+  }
 }

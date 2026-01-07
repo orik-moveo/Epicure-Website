@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import { useIsMobile } from '../../../hooks/useIsMobile';
 import styles from './Hero.module.scss';
 
 interface HeroProps {
@@ -19,7 +18,6 @@ export default function Hero({
   searchPlaceholder,
   backgroundImage,
 }: HeroProps) {
-  const isMobile = useIsMobile();
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearchBarClick = () => {
@@ -31,13 +29,9 @@ export default function Hero({
     return null;
   }
 
-  if (isMobile === null) {
-    return null;
-  }
-
   return (
     <section
-      className={isMobile ? styles.mobile : styles.desktop}
+      className={styles.hero}
       style={{
         backgroundImage: `url(${backgroundImage.url})`,
       }}

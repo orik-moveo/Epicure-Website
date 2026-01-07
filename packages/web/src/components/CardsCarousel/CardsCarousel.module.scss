@@ -1,22 +1,21 @@
-// Desktop styles
-.desktop {
-  display: flex;
-  gap: 24px;
-  opacity: 1;
-  box-sizing: border-box;
-}
+@import '@/app/variables';
 
-// Mobile styles - horizontal scroll carousel
-.mobile {
+.carousel {
   width: 100%;
   display: flex;
   gap: 24px;
-  margin-left: 20px;
+  margin-left: $container-pad-mobile;
   padding-left: 0;
-  padding-right: 20px;
+  padding-right: $container-pad-mobile;
   overflow-x: auto;
   overflow-y: hidden;
   opacity: 1;
   box-sizing: border-box;
-}
+  align-items: stretch;
 
+  @media (min-width: $breakpointDesktop) {
+    margin-left: 0;
+    padding-right: 0;
+    overflow-x: visible;
+  }
+}

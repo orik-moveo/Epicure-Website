@@ -1,6 +1,5 @@
 'use client';
 
-import { useIsMobile } from '../../../hooks/useIsMobile';
 import { secondaryFilterOptions } from '../../../app/types/secondaryFilters.types';
 import RatingFilter from './RatingFilter/RatingFilter';
 import PriceRangeFilter from './PriceRangeFilter/PriceRangeFilter';
@@ -12,14 +11,8 @@ export interface SecondaryFiltersProps {
 }
 
 export default function SecondaryFilters({}: SecondaryFiltersProps) {
-  const isMobile = useIsMobile();
-
-  if (isMobile === null) {
-    return null;
-  }
-
   return (
-    <div className={isMobile ? styles.mobile : styles.desktop}>
+    <div className={styles.filters}>
       {secondaryFilterOptions.map((filter) => {
         if (filter === 'rating') {
           return <RatingFilter key={filter} />;

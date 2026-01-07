@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
 import {
   FilterOption,
@@ -17,13 +16,8 @@ export default function PrimaryFilters({ activeFilter }: PrimaryFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const isMobile = useIsMobile();
   const filters = useTranslation('restaurants.filters');
   const filterOptions = primaryFilterOptions;
-
-  if (isMobile === null) {
-    return null;
-  }
 
   const handleFilterClick = (filter: FilterOption) => {
     // Create new URLSearchParams object from current search params
@@ -50,7 +44,7 @@ export default function PrimaryFilters({ activeFilter }: PrimaryFiltersProps) {
   };
 
   return (
-    <div className={isMobile ? styles.mobile : styles.desktop}>
+    <div className={styles.filters}>
       {filterOptions.map((filter) => (
         <button
           key={filter}
