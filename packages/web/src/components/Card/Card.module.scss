@@ -320,17 +320,17 @@
 .topWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; // מרכז בדסקטופ
+  align-items: center;
   width: 100%;
 
   @media (max-width: $breakpointMobile) {
-    align-items: flex-start; // נצמד לימין/שמאל במובייל
+    align-items: flex-start;
   }
 }
 
 .bottomWrapper {
   width: 100%;
-  margin-top: auto; // "ביטוח" נוסף להצמדה למטה
+  margin-top: auto;
   display: flex;
   justify-content: center;
 
@@ -340,14 +340,12 @@
   }
 }
 
-// Price Container Styles
 .priceContainer {
   display: flex;
   align-items: center;
   gap: 4px;
   position: relative;
 
-  // Desktop: 2 lines on each side (112px each) for Large Dish cards
   .card--dish.card--large & {
     @media (min-width: $breakpointDesktop) {
       &::before,

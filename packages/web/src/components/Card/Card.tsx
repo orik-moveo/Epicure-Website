@@ -23,7 +23,7 @@ interface CardImage {
 }
 
 interface CardProps {
-  variant: CardVariant; // חובה כדי לדעת איך להתנהג
+  variant: CardVariant;
   size?: CardSize;
   image: CardImage;
   title: string;
@@ -50,15 +50,11 @@ export default function Card(props: CardProps) {
   const isMobile = useIsMobile();
   if (isMobile === null) return null;
 
-  // --- שימוש ב-Utils הקיימים שלך ---
-
-  // 1. הגדרת התוכן המשני (Subtitle)
   const subtitleText =
     variant === CardVariant.Dish
       ? formatIngredients(ingredients || [])
       : chefName || '';
 
-  // 2. הגדרת התוכן המרכזי (Middle Content - רק למנה)
   const dietIconPath =
     variant === CardVariant.Dish ? getDietIconPath(dietType) : null;
   const middleContent = dietIconPath ? (
@@ -69,7 +65,6 @@ export default function Card(props: CardProps) {
     />
   ) : null;
 
-  // 3. הגדרת התוכן התחתון (Bottom Content)
   const bottomContent =
     variant === CardVariant.Dish ? (
       <div className={styles.priceContainer}>
@@ -86,7 +81,6 @@ export default function Card(props: CardProps) {
       </div>
     );
 
-  // --- לוגיקת הנראות שלך (לפי ה-Size) ---
   const showSubtitle = size !== CardSize.XSmall;
   const showMiddleContent = size === CardSize.Large || size === CardSize.Small;
   const showBottomContent =
@@ -94,7 +88,6 @@ export default function Card(props: CardProps) {
     size === CardSize.Medium ||
     size === CardSize.Small;
 
-  // --- שימוש ב-Card Utils שלך ---
   const cardClass = getCardClass(size, variant);
   const imageContainerClass = getImageContainerClass();
   const bottomSectionClass = getBottomSectionClass();
@@ -108,14 +101,12 @@ export default function Card(props: CardProps) {
       </div>
 
       <div className={bottomSectionClass}>
-        {/* קבוצה 1: טייטל, סאב-טייטל ואייקון דיאטה (בדסקטופ) */}
         <div className={styles.topWrapper}>
           <div className={styles.titleSubtitleContainer}>
             <h3 className={styles.title}>{title}</h3>
             {showSubtitle && <p className={styles.subtitle}>{subtitleText}</p>}
           </div>
 
-          {/* אייקון דיאטה בדסקטופ (middleContent) */}
           {!isMobile && showMiddleContent && dietIconPath && (
             <div className={styles.middleContent}>
               <img src={dietIconPath} alt="diet" className={styles.dietIcon} />
@@ -123,7 +114,6 @@ export default function Card(props: CardProps) {
           )}
         </div>
 
-        {/* קבוצה 2: מחיר / כוכבים / וראפר מובייל */}
         <div className={styles.bottomWrapper}>
           {isMobile && variant === CardVariant.Dish ? (
             <div className={styles.mobileDishBottomWrapper}>
