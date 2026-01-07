@@ -1,18 +1,17 @@
-// Variables
-$spacing-zero: 0;
+@import '@/app/variables';
 
 .wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin: $spacing-zero;
-  padding: $spacing-zero;
+  margin: 0;
+  padding: 0;
   width: 100%;
 }
 
 .main {
   flex: 1;
-  margin: $spacing-zero;
-  padding: $spacing-zero;
+  margin: 0;
+  padding: 0;
   width: 100%;
 }

@@ -1,10 +1,10 @@
 'use client';
 
-import { useIsMobile } from '../../../hooks/useIsMobile';
 import { Dish } from '../../../app/types/dishes.types';
 import CardsCarousel from '../../CardsCarousel/CardsCarousel';
-import DishCard from '../../dishes/DishCard';
 import styles from './PopularDishes.module.scss';
+import { CardSize, CardVariant } from '@/components/Card/Card.types';
+import Card from '@/components/Card/Card';
 
 interface PopularDishesProps {
   title: string;
@@ -12,29 +12,25 @@ interface PopularDishesProps {
 }
 
 export default function PopularDishes({ title, dishes }: PopularDishesProps) {
-  const isMobile = useIsMobile();
-
   if (!dishes || dishes.length === 0) {
     return null;
   }
 
-  if (isMobile === null) {
-    return null;
-  }
-
   return (
-    <section className={isMobile ? styles.mobile : styles.desktop}>
+    <section className={styles.section}>
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.cardsContainer}>
         <CardsCarousel>
           {dishes.map((dish, index) => (
-            <DishCard
+            <Card
               key={index}
+              variant={CardVariant.Dish}
               image={dish.image[0]}
-              name={dish.name}
+              title={dish.name}
               ingredients={dish.ingredients}
               price={dish.price}
               dietType={dish.dietType}
+              size={CardSize.Large}
             />
           ))}
         </CardsCarousel>

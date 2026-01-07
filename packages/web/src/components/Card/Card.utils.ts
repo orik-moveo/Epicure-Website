@@ -1,65 +1,40 @@
-import { CardVariant } from './Card.types';
+import { CardVariant, CardSize } from './Card.types';
 import styles from './Card.module.scss';
 
-export function getCardClass(isMobile: boolean, variant?: CardVariant): string {
-  if (isMobile) {
-    if (variant === CardVariant.Dish) {
-      return `${styles.mobileCard} ${styles.mobileCardDish}`;
-    }
-    if (variant === CardVariant.ChefRestaurant) {
-      return `${styles.mobileCard} ${styles.mobileCardChefRestaurant}`;
-    }
-    return styles.mobileCard;
-  }
-  if (variant === CardVariant.Dish) {
-    return `${styles.card} ${styles.cardDish}`;
-  }
-  if (variant === CardVariant.ChefRestaurant) {
-    return `${styles.card} ${styles.cardChefRestaurant}`;
-  }
-  return styles.card;
-}
-
-export function getImageContainerClass(
-  isMobile: boolean,
+export function getCardClass(
+  size: CardSize = CardSize.Large,
   variant?: CardVariant
 ): string {
-  if (isMobile) {
-    if (variant === CardVariant.Dish) {
-      return `${styles.mobileImageContainer} ${styles.mobileImageContainerDish}`;
-    }
-    if (variant === CardVariant.ChefRestaurant) {
-      return `${styles.mobileImageContainer} ${styles.mobileImageContainerChefRestaurant}`;
-    }
-    return styles.mobileImageContainer;
+  const classes = [styles.card];
+
+  // Add size modifier
+  switch (size) {
+    case CardSize.Large:
+      classes.push(styles['card--large']);
+      break;
+    case CardSize.Medium:
+      classes.push(styles['card--medium']);
+      break;
+    case CardSize.Small:
+      classes.push(styles['card--small']);
+      break;
+    case CardSize.XSmall:
+      classes.push(styles['card--xsmall']);
+      break;
   }
+
+  // Add variant modifier
   if (variant === CardVariant.Dish) {
-    return `${styles.imageContainer} ${styles.cardDishImageContainer}`;
+    classes.push(styles['card--dish']);
   }
-  if (variant === CardVariant.ChefRestaurant) {
-    return `${styles.imageContainer} ${styles.cardChefRestaurantImageContainer}`;
-  }
+
+  return classes.join(' ');
+}
+
+export function getImageContainerClass(): string {
   return styles.imageContainer;
 }
 
-export function getBottomSectionClass(
-  isMobile: boolean,
-  variant?: CardVariant
-): string {
-  if (isMobile) {
-    if (variant === CardVariant.Dish) {
-      return `${styles.mobileBottomSection} ${styles.mobileBottomSectionDish}`;
-    }
-    if (variant === CardVariant.ChefRestaurant) {
-      return `${styles.mobileBottomSection} ${styles.mobileBottomSectionChefRestaurant}`;
-    }
-    return styles.mobileBottomSection;
-  }
-  if (variant === CardVariant.Dish) {
-    return styles.bottomSectionDish;
-  }
-  if (variant === CardVariant.ChefRestaurant) {
-    return styles.bottomSectionChefRestaurant;
-  }
+export function getBottomSectionClass(): string {
   return styles.bottomSection;
 }

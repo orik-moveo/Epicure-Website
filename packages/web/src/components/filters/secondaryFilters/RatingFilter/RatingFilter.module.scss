@@ -1,13 +1,12 @@
-// Variables
+@import '@/app/variables';
+
 $color-bg-light: #fafafa;
-$color-white: #ffffff;
 $transition-fast: 0.2s;
 $dropdown-bg: #ffffff;
 $dropdown-shadow: rgba(0, 0, 0, 0.1);
 $border-color: #e0e0e0;
 
-// Desktop styles
-.desktop {
+.filter {
   position: relative;
   display: inline-block;
 }
@@ -15,44 +14,55 @@ $border-color: #e0e0e0;
 .dropdown {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
+  right: 4px;
+  left: auto;
   background-color: $dropdown-bg;
   border: 1px solid $border-color;
   border-radius: 4px;
   box-shadow: 0 2px 8px $dropdown-shadow;
-  width: 300px;
-  height: 300px;
+  width: 230px;
+  height: 250px;
   z-index: 1000;
   padding: 8px 0;
   box-sizing: border-box;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 300px;
+    height: 300px;
+    right: auto;
+    left: 0;
+  }
 }
 
 .title {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-    Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: #000000;
+  font-family: $font-family;
+  font-size: $fontSizemobileH3;
+  font-weight: $fontWeightRegular;
+  color: $color-black;
   text-align: center;
   margin: 0;
-  padding: 4px 0 0px 0;
+  padding: 4px 0 0 14px;
   box-sizing: border-box;
-}
 
-.mobile .title {
-  text-align: center;
-  padding-left: 14px;
+  @media (min-width: $breakpointDesktop) {
+    padding: 4px 0 0 0;
+  }
 }
 
 .ratingRow {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 10px 14px;
   cursor: pointer;
   transition: background-color $transition-fast;
   box-sizing: border-box;
+
+  @media (min-width: $breakpointDesktop) {
+    justify-content: center;
+    padding: 12px 16px;
+  }
 
   &:hover {
     background-color: $color-bg-light;
@@ -60,53 +70,35 @@ $border-color: #e0e0e0;
 }
 
 .checkbox {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   margin: 0;
   flex-shrink: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .starsContainer {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 14px;
+
+  @media (min-width: $breakpointDesktop) {
+    gap: 6px;
+  }
 }
 
 .star {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   display: block;
-}
 
-// Mobile styles
-.mobile {
-  position: relative;
-  display: inline-block;
-}
-
-.mobile .dropdown {
-  width: 230px;
-  height: 250px;
-  right: 4px;
-  left: auto;
-  transform: none;
-}
-
-.mobile .ratingRow {
-  padding: 10px 14px;
-  justify-content: flex-start;
-}
-
-.mobile .star {
-  width: 18x;
-  height: 18px;
-}
-
-.mobile .checkbox {
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-  margin: 0;
-  flex-shrink: 0;
+  @media (min-width: $breakpointDesktop) {
+    width: 28px;
+    height: 28px;
+  }
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useDropdown } from '../../../../hooks/useDropdown';
 import { ClickAwayListener } from '@mui/material';
 import FilterToggleButton from '../../../ui/FilterToggleButton/FilterToggleButton';
@@ -48,7 +47,6 @@ export default function RangeFilter({
   isLoadingLocation = false,
   onClear,
 }: RangeFilterProps) {
-  const isMobile = useIsMobile();
   const { isOpen, toggle, close } = useDropdown();
   const translations = useTranslation('restaurants.secondaryFilters');
 
@@ -82,19 +80,10 @@ export default function RangeFilter({
     setTimeout(() => setIsClearPressed(false), 200);
   };
 
-  if (isMobile === null) {
-    return null;
-  }
-
   return (
     <ClickAwayListener onClickAway={close}>
-      <div className={isMobile ? styles.mobile : styles.desktop}>
-        <FilterToggleButton
-          label={label}
-          isOpen={isOpen}
-          onClick={toggle}
-          isMobile={isMobile}
-        />
+      <div className={styles.filter}>
+        <FilterToggleButton label={label} isOpen={isOpen} onClick={toggle} />
 
         {isOpen && (
           <div className={styles.dropdown}>

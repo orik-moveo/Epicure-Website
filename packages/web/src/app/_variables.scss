@@ -1,0 +1,102 @@
+// SCSS Variables - Shared across the application
+// This file contains ONLY variables, no selectors (so it can be imported by CSS Modules)
+
+// Colors
+$color-black: #000000;
+$color-gray: #979797;
+$color-cream: #f9f4ea;
+$color-gold: #e19d1a;
+$color-offwhite: #fafafa;
+$color-white: #ffffff;
+$color-white-transparent: rgba(255, 255, 255, 0.88);
+
+// Layout
+$container-max: 1200px;
+$container-pad-desktop: 24px;
+$container-pad-mobile: 20px;
+$header-height: 64px;
+$header-pad-x: 32px;
+$header-pad-top: 17px;
+$header-pad-bottom: 16px;
+$header-gap: 16px;
+$search-width: 410px;
+$search-height: 41px;
+$search-pad-y: 6px;
+$search-pad-x: 12px;
+$search-radius: 4px;
+$search-border: 0.5px;
+$icon-size: 24px;
+$icon-gap: 16px;
+$font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+  Arial, sans-serif;
+
+// Typography
+$fontWeightThin: 200;
+$fontWeightRegular: 400;
+
+// Typography - Font Sizes
+$fontSizeH1: 32px;
+$fontSizeH2: 30px;
+$fontSizeH3: 40px;
+$fontSizeBody: 24px;
+$fontSizeButton: 16px;
+$fontSizeInput: 16px;
+
+// Typography - Mobile Font Sizes
+$fontSizemobileH1: 24px;
+$fontSizemobileH2: 16px;
+$fontSizemobileH3: 18px;
+$fontSizeBodymobile: 16px;
+$fontSizeButtonmobile: 16px;
+$fontSizeInputmobile: 16px;
+
+// Card Sizes - Desktop Widths
+$cardWidthLarge: 380px;
+$cardWidthMedium: 380px;
+$cardWidthSmall: 272px;
+$cardWidthXsmall: 230px;
+
+// Card Sizes - Mobile Widths
+$cardWidthMobileLarge: 245px;
+$cardWidthMobileMedium: 335px;
+$cardWidthMobileSmall: 335px;
+$cardWidthMobileXsmall: 245px;
+
+// Card Spacing - Large
+$cardSpacingLargeImageToTitle: 24px;
+$cardSpacingLargeTitleToMiddle: 8px;
+$cardSpacingLargeMiddleToSubtitle: 8px;
+$cardSpacingLargeSubtitleToBottom: 18px;
+$cardSpacingLargeBottomToEnd: 12px;
+
+// Card Spacing - Medium
+$cardSpacingMediumImageToTitle: 18px;
+$cardSpacingMediumTitleToSubtitle: 18px;
+$cardSpacingMediumSubtitleToBottom: 8px;
+$cardSpacingMediumBottomToEnd: 18px;
+
+// Card Spacing - Small
+$cardSpacingSmallImageToTitle: 24px;
+$cardSpacingSmallTitleToMiddle: 8px;
+$cardSpacingSmallMiddleToSubtitle: 8px;
+$cardSpacingSmallSubtitleToBottom: 18px;
+$cardSpacingSmallBottomToEnd: 8px;
+
+// Card Spacing - XSmall
+$cardSpacingXsmallImageToTitle: 20px;
+
+// Card Image Heights - Desktop
+$cardImageHeightLarge: 306px;
+$cardImageHeightMedium: 236px;
+$cardImageHeightSmall: 173px;
+$cardImageHeightXsmall: 224px;
+
+// Card Image Heights - Mobile
+$cardHeightMobileLarge: 152px;
+$cardHeightMobileMedium: 208px;
+$cardHeightMobileSmall: 208px;
+$cardHeightMobileXsmall: 152px;
+
+// Breakpoints
+$breakpointMobile: 767px;
+$breakpointDesktop: 768px; // Mobile first breakpoint

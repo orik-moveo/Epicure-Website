@@ -1,99 +1,9 @@
-// Variables
-$color-black: #000000;
-$color-bg-light: #fafafa;
-$font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-  Arial, sans-serif;
+@import '@/app/variables';
 
-// Desktop styles
-.desktop {
-  width: 100vw;
-  height: 530px;
-  background-color: $color-bg-light;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-  margin-top: 50px;
-  box-sizing: border-box;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.textSection {
-  width: 1440px;
-  max-width: 100%;
-  height: 449px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 147px;
-  padding-top: 0;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.title {
-  margin: 0;
-  font-family: $font-family;
-  font-weight: 100;
-  font-size: 30px;
-  line-height: 1.2;
-  text-align: left;
-  color: $color-black;
-  margin-bottom: 24px;
-}
-
-.description {
-  width: 570px;
-  height: 330px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  font-size: 20px;
-  line-height: 30px;
-  letter-spacing: 2.14px;
-  text-align: left;
-  color: $color-black;
-  margin-bottom: auto;
-}
-
-.iconsContainer {
-  width: 376px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-  margin-top: auto;
-}
-
-.storeIcon {
-  width: 180px;
-  height: 52px;
-  display: block;
-  flex-shrink: 0;
-}
-
-.logoContainer {
-  position: absolute;
-  top: 174px;
-  left: 1133px;
-  width: 178.22085571289062px;
-  height: 166px;
-}
-
-.logo {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
-
-// Mobile styles
-.mobile {
+.section {
   width: 100%;
   height: 867px;
-  background-color: $color-bg-light;
+  background-color: $color-offwhite;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -103,9 +13,18 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 100vw;
+    height: 530px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
 }
 
-.mobile .logoContainer {
+.logoContainer {
   width: 150px;
   height: 140px;
   padding: 16px;
@@ -115,16 +34,46 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   left: 0;
   z-index: 1;
   box-sizing: border-box;
+  order: 1;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 178.22px;
+    height: 166px;
+    padding: 0;
+    position: absolute;
+    top: 174px;
+    left: 1133px;
+    order: 2;
+  }
 }
 
-.mobile .logo {
+.logo {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: contain;
 }
 
-.mobile .iconsContainer {
+.textSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  order: 3;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 1440px;
+    max-width: 100%;
+    height: 449px;
+    padding-left: 147px;
+    order: 1;
+  }
+}
+
+.iconsContainer {
   width: calc(100% - 32px);
   height: 120px;
   display: flex;
@@ -137,20 +86,63 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   margin-top: 180px;
   margin-bottom: 8px;
   box-sizing: border-box;
+  order: 2;
+
+  @media (min-width: $breakpointDesktop) {
+    display: none;
+  }
 }
 
-.mobile .storeIcon {
+.textSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  order: 3;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 1440px;
+    max-width: 100%;
+    height: 449px;
+    padding-left: 147px;
+    order: 1;
+  }
+}
+
+.iconsContainerDesktop {
+  display: none;
+
+  @media (min-width: $breakpointDesktop) {
+    display: flex;
+    width: 376px;
+    height: 52px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+.storeIcon {
   width: 180px;
   height: 52px;
   display: block;
   flex-shrink: 0;
 }
 
-.mobile .title {
+.title {
   width: calc(100% - 32px);
+  margin: 0;
   font-family: $font-family;
-  font-weight: 100;
-  font-size: 18px;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizemobileH3;
   line-height: 1.2;
   text-align: left;
   color: $color-black;
@@ -159,18 +151,25 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   margin-top: 60px;
   margin-bottom: 30px;
   box-sizing: border-box;
+
+  @media (min-width: $breakpointDesktop) {
+    width: auto;
+    font-size: $fontSizeH2;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
 }
 
-.mobile .description {
+.description {
   width: 100%;
   max-width: 100%;
   flex: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  font-size: 18px;
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizemobileH3;
   line-height: 36px;
   letter-spacing: 2.14px;
-
   color: $color-black;
   padding-left: 16px;
   padding-right: 16px;
@@ -178,4 +177,13 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 570px;
+    height: 330px;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 0;
+    margin-bottom: auto;
+  }
 }

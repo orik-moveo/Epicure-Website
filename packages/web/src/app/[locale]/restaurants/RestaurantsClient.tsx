@@ -1,11 +1,9 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useTranslation } from '../../../hooks/useTranslation';
 import { Restaurant, RestaurantLocation } from '../../types/restaurants.types';
 import { FilterOption } from '../../types/filters.types';
-import RestaurantCard from '../../../components/restaurants/RestaurantCard';
 import RestaurantMapView from '../../../components/filters/primaryFilters/mapView/RestaurantMapView';
 import PrimaryFilters from '../../../components/filters/primaryFilters/PrimaryFilters';
 import SecondaryFilters from '../../../components/filters/secondaryFilters/SecondaryFilters';
@@ -17,6 +15,8 @@ import {
   filterRestaurantsByDistance,
 } from '../../../components/filters/secondaryFilters/utils/filterRestaurants';
 import styles from './Restaurants.module.scss';
+import { CardSize, CardVariant } from '@/components/Card/Card.types';
+import Card from '@/components/Card/Card';
 
 interface RestaurantsClientProps {
   data: {
@@ -33,13 +33,8 @@ export default function RestaurantsClient({
   locationsData,
   filter,
 }: RestaurantsClientProps) {
-  const isMobile = useIsMobile();
   const translations = useTranslation('restaurants');
   const searchParams = useSearchParams();
-
-  if (isMobile === null) {
-    return null;
-  }
 
   const allRestaurants = data?.data || [];
 
@@ -78,8 +73,8 @@ export default function RestaurantsClient({
   );
 
   return (
-    <section className={isMobile ? styles.mobile : styles.desktop}>
-      {isMobile && <h2 className={styles.title}>{translations.title}</h2>}
+    <section className={styles.section}>
+      <h2 className={styles.title}>{translations.title}</h2>
       <PrimaryFilters activeFilter={filter} />
       <SecondaryFilters />
       {filter === 'mapView' ? (
@@ -88,11 +83,13 @@ export default function RestaurantsClient({
         <div className={styles.cardsContainer}>
           {restaurants.map((restaurant, index) => (
             <div key={index} className={styles.cardWrapper}>
-              <RestaurantCard
+              <Card
+                variant={CardVariant.Restaurant}
                 image={restaurant.image[0]}
-                name={restaurant.name}
+                title={restaurant.name}
                 chefName={restaurant.chef.name}
                 rating={restaurant.rating}
+                size={CardSize.Medium}
               />
             </div>
           ))}

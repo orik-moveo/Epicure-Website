@@ -1,6 +1,5 @@
 'use client';
 
-import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useTranslation } from '../../../../hooks/useTranslation';
 import { useRatingFilter } from '../../../../hooks/useRatingFilter';
 import { useDropdown } from '../../../../hooks/useDropdown';
@@ -10,25 +9,19 @@ import { renderStars } from '../../../restaurants/restaurants.utils';
 import styles from './RatingFilter.module.scss';
 
 export default function RatingFilter() {
-  const isMobile = useIsMobile();
   const translations = useTranslation('restaurants.secondaryFilters');
   const { selectedRatings, handleRatingToggle } = useRatingFilter();
   const { isOpen, toggle, close } = useDropdown();
-
-  if (isMobile === null) {
-    return null;
-  }
 
   const ratingOptions = [1, 2, 3, 4, 5];
 
   return (
     <ClickAwayListener onClickAway={close}>
-      <div className={isMobile ? styles.mobile : styles.desktop}>
+      <div className={styles.filter}>
         <FilterToggleButton
           label={translations.rating || 'Rating'}
           isOpen={isOpen}
           onClick={toggle}
-          isMobile={isMobile}
         />
 
         {isOpen && (

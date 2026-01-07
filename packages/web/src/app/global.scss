@@ -1,27 +1,5 @@
-// Variables
-$color-black: #000000;
-$color-gray: #979797;
-$color-cream: #F9F4EA;
-$color-gold: #E19D1A;
-$color-offwhite: #FAFAFA;
-$color-white: #ffffff;
-$container-max: 1200px;
-$container-pad-desktop: 24px;
-$container-pad-mobile: 20px;
-$header-height: 64px;
-$header-pad-x: 32px;
-$header-pad-top: 17px;
-$header-pad-bottom: 16px;
-$header-gap: 16px;
-$search-width: 410px;
-$search-height: 41px;
-$search-pad-y: 6px;
-$search-pad-x: 12px;
-$search-radius: 4px;
-$search-border: 0.5px;
-$icon-size: 24px;
-$icon-gap: 16px;
-$font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+// Import variables from separate file
+@import '@/app/variables';
 
 :root {
   /* Colors */
@@ -30,6 +8,7 @@ $font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Ar
   --c-cream: #{$color-cream};
   --c-gold: #{$color-gold};
   --c-offwhite: #{$color-offwhite};
+  --c-white-transparent: #{$color-white-transparent};
 
   /* Layout */
   --container-max: #{$container-max};
@@ -54,6 +33,63 @@ $font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Ar
   /* Icons */
   --icon-size: #{$icon-size};
   --icon-gap: #{$icon-gap};
+
+  /* Typography - Font Weights */
+  --font-weight-thin: #{$fontWeightThin};
+  --font-weight-regular: #{$fontWeightRegular};
+
+  /* Typography - Font Sizes */
+  --font-size-h1: #{$fontSizeH1};
+  --font-size-h2: #{$fontSizeH2};
+  --font-size-h3: #{$fontSizeH3};
+  --font-size-body: #{$fontSizeBody};
+  --font-size-button: #{$fontSizeButton};
+  --font-size-input: #{$fontSizeInput};
+
+  /* Card Sizes - Desktop */
+  --card-width-large: #{$cardWidthLarge};
+  --card-width-medium: #{$cardWidthMedium};
+  --card-width-small: #{$cardWidthSmall};
+  --card-width-xsmall: #{$cardWidthXsmall};
+
+  /* Card Sizes - Mobile */
+  --card-width-mobile-large: #{$cardWidthMobileLarge};
+  --card-width-mobile-medium: #{$cardWidthMobileMedium};
+  --card-width-mobile-small: #{$cardWidthMobileSmall};
+  --card-width-mobile-xsmall: #{$cardWidthMobileXsmall};
+
+  /* Card Spacing - Large */
+  --card-spacing-large-image-to-title: #{$cardSpacingLargeImageToTitle};
+  --card-spacing-large-title-to-middle: #{$cardSpacingLargeTitleToMiddle};
+  --card-spacing-large-middle-to-subtitle: #{$cardSpacingLargeMiddleToSubtitle};
+  --card-spacing-large-subtitle-to-bottom: #{$cardSpacingLargeSubtitleToBottom};
+  --card-spacing-large-bottom-to-end: #{$cardSpacingLargeBottomToEnd};
+
+  /* Card Spacing - Medium */
+  --card-spacing-medium-image-to-title: #{$cardSpacingMediumImageToTitle};
+  --card-spacing-medium-title-to-subtitle: #{$cardSpacingMediumTitleToSubtitle};
+  --card-spacing-medium-subtitle-to-bottom: #{$cardSpacingMediumSubtitleToBottom};
+  --card-spacing-medium-bottom-to-end: #{$cardSpacingMediumBottomToEnd};
+
+  /* Card Spacing - Small */
+  --card-spacing-small-image-to-title: #{$cardSpacingSmallImageToTitle};
+  --card-spacing-small-title-to-middle: #{$cardSpacingSmallTitleToMiddle};
+  --card-spacing-small-middle-to-subtitle: #{$cardSpacingSmallMiddleToSubtitle};
+  --card-spacing-small-subtitle-to-bottom: #{$cardSpacingSmallSubtitleToBottom};
+  --card-spacing-small-bottom-to-end: #{$cardSpacingSmallBottomToEnd};
+
+  /* Card Spacing - XSmall */
+  --card-spacing-xsmall-image-to-title: #{$cardSpacingXsmallImageToTitle};
+
+  /* Card Image Heights - Desktop */
+  --card-image-height-large: #{$cardImageHeightLarge};
+  --card-image-height-medium: #{$cardImageHeightMedium};
+  --card-image-height-small: #{$cardImageHeightSmall};
+  --card-image-height-xsmall: #{$cardImageHeightXsmall};
+
+  /* Breakpoints */
+  --breakpoint-mobile: #{$breakpointMobile};
+  --breakpoint-desktop: #{$breakpointDesktop};
 }
 
 * {
@@ -76,8 +112,59 @@ body {
   font-family: $font-family;
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
   margin: 0;
+}
+
+// Typography Classes
+h1 {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizeH1;
+  color: $color-black;
+  line-height: 1.2;
+}
+
+h2 {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizeH2;
+  color: $color-black;
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: $font-family;
+  font-weight: $fontWeightRegular;
+  font-size: $fontSizeH3;
+  color: $color-black;
+  line-height: 1.2;
+}
+
+.body-text {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizeBody;
+  color: $color-black;
+  line-height: 1.2;
+}
+
+.button-text {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizeButton;
+  line-height: 1.2;
+}
+
+.input-text {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizeInput;
+  color: $color-black;
+  line-height: 1.2;
 }
 
 .container {
@@ -86,7 +173,7 @@ h1, h2, h3, p {
   padding: 0 var(--container-pad-desktop);
 }
 
-@media (max-width: 767px) {
+@media (max-width: $breakpointMobile) {
   .container {
     padding: 0 var(--container-pad-mobile);
   }

@@ -1,64 +1,73 @@
-// Variables
-$color-black: #000000;
-$font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-  Arial, sans-serif;
+@import '@/app/variables';
 
-// Desktop styles
-.desktop {
-  width: 1185px;
-  height: 924px;
-  margin: 50px auto 0;
+.section {
+  width: 100%;
+  margin-top: 50px;
+  padding: 0 $container-pad-mobile;
   display: flex;
   flex-direction: column;
-  opacity: 1;
   box-sizing: border-box;
+
+  @media (min-width: $breakpointDesktop) {
+    max-width: $container-max;
+    margin: 50px auto 0;
+    padding: 0;
+  }
 }
 
-// Upper section
 .upperSection {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 40px;
   margin-bottom: 50px;
-  opacity: 1;
-  box-sizing: border-box;
 }
 
 .title {
-  margin: 0;
-  width: 100%;
-  height: 35px;
   font-family: $font-family;
-  font-weight: 200;
-  font-size: 30px;
-  line-height: 35px;
+  font-weight: $fontWeightThin;
+  font-size: var(--font-size-h2);
   letter-spacing: 1.25px;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
   color: $color-black;
-  opacity: 1;
-  box-sizing: border-box;
+  margin: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeH2;
+    text-align: center;
+  }
 }
 
 .contentWrapper {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  gap: 65px;
-  align-items: flex-start;
-  opacity: 1;
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  @media (min-width: $breakpointDesktop) {
+    flex-direction: row;
+    gap: 65px;
+    align-items: flex-start;
+  }
 }
 
 .imageContainer {
-  width: 478px;
-  height: 372px;
+  width: 100%;
+  max-width: 335px;
+  height: 262px;
   flex-shrink: 0;
-  overflow: hidden;
   position: relative;
-  opacity: 1;
-  box-sizing: border-box;
+  overflow: hidden;
+  align-self: center;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 478px;
+    height: 372px;
+    max-width: none;
+    align-self: flex-start;
+  }
 }
 
 .chefImage {
@@ -66,192 +75,77 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%);
-  display: block;
-  opacity: 1;
 }
 
 .nameOverlay {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 478px;
-  height: 78px;
-  background-color: rgba(255, 255, 255, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.chefFullName {
-  font-family: $font-family;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 1.2;
-  text-align: center;
-  color: $color-black;
-  opacity: 1;
-}
-
-.descriptionContainer {
-  width: 642px;
-  height: 255px;
-  display: flex;
-  flex-direction: column;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.description {
   width: 100%;
-  font-family: $font-family;
-  font-weight: 100;
-  font-size: 24px;
-  line-height: 1.5;
-  text-align: justify;
-  color: $color-black;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-// Lower section
-.lowerSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.restaurantsTitle {
-  margin: 0;
-  width: 100%;
-  height: 35px;
-  font-family: $font-family;
-  font-weight: 200;
-  font-size: 24px;
-  line-height: 35px;
-  letter-spacing: 1.25px;
-  text-align: left;
-  text-transform: uppercase;
-  color: $color-black;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.cardsContainer {
-  width: 100%;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-// Mobile styles
-.mobile {
-  width: 100%;
-  margin-top: 50px;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.upperSectionMobile {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-  margin-bottom: 0;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.mobile .title {
-  width: 186px;
-  height: 35px;
-  margin: 0;
-  font-size: 18px;
-  line-height: 35px;
-  text-align: left;
-}
-
-.contentWrapperMobile {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 25px;
-  margin-bottom: 25px;
-  opacity: 1;
-  box-sizing: border-box;
-}
-
-.mobile .imageContainer {
-  width: 335px;
-  height: 262px;
-  align-self: center;
-}
-
-.nameOverlayMobile {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 335px;
   height: 51px;
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;
-  box-sizing: border-box;
+
+  @media (min-width: $breakpointDesktop) {
+    height: 78px;
+  }
 }
 
-.chefFullNameMobile {
+.chefFullName {
   font-family: $font-family;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.2;
-  text-align: center;
+  font-weight: $fontWeightRegular;
+  font-size: $fontSizemobileH3;
   color: $color-black;
-  opacity: 1;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeH3;
+  }
 }
 
-.mobile .descriptionContainer {
+.descriptionContainer {
+  flex: 1;
   width: 100%;
-  height: auto;
+
+  @media (min-width: $breakpointDesktop) {
+    width: auto;
+  }
 }
 
-.mobile .description {
-  width: 100%;
+.description {
   font-family: $font-family;
-  font-weight: 100;
-  font-size: 18px;
+  font-weight: $fontWeightThin;
+  font-size: var(--font-size-body);
   line-height: 1.5;
-  text-align: justify;
   color: $color-black;
-  opacity: 1;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeBody;
+  }
 }
 
-.lowerSectionMobile {
+.lowerSection {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 17px;
-  margin-top: 0;
-  opacity: 1;
-  box-sizing: border-box;
+  gap: 40px;
 }
 
-.mobile .restaurantsTitle {
-  width: auto;
-  height: auto;
-  font-size: 16px;
-  line-height: 1.2;
+.restaurantsTitle {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizemobileH3;
+  text-transform: uppercase;
   margin: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizemobileH1;
+  }
+}
+
+.cardsContainer {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
 }

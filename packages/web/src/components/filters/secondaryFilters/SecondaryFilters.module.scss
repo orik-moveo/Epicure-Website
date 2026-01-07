@@ -1,60 +1,11 @@
-// Variables
-$color-black: #000000;
+@import '@/app/variables';
+
 $color-bg-light: #fafafa;
-$font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-  Arial, sans-serif;
-$font-size-nav: 18px;
-$font-weight-thin: 100;
 $transition-fast: 0.2s;
 $spacing-md: 20px;
 $spacing-lg: 32px;
-$icon-size: 24px;
 
-// Desktop styles
-.desktop {
-  width: 100%;
-  height: 60px;
-  background-color: $color-bg-light;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-lg;
-  opacity: 1;
-  box-sizing: border-box;
-  position: sticky;
-  top: 114px;
-  z-index: 98;
-}
-
-.filterButton {
-  font-family: $font-family;
-  font-size: $font-size-nav;
-  font-weight: $font-weight-thin;
-  color: $color-black;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: opacity $transition-fast;
-  opacity: 1;
-  box-sizing: border-box;
-
-  &:hover {
-    opacity: 0.7;
-  }
-}
-
-.arrowIcon {
-  width: $icon-size;
-  height: $icon-size;
-  display: block;
-}
-
-// Mobile styles
-.mobile {
+.filters {
   width: 100%;
   height: 60px;
   background-color: $color-bg-light;
@@ -68,8 +19,41 @@ $icon-size: 24px;
   position: sticky;
   top: 68px;
   z-index: 98;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 100vw;
+    padding: 0;
+    top: 114px;
+  }
 }
 
-.mobile .filterButton {
-  font-size: 14px;
+.filterButton {
+  font-family: $font-family;
+  font-size: $fontSizeButtonmobile;
+  font-weight: $fontWeightThin;
+  color: $color-black;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity $transition-fast;
+  opacity: 1;
+  box-sizing: border-box;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizemobileH3;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.arrowIcon {
+  width: $icon-size;
+  height: $icon-size;
+  display: block;
 }
