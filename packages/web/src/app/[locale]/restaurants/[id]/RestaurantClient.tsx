@@ -1,0 +1,117 @@
+'use client';
+
+import { Dish } from '@/app/types/dishes.types';
+import { Restaurant } from '@/app/types/restaurants.types';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
+import { useTranslation } from '@/hooks/useTranslation';
+import { isRestaurantOpen } from './restaurant.utils';
+import Card from '@/components/Card/Card';
+import { CardVariant, CardSize } from '@/components/Card/Card.types';
+import styles from './RestaurantClient.module.scss';
+
+interface RestaurantClientProps {
+  restaurant: Restaurant & {
+    id?: number;
+    documentId?: string;
+    dishes?: Dish[];
+  };
+  meal?: string | string[];
+}
+
+export default function RestaurantClient({
+  restaurant,
+  meal,
+}: RestaurantClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = useParams();
+  const translations = useTranslation('restaurant');
+
+  const selectedMeal =
+    typeof meal === 'string' ? meal : meal?.[0] || 'breakfast';
+
+  const isOpen = isRestaurantOpen(restaurant, new Date());
+
+  const filteredDishes =
+    restaurant.dishes?.filter((dish) =>
+      dish.meal_types?.some((mealType) => mealType.label === selectedMeal)
+    ) || [];
+
+  const locale = params.locale as string;
+
+  const restaurantId = restaurant.documentId || (params.id as string);
+
+  const handleMealClick = (mealType: string) => {
+    const urlParams = new URLSearchParams(searchParams.toString());
+    urlParams.set('meal', mealType);
+    router.replace(
+      `/${locale}/restaurants/${restaurantId}?${urlParams.toString()}`
+    );
+  };
+
+  const mealTypes = ['breakfast', 'lunch', 'dinner'];
+
+  return (
+    <div className={styles.container}>
+      {restaurant.image && restaurant.image[0] && (
+        <img
+          src={restaurant.image[0].url}
+          alt={restaurant.name}
+          className={styles.image}
+        />
+      )}
+
+      <div className={styles.content}>
+        <h1 className={`${styles.title} ${styles.gap24}`}>{restaurant.name}</h1>
+
+        {restaurant.chef && (
+          <p className={`${styles.subtitle} ${styles.gap16}`}>
+            {restaurant.chef.name}
+          </p>
+        )}
+
+        <div className={styles.statusContainer}>
+          <img
+            src="/assets/icons/clock.svg"
+            alt="Clock"
+            className={styles.statusIcon}
+          />
+          <span className={styles.statusText}>
+            {isOpen ? translations.openNow : translations.closedNow}
+          </span>
+        </div>
+
+        <div className={`${styles.mealTabs} ${styles.gap48}`}>
+          {mealTypes.map((mealType) => (
+            <button
+              key={mealType}
+              className={`${styles.mealTab} ${
+                selectedMeal === mealType ? styles.active : ''
+              }`}
+              onClick={() => handleMealClick(mealType)}
+            >
+              {translations[mealType]}
+            </button>
+          ))}
+        </div>
+
+        {filteredDishes && filteredDishes.length > 0 && (
+          <div className={`${styles.cardsContainer} ${styles.gap30}`}>
+            {filteredDishes.map((dish, index) => (
+              <Card
+                key={index}
+                variant={CardVariant.Dish}
+                size={CardSize.Small}
+                image={dish.image[0]}
+                title={dish.name}
+                ingredients={dish.ingredients}
+                price={dish.price}
+                dietType={dish.dietType}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

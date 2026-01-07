@@ -49,5 +49,12 @@
       "rating": "Rating",
       "clear": "CLEAR"
     }
+  },
+  "restaurant": {
+    "openNow": "Open now",
+    "closedNow": "Closed now",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner"
   }
 }

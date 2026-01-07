@@ -1,6 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useTranslation } from '../../../hooks/useTranslation';
 import { Restaurant, RestaurantLocation } from '../../types/restaurants.types';
 import { FilterOption } from '../../types/filters.types';
@@ -35,6 +37,7 @@ export default function RestaurantsClient({
 }: RestaurantsClientProps) {
   const translations = useTranslation('restaurants');
   const searchParams = useSearchParams();
+  const locale = useLocale();
 
   const allRestaurants = data?.data || [];
 
@@ -81,18 +84,26 @@ export default function RestaurantsClient({
         <RestaurantMapView locations={locationsData?.data || []} />
       ) : (
         <div className={styles.cardsContainer}>
-          {restaurants.map((restaurant, index) => (
-            <div key={index} className={styles.cardWrapper}>
-              <Card
-                variant={CardVariant.Restaurant}
-                image={restaurant.image[0]}
-                title={restaurant.name}
-                chefName={restaurant.chef.name}
-                rating={restaurant.rating}
-                size={CardSize.Medium}
-              />
-            </div>
-          ))}
+          {restaurants.map((restaurant, index) => {
+            const restaurantId =
+              (restaurant as any).documentId || index.toString();
+            return (
+              <Link
+                key={index}
+                href={`/${locale}/restaurants/${restaurantId}`}
+                className={styles.cardWrapper}
+              >
+                <Card
+                  variant={CardVariant.Restaurant}
+                  image={restaurant.image[0]}
+                  title={restaurant.name}
+                  chefName={restaurant.chef.name}
+                  rating={restaurant.rating}
+                  size={CardSize.Medium}
+                />
+              </Link>
+            );
+          })}
         </div>
       )}
     </section>

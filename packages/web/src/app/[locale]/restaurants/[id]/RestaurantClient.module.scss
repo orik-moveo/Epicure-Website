@@ -1,0 +1,192 @@
+@import '@/app/variables';
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  width: 100%;
+  height: 272px;
+  object-fit: cover;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 1186px;
+    height: 425px;
+    margin: 0 auto;
+  }
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 $container-pad-mobile;
+
+  @media (min-width: $breakpointDesktop) {
+    padding: 0;
+    max-width: $container-max;
+    margin: 0 auto;
+  }
+}
+
+.title {
+  font-family: $font-family;
+  font-size: $fontSizemobileH3; // 18px
+  font-weight: $fontWeightRegular;
+  color: $color-black;
+  text-align: left;
+  margin: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeH3; // 40px
+    text-align: center;
+  }
+}
+
+.subtitle {
+  font-family: $font-family;
+  font-size: $fontSizeBodymobile; // 16px
+  font-weight: $fontWeightThin;
+  color: $color-black;
+  text-align: left;
+  margin: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeH1; // 32px
+    text-align: center;
+  }
+}
+
+.statusContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  margin-top: 16px;
+
+  @media (min-width: $breakpointDesktop) {
+    justify-content: center;
+    text-align: center;
+    margin-top: 32px;
+  }
+}
+
+.statusIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.statusText {
+  font-family: $font-family;
+  font-size: $fontSizemobileH3; // 18px
+  font-weight: $fontWeightThin;
+  color: $color-black;
+}
+
+.mealTabs {
+  width: 246px;
+  height: 27px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 316px;
+    height: 30px;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+}
+
+.mealTab {
+  font-family: $font-family;
+  font-size: 18px;
+  font-weight: $fontWeightThin;
+  color: $color-black;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: $fontSizeBody;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &.active {
+    font-weight: $fontWeightRegular;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 0;
+      border-bottom: 1.8px solid #de9200e5;
+      background-color: transparent;
+    }
+  }
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 56px;
+
+  @media (min-width: $breakpointDesktop) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    align-items: start;
+    padding-bottom: 48px;
+  }
+}
+
+// Gaps
+.gap24 {
+  margin-top: 24px;
+
+  @media (min-width: $breakpointDesktop) {
+    margin-top: 32px;
+  }
+}
+
+.gap16 {
+  margin-top: 16px;
+
+  @media (min-width: $breakpointDesktop) {
+    margin-top: 4px;
+  }
+}
+
+.gap32 {
+  margin-top: 32px;
+
+  @media (min-width: $breakpointDesktop) {
+    margin-top: 32px;
+  }
+}
+
+.gap30 {
+  margin-top: 30px;
+
+  @media (min-width: $breakpointDesktop) {
+    margin-top: 47px;
+  }
+}
+
+.gap48 {
+  margin-top: 48px;
+}
