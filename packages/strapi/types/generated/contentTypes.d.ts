@@ -487,6 +487,10 @@ export interface ApiDishDish extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::dish.dish'> &
       Schema.Attribute.Private;
+    meal_types: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::meal-type.meal-type'
+    >;
     name: Schema.Attribute.String;
     price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
@@ -535,6 +539,35 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       'homepage.popular-restaurants-section',
       false
     >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMealTypeMealType extends Struct.CollectionTypeSchema {
+  collectionName: 'meal_types';
+  info: {
+    displayName: 'MealType';
+    pluralName: 'meal-types';
+    singularName: 'meal-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dishes: Schema.Attribute.Relation<'manyToMany', 'api::dish.dish'>;
+    label: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::meal-type.meal-type'
+    > &
+      Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1102,6 +1135,7 @@ declare module '@strapi/strapi' {
       'api::chef.chef': ApiChefChef;
       'api::dish.dish': ApiDishDish;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::meal-type.meal-type': ApiMealTypeMealType;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
