@@ -1,5 +1,5 @@
 // Import variables from separate file
-@import 'variables';
+@import '@/app/variables';
 
 :root {
   /* Colors */
@@ -8,6 +8,7 @@
   --c-cream: #{$color-cream};
   --c-gold: #{$color-gold};
   --c-offwhite: #{$color-offwhite};
+  --c-white-transparent: #{$color-white-transparent};
 
   /* Layout */
   --container-max: #{$container-max};

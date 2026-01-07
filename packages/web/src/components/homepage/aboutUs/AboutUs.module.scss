@@ -1,11 +1,9 @@
 @import '@/app/variables';
 
-$color-bg-light: #fafafa;
-
 .section {
   width: 100%;
   height: 867px;
-  background-color: $color-bg-light;
+  background-color: $color-offwhite;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

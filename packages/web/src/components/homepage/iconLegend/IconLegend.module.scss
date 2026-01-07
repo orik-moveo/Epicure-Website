@@ -1,7 +1,5 @@
 @import '@/app/variables';
 
-$color-bg-grey: #fafafa;
-
 .section {
   width: 100%;
   height: 584px;
@@ -10,7 +8,7 @@ $color-bg-grey: #fafafa;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $color-bg-grey;
+  background-color: $color-offwhite;
   gap: 40px;
   opacity: 1;
   box-sizing: border-box;
