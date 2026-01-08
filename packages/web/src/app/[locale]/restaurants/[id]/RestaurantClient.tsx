@@ -1,6 +1,7 @@
 'use client';
 
-import { Dish, MEAL_TYPES, MealType } from '@/app/types/dishes.types';
+import { useEffect } from 'react';
+import { MEAL_TYPES, MealType } from '@/app/types/dishes.types';
 import { Restaurant } from '@/app/types/restaurants.types';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -10,12 +11,8 @@ import { CardVariant, CardSize } from '@/components/Card/Card.types';
 import styles from './RestaurantClient.module.scss';
 
 interface RestaurantClientProps {
-  restaurant: Restaurant & {
-    id?: number;
-    documentId?: string;
-    dishes?: Dish[];
-  };
-  meal?: string | string[];
+  restaurant: Restaurant;
+  meal?: MealType;
 }
 
 export default function RestaurantClient({
@@ -27,16 +24,13 @@ export default function RestaurantClient({
   const pathname = usePathname();
   const translations = useTranslation('restaurant');
 
-  const selectedMeal: MealType =
-    typeof meal === 'string'
-      ? (meal as MealType)
-      : (meal?.[0] as MealType) || MealType.Breakfast;
+  const selectedMeal = meal;
 
   const isOpen = isRestaurantOpen(restaurant, new Date());
 
   const filteredDishes =
     restaurant.dishes?.filter((dish) =>
-      dish.meal_types?.some((mealType) => mealType.label === selectedMeal)
+      dish.meal_types?.some((m) => m.label === selectedMeal)
     ) || [];
 
   const handleMealClick = (mealType: MealType) => {
@@ -47,8 +41,6 @@ export default function RestaurantClient({
       { scroll: false }
     );
   };
-
-  const mealTypes = MEAL_TYPES;
 
   return (
     <div className={styles.container}>
@@ -81,7 +73,7 @@ export default function RestaurantClient({
         </div>
 
         <div className={`${styles.mealTabs} ${styles.gap48}`}>
-          {mealTypes.map((mealType) => (
+          {MEAL_TYPES.map((mealType) => (
             <button
               key={mealType}
               className={`${styles.mealTab} ${
