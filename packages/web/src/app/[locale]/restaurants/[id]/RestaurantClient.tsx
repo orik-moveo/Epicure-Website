@@ -1,8 +1,8 @@
 'use client';
 
-import { Dish } from '@/app/types/dishes.types';
+import { Dish, MEAL_TYPES, MealType } from '@/app/types/dishes.types';
 import { Restaurant } from '@/app/types/restaurants.types';
-import { useRouter, useSearchParams, useParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { isRestaurantOpen } from './restaurant.utils';
 import Card from '@/components/Card/Card';
@@ -24,11 +24,13 @@ export default function RestaurantClient({
 }: RestaurantClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const params = useParams();
+  const pathname = usePathname();
   const translations = useTranslation('restaurant');
 
-  const selectedMeal =
-    typeof meal === 'string' ? meal : meal?.[0] || 'breakfast';
+  const selectedMeal: MealType =
+    typeof meal === 'string'
+      ? (meal as MealType)
+      : (meal?.[0] as MealType) || MealType.Breakfast;
 
   const isOpen = isRestaurantOpen(restaurant, new Date());
 
@@ -37,19 +39,16 @@ export default function RestaurantClient({
       dish.meal_types?.some((mealType) => mealType.label === selectedMeal)
     ) || [];
 
-  const locale = params.locale as string;
-
-  const restaurantId = restaurant.documentId || (params.id as string);
-
-  const handleMealClick = (mealType: string) => {
-    const urlParams = new URLSearchParams(searchParams.toString());
-    urlParams.set('meal', mealType);
+  const handleMealClick = (mealType: MealType) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('meal', mealType);
     router.replace(
-      `/${locale}/restaurants/${restaurantId}?${urlParams.toString()}`
+      params.toString() ? `${pathname}?${params.toString()}` : pathname,
+      { scroll: false }
     );
   };
 
-  const mealTypes = ['breakfast', 'lunch', 'dinner'];
+  const mealTypes = MEAL_TYPES;
 
   return (
     <div className={styles.container}>

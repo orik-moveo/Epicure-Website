@@ -1,3 +1,14 @@
+export enum MealType {
+  Breakfast = 'breakfast',
+  Lunch = 'lunch',
+  Dinner = 'dinner',
+}
+
+export const MEAL_TYPES: MealType[] = [
+  MealType.Breakfast,
+  MealType.Lunch,
+  MealType.Dinner,
+];
 export interface Dish {
   image: Array<{
     url: string;
@@ -11,6 +22,6 @@ export interface Dish {
   price: number;
   dietType: 'none' | 'spicy' | 'vegetarian' | 'vegan';
   meal_types?: Array<{
-    label?: string;
+    label?: MealType;
   }>;
 }
