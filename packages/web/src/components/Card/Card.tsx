@@ -57,13 +57,6 @@ export default function Card(props: CardProps) {
 
   const dietIconPath =
     variant === CardVariant.Dish ? getDietIconPath(dietType) : null;
-  const middleContent = dietIconPath ? (
-    <img
-      src={dietIconPath}
-      alt={dietType || 'diet icon'}
-      className={styles.dietIcon}
-    />
-  ) : null;
 
   const bottomContent =
     variant === CardVariant.Dish ? (

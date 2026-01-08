@@ -47,7 +47,7 @@ export class RestaurantService {
   }
 
   async getOne(id: string): Promise<any> {
-    const url = `${this.baseUrl}/api/${this.resource}/${id}?populate=*`;
+    const url = `${this.baseUrl}/api/${this.resource}/${id}`;
     const response = await firstValueFrom(this.httpService.get(url));
     return response.data;
   }

@@ -56,6 +56,12 @@
       "relation": "manyToOne",
       "target": "api::restaurant.restaurant",
       "inversedBy": "dishes"
+    },
+    "meal_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::meal-type.meal-type",
+      "inversedBy": "dishes"
     }
   }
 }

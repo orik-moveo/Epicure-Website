@@ -26,6 +26,16 @@ export async function getRestaurants(filter?: string) {
   return response.json();
 }
 
+export async function getRestaurant(id: string) {
+  const response = await fetch(`${BACKEND_URL}/api/restaurants/${id}`, {
+    cache: 'no-store',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch restaurant');
+  }
+  return response.json();
+}
+
 export async function getRestaurantLocations() {
   const url = `${BACKEND_URL}/api/restaurants/locations`;
 

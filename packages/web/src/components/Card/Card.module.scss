@@ -1,8 +1,84 @@
 // Import variables from shared variables file
-
 @import '@/app/variables';
-// Base Card Styles
 
+// SASS Maps for size-specific values
+$card-sizes: (
+  large: (
+    mobile-width: $cardWidthMobileLarge,
+    desktop-width: $cardWidthLarge,
+    mobile-height: $cardHeightMobileLarge,
+    desktop-height: $cardImageHeightLarge,
+    padding-top: $cardSpacingLargeImageToTitle,
+    padding-bottom: $cardSpacingLargeBottomToEnd,
+    title-gap: $cardSpacingLargeTitleToMiddle,
+    middle-margin: $cardSpacingLargeMiddleToSubtitle,
+    subtitle-margin: $cardSpacingLargeSubtitleToBottom,
+    price-line-width: 112px,
+    price-line-offset: 109px,
+  ),
+  medium: (
+    mobile-width: $cardWidthMobileMedium,
+    desktop-width: $cardWidthMedium,
+    mobile-height: $cardHeightMobileMedium,
+    desktop-height: $cardImageHeightMedium,
+    padding-top: $cardSpacingMediumImageToTitle,
+    padding-bottom: $cardSpacingMediumBottomToEnd,
+    title-gap: $cardSpacingMediumTitleToSubtitle,
+    subtitle-margin: $cardSpacingMediumSubtitleToBottom,
+  ),
+  small: (
+    mobile-width: $cardWidthMobileSmall,
+    desktop-width: $cardWidthSmall,
+    mobile-height: $cardHeightMobileSmall,
+    desktop-height: $cardImageHeightSmall,
+    padding-top: $cardSpacingSmallImageToTitle,
+    padding-bottom: $cardSpacingSmallBottomToEnd,
+    title-gap: $cardSpacingSmallTitleToMiddle,
+    middle-margin: $cardSpacingSmallMiddleToSubtitle,
+    subtitle-margin: $cardSpacingSmallSubtitleToBottom,
+    price-line-width: 60px,
+    price-line-offset: 64px,
+  ),
+  xsmall: (
+    mobile-width: $cardWidthMobileXsmall,
+    desktop-width: $cardWidthXsmall,
+    mobile-height: $cardHeightMobileXsmall,
+    desktop-height: $cardImageHeightXsmall,
+    padding-top: $cardSpacingXsmallImageToTitle,
+    padding-bottom: 18px,
+  ),
+);
+
+// Mixins for common patterns
+@mixin desktop-only {
+  @media (min-width: $breakpointDesktop) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: $breakpointMobile) {
+    @content;
+  }
+}
+
+@mixin size-specific-width($size) {
+  $config: map-get($card-sizes, $size);
+  width: map-get($config, mobile-width);
+  @include desktop-only {
+    width: map-get($config, desktop-width);
+  }
+}
+
+@mixin size-specific-height($size) {
+  $config: map-get($card-sizes, $size);
+  height: map-get($config, mobile-height);
+  @include desktop-only {
+    height: map-get($config, desktop-height);
+  }
+}
+
+// Base Card Styles
 .card {
   display: flex;
   flex-direction: column;
@@ -11,35 +87,13 @@
   height: 100%;
 
   // Size-specific widths
-  &.card--large {
-    width: $cardWidthMobileLarge;
-    @media (min-width: $breakpointDesktop) {
-      width: $cardWidthLarge;
+  @each $size in large, medium, small, xsmall {
+    &.card--#{$size} {
+      @include size-specific-width($size);
     }
   }
 
-  &.card--medium {
-    width: $cardWidthMobileMedium;
-    @media (min-width: $breakpointDesktop) {
-      width: $cardWidthMedium;
-    }
-  }
-
-  &.card--small {
-    width: $cardWidthMobileSmall;
-    @media (min-width: $breakpointDesktop) {
-      width: $cardWidthSmall;
-    }
-  }
-
-  &.card--xsmall {
-    width: $cardWidthMobileXsmall;
-    @media (min-width: $breakpointDesktop) {
-      width: $cardWidthXsmall;
-    }
-  }
-
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     flex-shrink: 0;
   }
 }
@@ -51,32 +105,10 @@
   box-sizing: border-box;
   flex-shrink: 0;
 
-  // Size-specific heights (desktop only)
-  .card--large & {
-    height: $cardHeightMobileLarge;
-    @media (min-width: $breakpointDesktop) {
-      height: $cardImageHeightLarge;
-    }
-  }
-
-  .card--medium & {
-    height: $cardHeightMobileMedium;
-    @media (min-width: $breakpointDesktop) {
-      height: $cardImageHeightMedium;
-    }
-  }
-
-  .card--small & {
-    height: $cardHeightMobileSmall;
-    @media (min-width: $breakpointDesktop) {
-      height: $cardImageHeightSmall;
-    }
-  }
-
-  .card--xsmall & {
-    height: $cardHeightMobileXsmall;
-    @media (min-width: $breakpointDesktop) {
-      height: $cardImageHeightXsmall;
+  // Size-specific heights
+  @each $size in large, medium, small, xsmall {
+    .card--#{$size} & {
+      @include size-specific-height($size);
     }
   }
 }
@@ -100,48 +132,22 @@
   flex-grow: 1;
   height: 100%;
 
-  .card--large & {
-    padding-top: $cardSpacingLargeImageToTitle;
-    padding-bottom: $cardSpacingLargeBottomToEnd;
-
-    @media (min-width: $breakpointDesktop) {
-      padding-top: $cardSpacingLargeImageToTitle;
-      padding-bottom: $cardSpacingLargeBottomToEnd;
+  // Size-specific padding
+  @each $size in large, medium, small, xsmall {
+    .card--#{$size} & {
+      $config: map-get($card-sizes, $size);
+      padding-top: map-get($config, padding-top);
+      padding-bottom: map-get($config, padding-bottom);
     }
-  }
-
-  .card--medium & {
-    padding-top: $cardSpacingMediumImageToTitle;
-    padding-bottom: $cardSpacingMediumBottomToEnd;
-
-    @media (min-width: $breakpointDesktop) {
-      padding-top: $cardSpacingMediumImageToTitle;
-      padding-bottom: $cardSpacingMediumBottomToEnd;
-    }
-  }
-
-  .card--small & {
-    padding-top: $cardSpacingSmallImageToTitle;
-    padding-bottom: $cardSpacingSmallBottomToEnd;
-
-    @media (min-width: $breakpointDesktop) {
-      padding-top: $cardSpacingSmallImageToTitle;
-      padding-bottom: $cardSpacingSmallBottomToEnd;
-    }
-  }
-
-  .card--xsmall & {
-    padding-top: $cardSpacingXsmallImageToTitle;
-    padding-bottom: 18px;
   }
 
   .card--dish & {
-    @media (min-width: $breakpointDesktop) {
+    @include desktop-only {
       align-items: center;
     }
   }
 
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     align-items: flex-start;
     padding: 16px;
     gap: 8px;
@@ -155,40 +161,23 @@
   align-items: center;
   box-sizing: border-box;
 
-  .card--large & {
-    gap: $cardSpacingLargeTitleToMiddle;
-
-    @media (min-width: $breakpointDesktop) {
-      gap: $cardSpacingLargeTitleToMiddle;
-    }
-  }
-
-  .card--medium & {
-    gap: $cardSpacingMediumTitleToSubtitle;
-
-    @media (min-width: $breakpointDesktop) {
-      gap: $cardSpacingMediumTitleToSubtitle;
-    }
-  }
-
-  .card--small & {
-    gap: $cardSpacingSmallTitleToMiddle;
-
-    @media (min-width: $breakpointDesktop) {
-      gap: $cardSpacingSmallTitleToMiddle;
+  // Size-specific gap
+  @each $size in large, medium, small {
+    .card--#{$size} & {
+      $config: map-get($card-sizes, $size);
+      gap: map-get($config, title-gap);
     }
   }
 
   .card--dish & {
-    @media (min-width: $breakpointDesktop) {
+    @include desktop-only {
       width: 100%;
       height: auto;
       padding: 0 16px;
     }
   }
 
-  // Mobile styles
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     width: 100%;
     height: auto;
     align-items: flex-start;
@@ -203,16 +192,14 @@
   box-sizing: border-box;
 
   // Size-specific margins
-  .card--large & {
-    margin-bottom: $cardSpacingLargeMiddleToSubtitle;
+  @each $size in large, small {
+    .card--#{$size} & {
+      $config: map-get($card-sizes, $size);
+      margin-bottom: map-get($config, middle-margin);
+    }
   }
 
-  .card--small & {
-    margin-bottom: $cardSpacingSmallMiddleToSubtitle;
-  }
-
-  // Mobile styles
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -224,16 +211,14 @@
   justify-content: center;
   box-sizing: border-box;
 
-  // Variant-specific styles
   .card--dish & {
-    @media (min-width: $breakpointDesktop) {
+    @include desktop-only {
       margin-top: auto;
       width: 100%;
     }
   }
 
-  // Mobile styles
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     width: auto;
     height: auto;
     align-items: center;
@@ -252,8 +237,7 @@
   text-align: center;
   color: $color-black;
 
-  // Mobile styles
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     font-size: $fontSizemobileH3;
     font-weight: $fontWeightRegular;
     text-align: left;
@@ -271,24 +255,18 @@
   color: $color-black;
 
   // Size-specific styles
-  .card--large & {
-    margin-bottom: $cardSpacingLargeSubtitleToBottom;
-  }
-
-  .card--medium & {
-    margin-bottom: $cardSpacingMediumSubtitleToBottom;
-  }
-
-  .card--small & {
-    margin-bottom: $cardSpacingSmallSubtitleToBottom;
+  @each $size in large, medium, small {
+    .card--#{$size} & {
+      $config: map-get($card-sizes, $size);
+      margin-bottom: map-get($config, subtitle-margin);
+    }
   }
 
   .card--xsmall & {
     display: none; // XSmall shows only title
   }
 
-  // Mobile styles
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     font-size: $fontSizeBodymobile;
     font-weight: $fontWeightThin;
     text-align: left;
@@ -299,7 +277,7 @@
 // Variant specific styles (for Dish variant)
 .card--dish {
   .subtitle {
-    @media (min-width: $breakpointDesktop) {
+    @include desktop-only {
       width: 100%;
       word-wrap: break-word;
     }
@@ -323,7 +301,7 @@
   align-items: center;
   width: 100%;
 
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     align-items: flex-start;
   }
 }
@@ -334,9 +312,31 @@
   display: flex;
   justify-content: center;
 
-  @media (max-width: $breakpointMobile) {
+  @include mobile-only {
     justify-content: flex-start;
     overflow: visible;
+  }
+}
+
+// Mixin for price line pseudo-elements
+@mixin price-line($width, $offset) {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: $width;
+    height: 0;
+    border-top: 0.5px solid $color-gray;
+  }
+
+  &::before {
+    left: -#{$offset};
+  }
+
+  &::after {
+    right: -#{$offset};
   }
 }
 
@@ -347,28 +347,15 @@
   position: relative;
 
   .card--dish.card--large & {
-    @media (min-width: $breakpointDesktop) {
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 112px;
-        height: 0;
-        border-top: 0.5px solid $color-gray;
-      }
-
-      &::before {
-        left: -116px;
-      }
-
-      &::after {
-        right: -116px;
-      }
+    @include desktop-only {
+      $config: map-get($card-sizes, large);
+      @include price-line(
+        map-get($config, price-line-width),
+        map-get($config, price-line-offset)
+      );
     }
 
-    @media (max-width: $breakpointMobile) {
+    @include mobile-only {
       padding-right: 0; // Ensure no padding interferes
       &::after {
         content: '';
@@ -381,6 +368,16 @@
         height: 0;
         border-top: 0.5px solid $color-gray;
       }
+    }
+  }
+
+  .card--dish.card--small & {
+    @include desktop-only {
+      $config: map-get($card-sizes, small);
+      @include price-line(
+        map-get($config, price-line-width),
+        map-get($config, price-line-offset)
+      );
     }
   }
 }
@@ -398,7 +395,7 @@
   color: $color-black;
   line-height: 1.2;
 
-  @media (min-width: $breakpointDesktop) {
+  @include desktop-only {
     font-size: $fontSizeBody;
   }
 }

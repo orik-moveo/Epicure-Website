@@ -1,3 +1,5 @@
+import { Dish } from './dishes.types';
+
 export interface OpeningHours {
   day:
     | 'sunday'
@@ -30,6 +32,7 @@ export interface RestaurantLocation {
 }
 
 export interface Restaurant {
+  documentId?: string;
   image: Array<{
     url: string;
     width?: number;
@@ -46,4 +49,5 @@ export interface Restaurant {
   createdAt?: string;
   minPrice: number;
   maxPrice: number;
+  dishes?: Dish[];
 }
