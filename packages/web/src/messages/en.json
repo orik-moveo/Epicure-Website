@@ -56,5 +56,10 @@
     "breakfast": "Breakfast",
     "lunch": "Lunch",
     "dinner": "Dinner"
+  },
+  "dishDialog": {
+    "chooseASide": "Choose a side",
+    "changes": "Changes",
+    "quantity": "Quantity"
   }
 }

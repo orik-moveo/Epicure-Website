@@ -1,0 +1,429 @@
+@import '@/app/variables';
+
+.dialogPaper {
+  max-width: 100%;
+  margin: 0;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 0;
+  position: relative;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 573px;
+    max-width: 573px;
+    height: auto;
+    max-height: calc(100vh - 40px);
+    margin: 0 auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+}
+
+.dialogContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  overflow-y: auto;
+
+  @media (min-width: $breakpointDesktop) {
+    height: 100%;
+    max-height: calc(100vh - 40px);
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.closeButtonRow {
+  width: 100%;
+  height: 24px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+
+  @media (min-width: $breakpointDesktop) {
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    padding: 0;
+    z-index: 10;
+  }
+}
+
+.closeButton {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.closeIconMobile {
+  display: block;
+
+  @media (min-width: $breakpointDesktop) {
+    display: none;
+  }
+}
+
+.closeIconDesktop {
+  display: none;
+
+  @media (min-width: $breakpointDesktop) {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.imageContainer {
+  width: 100%;
+  height: 272px;
+  margin-top: 20px;
+  margin-bottom: 32px;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 576px;
+    height: 292px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.contentContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  padding-bottom: 40px;
+
+  @media (min-width: $breakpointDesktop) {
+    align-items: center;
+    padding: 0;
+    padding-bottom: 40px;
+    width: 576px;
+  }
+}
+
+.title {
+  font-family: $font-family;
+  font-weight: $fontWeightRegular;
+  font-size: $fontSizemobileH3;
+  line-height: 1.2;
+  color: $color-black;
+  text-align: left;
+  margin: 0 37px 14px 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+    padding-top: 40px;
+  }
+}
+
+.ingredients {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: $fontSizeBodymobile;
+  line-height: 1.2;
+  color: $color-black;
+  text-align: left;
+  margin: 0 37px 14px 0;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+    padding-top: 14px;
+    padding-left: 170px;
+    padding-right: 170px;
+  }
+}
+
+.dietIconContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 37px 14px 0;
+
+  @media (min-width: $breakpointDesktop) {
+    justify-content: center;
+    margin: 0;
+    padding-top: 14px;
+  }
+}
+
+.dietIcon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 37px 30px 0;
+
+  @media (min-width: $breakpointDesktop) {
+    margin: 0;
+    padding: 14px 0 40px;
+    justify-content: center;
+    width: 576px;
+  }
+}
+
+.priceLine {
+  display: none;
+
+  @media (min-width: $breakpointDesktop) {
+    display: block;
+    width: 85px;
+    height: 0.5px;
+    background-color: $color-gray;
+  }
+}
+
+.shekelIcon {
+  width: 18px;
+  height: 18px;
+  display: block;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.price {
+  font-family: $font-family;
+  font-weight: $fontWeightRegular;
+  font-size: $fontSizeBodymobile;
+  line-height: 1.2;
+  color: $color-black;
+
+  @media (min-width: $breakpointDesktop) {
+    font-size: 24px;
+  }
+}
+
+.section {
+  margin-bottom: 24px;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.sectionTitle {
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: 20px;
+  line-height: 1.2;
+  color: $color-black;
+  text-align: left;
+  margin: 0 0 24px 0;
+  text-decoration: underline;
+  text-decoration-color: #de9200e5;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+
+  @media (min-width: $breakpointDesktop) {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @media (min-width: $breakpointDesktop) {
+    align-items: flex-start;
+    width: 100%;
+    padding-left: 192px;
+  }
+}
+
+.radioOption,
+.checkboxOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: $font-family;
+  font-weight: $fontWeightThin;
+  font-size: 18px;
+  line-height: 1.2;
+  color: $color-black;
+
+  @media (min-width: $breakpointDesktop) {
+    justify-content: flex-start;
+  }
+}
+
+.radioOption {
+  @media (min-width: $breakpointDesktop) {
+    padding-bottom: 4px;
+  }
+}
+
+.checkboxOption {
+  @media (min-width: $breakpointDesktop) {
+    padding-bottom: 4px;
+  }
+}
+
+.radioInput,
+.checkboxInput {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.optionLabel {
+  user-select: none;
+}
+
+.quantityContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+
+  @media (min-width: $breakpointDesktop) {
+    justify-content: center;
+  }
+}
+
+.quantityButton {
+  width: auto;
+  height: auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family;
+  font-size: 20px;
+  font-weight: $fontWeightRegular;
+  color: $color-gray;
+  padding: 0;
+  min-width: 24px;
+  min-height: 24px;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:active {
+    color: $color-black;
+  }
+}
+
+.quantityButtonMinus {
+  position: relative;
+  padding-left: 16px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 20px;
+    background-color: $color-gray;
+  }
+}
+
+.quantityValue {
+  font-family: $font-family;
+  font-weight: $fontWeightRegular;
+  font-size: 18px;
+  line-height: 1.2;
+  color: $color-black;
+  min-width: 24px;
+  text-align: center;
+
+  @media (min-width: $breakpointDesktop) {
+    font-weight: $fontWeightThin;
+  }
+}
+
+.addToBagButton {
+  margin-top: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: $breakpointDesktop) {
+    margin-top: 20px;
+    width: 206px;
+    height: 48px;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.addToBagIcon {
+  width: 100%;
+  max-width: 206px;
+  height: auto;
+  display: block;
+
+  @media (min-width: $breakpointDesktop) {
+    width: 206px;
+    height: 48px;
+    object-fit: contain;
+  }
+}

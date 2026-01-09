@@ -1,11 +1,11 @@
-import { getRestaurant } from '@/lib/api';
+import { getRestaurant, getDish } from '@/lib/api';
 import RestaurantClient from './RestaurantClient';
 import { MealType } from '@/app/types/dishes.types';
 import { redirect } from 'next/navigation';
 
 interface RestaurantPageProps {
   params: Promise<{ locale: string; id: string }>;
-  searchParams: Promise<{ meal?: string | string[] }>;
+  searchParams: Promise<{ meal?: string | string[]; dish?: string }>;
 }
 
 export default async function RestaurantPage({
@@ -32,9 +32,23 @@ export default async function RestaurantPage({
 
   const data = await getRestaurant(resolvedParams.id);
 
+  let selectedDish = null;
+  if (resolvedSearchParams.dish) {
+    try {
+      const dishResponse = await getDish(resolvedSearchParams.dish);
+      selectedDish = dishResponse.data;
+    } catch (error) {
+      console.error('Failed to fetch dish on server:', error);
+    }
+  }
+
   return (
     <main>
-      <RestaurantClient restaurant={data.data} meal={selectedMeal} />
+      <RestaurantClient
+        restaurant={data.data}
+        meal={selectedMeal}
+        initialDish={selectedDish}
+      />
     </main>
   );
 }

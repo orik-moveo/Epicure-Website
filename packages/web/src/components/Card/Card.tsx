@@ -32,6 +32,7 @@ interface CardProps {
   ingredients?: Dish['ingredients'];
   price?: number;
   dietType?: Dish['dietType'];
+  onClick?: () => void;
 }
 
 export default function Card(props: CardProps) {
@@ -45,6 +46,7 @@ export default function Card(props: CardProps) {
     ingredients,
     price,
     dietType,
+    onClick,
   } = props;
 
   const isMobile = useIsMobile();
@@ -86,7 +88,7 @@ export default function Card(props: CardProps) {
   const bottomSectionClass = getBottomSectionClass();
 
   return (
-    <div className={cardClass}>
+    <div className={cardClass} onClick={onClick}>
       <div className={imageContainerClass}>
         {image?.url && (
           <img src={image.url} alt={title} className={styles.image} />

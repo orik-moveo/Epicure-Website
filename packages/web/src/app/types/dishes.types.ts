@@ -10,6 +10,7 @@ export const MEAL_TYPES: MealType[] = [
   MealType.Dinner,
 ];
 export interface Dish {
+  documentId?: string;
   image: Array<{
     url: string;
     width?: number;
@@ -23,5 +24,11 @@ export interface Dish {
   dietType: 'none' | 'spicy' | 'vegetarian' | 'vegan';
   meal_types?: Array<{
     label?: MealType;
+  }>;
+  sides?: Array<{
+    label: string;
+  }>;
+  changes?: Array<{
+    label: string;
   }>;
 }

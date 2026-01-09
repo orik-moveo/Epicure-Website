@@ -48,3 +48,13 @@ export async function getRestaurantLocations() {
   }
   return response.json();
 }
+
+export async function getDish(id: string) {
+  const response = await fetch(`${BACKEND_URL}/api/dishes/${id}`, {
+    cache: 'no-store',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch dish');
+  }
+  return response.json();
+}
