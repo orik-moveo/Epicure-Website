@@ -9,7 +9,7 @@ $color-gold: #e19d1a;
 $color-offwhite: #fafafa;
 $color-white: #ffffff;
 $color-white-transparent: rgba(255, 255, 255, 0.88);
-$color-backdrop: #000000b2; 
+$color-backdrop: #000000b2;
 
 // Layout
 $container-max: 1200px;
@@ -43,6 +43,14 @@ $fontSizeBody: 24px;
 $fontSizeButton: 16px;
 $fontSizeInput: 16px;
 
+// Typography - Letter Spacing
+$letterSpacingH1: 1.97px;
+$letterSpacingH2: 1.25px;
+$letterSpacingH3: 2.67px;
+$letterSpacingBody: 1.97px;
+$letterSpacingButton: 1.97px;
+$letterSpacingInput: 1.97px;
+
 // Typography - Mobile Font Sizes
 $fontSizemobileH1: 24px;
 $fontSizemobileH2: 16px;
@@ -72,9 +80,9 @@ $cardSpacingLargeBottomToEnd: 12px;
 
 // Card Spacing - Medium
 $cardSpacingMediumImageToTitle: 18px;
-$cardSpacingMediumTitleToSubtitle: 18px;
+$cardSpacingMediumTitleToSubtitle: 8px;
 $cardSpacingMediumSubtitleToBottom: 8px;
-$cardSpacingMediumBottomToEnd: 18px;
+$cardSpacingMediumBottomToEnd: 8px;
 
 // Card Spacing - Small
 $cardSpacingSmallImageToTitle: 24px;

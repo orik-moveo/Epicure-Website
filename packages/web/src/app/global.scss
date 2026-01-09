@@ -47,6 +47,14 @@
   --font-size-button: #{$fontSizeButton};
   --font-size-input: #{$fontSizeInput};
 
+  /* Typography - Letter Spacing */
+  --letter-spacing-h1: #{$letterSpacingH1};
+  --letter-spacing-h2: #{$letterSpacingH2};
+  --letter-spacing-h3: #{$letterSpacingH3};
+  --letter-spacing-body: #{$letterSpacingBody};
+  --letter-spacing-button: #{$letterSpacingButton};
+  --letter-spacing-input: #{$letterSpacingInput};
+
   /* Card Sizes - Desktop */
   --card-width-large: #{$cardWidthLarge};
   --card-width-medium: #{$cardWidthMedium};
@@ -127,6 +135,7 @@ h1 {
   font-size: $fontSizeH1;
   color: $color-black;
   line-height: 1.2;
+  letter-spacing: $letterSpacingH1;
 }
 
 h2 {
@@ -135,6 +144,7 @@ h2 {
   font-size: $fontSizeH2;
   color: $color-black;
   line-height: 1.2;
+  letter-spacing: $letterSpacingH2;
 }
 
 h3 {
@@ -143,6 +153,7 @@ h3 {
   font-size: $fontSizeH3;
   color: $color-black;
   line-height: 1.2;
+  letter-spacing: $letterSpacingH3;
 }
 
 .body-text {
@@ -151,6 +162,7 @@ h3 {
   font-size: $fontSizeBody;
   color: $color-black;
   line-height: 1.2;
+  letter-spacing: $letterSpacingBody;
 }
 
 .button-text {
@@ -158,6 +170,7 @@ h3 {
   font-weight: $fontWeightThin;
   font-size: $fontSizeButton;
   line-height: 1.2;
+  letter-spacing: $letterSpacingButton;
 }
 
 .input-text {
@@ -166,6 +179,7 @@ h3 {
   font-size: $fontSizeInput;
   color: $color-black;
   line-height: 1.2;
+  letter-spacing: $letterSpacingInput;
 }
 
 .container {
