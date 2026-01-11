@@ -35,8 +35,7 @@ export default async function RestaurantPage({
   let selectedDish = null;
   if (resolvedSearchParams.dish) {
     try {
-      const dishResponse = await getDish(resolvedSearchParams.dish);
-      selectedDish = dishResponse.data;
+      selectedDish = await getDish(resolvedSearchParams.dish);
     } catch (error) {
       console.error('Failed to fetch dish on server:', error);
     }
@@ -45,7 +44,7 @@ export default async function RestaurantPage({
   return (
     <main>
       <RestaurantClient
-        restaurant={data.data}
+        restaurant={data}
         meal={selectedMeal}
         initialDish={selectedDish}
       />

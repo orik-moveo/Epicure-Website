@@ -21,11 +21,7 @@ export default function HomepageClient({ data }: HomepageClientProps) {
     dispatch(setHomepage(data));
   }, [data, dispatch]);
 
-  const hero = data?.data?.hero || null;
-  const popularRestaurants = data?.data?.popularRestaurants || null;
-  const popularDishes = data?.data?.popularDishes || null;
-  const chefOfWeek = data?.data?.chefOfWeek || null;
-  const about = data?.data?.about || null;
+  const { hero, popularRestaurants, popularDishes, chefOfWeek, about } = data;
 
   return (
     <>

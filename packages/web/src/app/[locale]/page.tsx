@@ -2,11 +2,11 @@ import { getHomepage } from '../../lib/api';
 import HomepageClient from './HomepageClient';
 
 export default async function HomepagePage() {
-  const data = await getHomepage();
+  const homepage = await getHomepage();
 
   return (
     <main>
-      <HomepageClient data={data} />
+      <HomepageClient data={homepage} />
     </main>
   );
 }
