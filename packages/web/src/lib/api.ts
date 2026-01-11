@@ -8,7 +8,16 @@ export async function getHomepage() {
   if (!response.ok) {
     throw new Error('Failed to fetch homepage');
   }
-  return response.json();
+  const json = await response.json();
+  const data = json.data;
+
+  return {
+    hero: data.hero,
+    popularRestaurants: data.popularRestaurants,
+    popularDishes: data.popularDishes,
+    chefOfWeek: data.chefOfWeek,
+    about: data.about,
+  };
 }
 
 export async function getRestaurants(filter?: string) {
@@ -33,7 +42,8 @@ export async function getRestaurant(id: string) {
   if (!response.ok) {
     throw new Error('Failed to fetch restaurant');
   }
-  return response.json();
+  const json = await response.json();
+  return json.data;
 }
 
 export async function getRestaurantLocations() {
@@ -56,5 +66,7 @@ export async function getDish(id: string) {
   if (!response.ok) {
     throw new Error('Failed to fetch dish');
   }
-  return response.json();
+  const json = await response.json();
+
+  return json.data;
 }
