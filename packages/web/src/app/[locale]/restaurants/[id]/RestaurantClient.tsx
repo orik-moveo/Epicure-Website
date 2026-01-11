@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
-import { MEAL_TYPES, MealType } from '@/app/types/dishes.types';
+import { useEffect, useState } from 'react';
+import { Dish, MEAL_TYPES, MealType } from '@/app/types/dishes.types';
 import { Restaurant } from '@/app/types/restaurants.types';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -9,15 +9,18 @@ import { isRestaurantOpen } from './restaurant.utils';
 import Card from '@/components/Card/Card';
 import { CardVariant, CardSize } from '@/components/Card/Card.types';
 import styles from './RestaurantClient.module.scss';
+import DishDialog from '@/components/dishes/DishDialog/DishDialog';
 
 interface RestaurantClientProps {
   restaurant: Restaurant;
   meal?: MealType;
+  initialDish?: Dish | null;
 }
 
 export default function RestaurantClient({
   restaurant,
   meal,
+  initialDish = null,
 }: RestaurantClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -26,7 +29,44 @@ export default function RestaurantClient({
 
   const selectedMeal = meal;
 
-  const isOpen = isRestaurantOpen(restaurant, new Date());
+  const [selectedDish, setSelectedDish] = useState<Dish | null>(initialDish);
+  const [isDialogOpen, setIsDialogOpen] = useState(!!initialDish);
+
+  const handleDishClick = (dishId: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('dish', dishId);
+
+    // Use push to trigger server component re-fetch
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  useEffect(() => {
+    const dishId = searchParams.get('dish');
+
+    if (!dishId) {
+      setSelectedDish(null);
+      setIsDialogOpen(false);
+      return;
+    }
+
+    if (initialDish && initialDish.documentId === dishId) {
+      setSelectedDish(initialDish);
+      setIsDialogOpen(true);
+    } else {
+      setSelectedDish(null);
+      setIsDialogOpen(false);
+    }
+  }, [searchParams, initialDish]);
+
+  const handleCloseDialog = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('dish');
+
+    router.replace(
+      params.toString() ? `${pathname}?${params.toString()}` : pathname,
+      { scroll: false }
+    );
+  };
 
   const filteredDishes =
     restaurant.dishes?.filter((dish) =>
@@ -41,6 +81,8 @@ export default function RestaurantClient({
       { scroll: false }
     );
   };
+
+  const isOpen = isRestaurantOpen(restaurant, new Date());
 
   return (
     <div className={styles.container}>
@@ -98,11 +140,17 @@ export default function RestaurantClient({
                 ingredients={dish.ingredients}
                 price={dish.price}
                 dietType={dish.dietType}
+                onClick={() => handleDishClick(dish.documentId || '')}
               />
             ))}
           </div>
         )}
       </div>
+      <DishDialog
+        dish={selectedDish}
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+      />
     </div>
   );
 }
