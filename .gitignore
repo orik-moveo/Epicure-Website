@@ -57,4 +57,4 @@ packages/strapi/license.txt
 # Next.js
 .next
 out
-.env.local
+**/.env.local
