@@ -96,11 +96,15 @@
         },
         "configurations": {
           "development": {
-            "dependsOn": ["build:development"],
+            "dependsOn": [
+              "build:development"
+            ],
             "command": "NODE_ENV=development node dist/main.js"
           },
           "production": {
-            "dependsOn": ["build:production"],
+            "dependsOn": [
+              "build:production"
+            ],
             "command": "NODE_ENV=production node dist/main.js"
           }
         }
@@ -115,6 +119,7 @@
   "dependencies": {
     "@nestjs/axios": "^4.0.0",
     "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
     "axios": "^1.6.0",
@@ -126,5 +131,3 @@
     "@nestjs/testing": "^11.0.0"
   }
 }
-
-
