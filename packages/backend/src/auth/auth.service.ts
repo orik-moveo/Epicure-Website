@@ -11,6 +11,7 @@ import { LoginDto } from '../../../shared/dto/auth/login.dto';
 import { User } from '../../../shared/entities/user.entity';
 import { AuthResponseDto } from '../../../shared/dto/auth/authResponse.dto';
 import { AuthUserDto } from '../../../shared/dto/auth/authUser.dto';
+import { JwtPayload } from './interfaces/jwtPayload.interface';
 
 @Injectable()
 export class AuthService {
@@ -52,7 +53,7 @@ export class AuthService {
   }
 
   private buildAuthResponse(user: User): AuthResponseDto {
-    const payload = { sub: user.id, email: user.email };
+    const payload: JwtPayload = { sub: user.id, email: user.email };
 
     const authUser: AuthUserDto = {
       id: user.id,
