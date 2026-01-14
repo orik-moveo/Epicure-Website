@@ -61,5 +61,27 @@
     "chooseASide": "Choose a side",
     "changes": "Changes",
     "quantity": "Quantity"
+  },
+  "auth": {
+    "dialog": {
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "goToSignUp": "Go to Sign up",
+      "goToSignIn": "Go to Sign in"
+    },
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "signingIn": "Signing in...",
+      "signingUp": "Signing up..."
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "registrationFailed": "Registration failed"
+    }
   }
 }

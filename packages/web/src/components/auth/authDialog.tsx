@@ -1,6 +1,9 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import { AuthMode } from '../../app/types/auth.types';
+import { useTranslation } from '../../hooks/useTranslation';
+import SignInForm from './signInForm';
+import SignUpForm from './signUpForm';
 
 interface AuthDialogProps {
   open: boolean;
@@ -9,21 +12,28 @@ interface AuthDialogProps {
 
 export default function AuthDialog({ open, onClose }: AuthDialogProps) {
   const [mode, setMode] = useState<AuthMode>(AuthMode.SignIn);
+  const dialog = useTranslation('auth.dialog');
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
-      <DialogTitle>{mode === AuthMode.SignIn ? 'Sign In' : 'Sign Up'}</DialogTitle>
+      <DialogTitle>
+        {mode === AuthMode.SignIn ? dialog.signIn : dialog.signUp}
+      </DialogTitle>
 
       <DialogContent>
-        {mode === 'signin' ? (
+        {mode === AuthMode.SignIn ? (
           <>
-            <p>Sign in form goes here</p>
-            <button onClick={() => setMode(AuthMode.SignUp)}>Go to Sign up</button>
+            <SignInForm onSuccess={onClose} />
+            <button onClick={() => setMode(AuthMode.SignUp)}>
+              {dialog.goToSignUp}
+            </button>
           </>
         ) : (
           <>
-            <p>Sign up form goes here</p>
-            <button onClick={() => setMode(AuthMode.SignIn)}>Go to Sign in</button>
+            <SignUpForm onSuccess={onClose} />
+            <button onClick={() => setMode(AuthMode.SignIn)}>
+              {dialog.goToSignIn}
+            </button>
           </>
         )}
       </DialogContent>

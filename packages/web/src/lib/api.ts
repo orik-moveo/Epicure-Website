@@ -91,9 +91,7 @@ export async function login(payload: LoginPayload): Promise<AuthResponse> {
   return response.json();
 }
 
-export async function register(
-  payload: RegisterPayload
-): Promise<AuthResponse> {
+export async function registerUser(payload: RegisterPayload): Promise<AuthResponse> {
   const response = await fetch(`${BACKEND_URL}/api/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
