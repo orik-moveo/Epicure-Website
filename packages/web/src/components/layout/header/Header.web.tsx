@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { useTranslation } from '../../../hooks/useTranslation';
 import styles from './Header.web.module.scss';
+import AuthDialog from '../../auth/authDialog';
 
 export default function HeaderWeb() {
   const locale = useLocale();
@@ -13,6 +14,7 @@ export default function HeaderWeb() {
   const nav = useTranslation('header.nav');
   const search = useTranslation('header.search');
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
 
   const isRestaurantsPage = pathname?.includes('/restaurants');
 
@@ -54,7 +56,7 @@ export default function HeaderWeb() {
             />
           </div>
 
-          <button className={styles.iconButton} aria-label="User">
+          <button className={styles.iconButton} aria-label="User" onClick={() => setIsAuthDialogOpen(true)}>
             <img src="/assets/icons/user.svg" alt="User" />
           </button>
 
@@ -63,6 +65,7 @@ export default function HeaderWeb() {
           </button>
         </div>
       </div>
+      <AuthDialog open={isAuthDialogOpen} onClose={() => setIsAuthDialogOpen(false)} />
     </header>
   );
 }
