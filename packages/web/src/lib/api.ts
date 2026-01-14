@@ -1,3 +1,9 @@
+import {
+  AuthResponse,
+  LoginPayload,
+  RegisterPayload,
+} from '@/app/types/auth.types';
+
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
 
@@ -69,4 +75,32 @@ export async function getDish(id: string) {
   const json = await response.json();
 
   return json.data;
+}
+
+export async function login(payload: LoginPayload): Promise<AuthResponse> {
+  const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error('Login failed');
+  }
+
+  return response.json();
+}
+
+export async function register(
+  payload: RegisterPayload
+): Promise<AuthResponse> {
+  const response = await fetch(`${BACKEND_URL}/api/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    throw new Error('Registration failed');
+  }
+  return response.json();
 }
