@@ -5,10 +5,11 @@ import Link from 'next/link';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import styles from './Header.mobile.module.scss';
 import AuthDialog from '../../auth/authDialog';
+import { useDialog } from '@/hooks/useDialog';
 
 export default function HeaderMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+  const { isAuthDialogOpen, openAuthDialog, closeAuthDialog } = useDialog();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -40,7 +41,7 @@ export default function HeaderMobile() {
           <button className={styles.iconButton} aria-label="Search">
             <img src="/assets/icons/search.svg" alt="Search" />
           </button>
-          <button className={styles.iconButton} aria-label="User" onClick={() => setIsAuthDialogOpen(true)}>
+          <button className={styles.iconButton} aria-label="User" onClick={openAuthDialog}>
             <img src="/assets/icons/user.svg" alt="User" />
           </button>
           <button className={styles.iconButton} aria-label="Shopping Bag">
@@ -49,7 +50,7 @@ export default function HeaderMobile() {
         </div>
       </header>
       <MobileMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
-      <AuthDialog open={isAuthDialogOpen} onClose={() => setIsAuthDialogOpen(false)} />
+      <AuthDialog open={isAuthDialogOpen} onClose={closeAuthDialog} />
     </>
   );
 }

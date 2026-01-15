@@ -10,6 +10,7 @@ import Card from '@/components/Card/Card';
 import { CardVariant, CardSize } from '@/components/Card/Card.types';
 import styles from './RestaurantClient.module.scss';
 import DishDialog from '@/components/dishes/DishDialog/DishDialog';
+import { useDialog } from '@/hooks/useDialog';
 
 interface RestaurantClientProps {
   restaurant: Restaurant;
@@ -26,11 +27,10 @@ export default function RestaurantClient({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const translations = useTranslation('restaurant');
+  const { isDishDialogOpen, selectedDish, openDishDialog, closeDishDialog } =
+    useDialog();
 
   const selectedMeal = meal;
-
-  const [selectedDish, setSelectedDish] = useState<Dish | null>(initialDish);
-  const [isDialogOpen, setIsDialogOpen] = useState(!!initialDish);
 
   const handleDishClick = (dishId: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -44,19 +44,16 @@ export default function RestaurantClient({
     const dishId = searchParams.get('dish');
 
     if (!dishId) {
-      setSelectedDish(null);
-      setIsDialogOpen(false);
+      closeDishDialog();
       return;
     }
 
     if (initialDish && initialDish.documentId === dishId) {
-      setSelectedDish(initialDish);
-      setIsDialogOpen(true);
+      openDishDialog(initialDish);
     } else {
-      setSelectedDish(null);
-      setIsDialogOpen(false);
+      closeDishDialog();
     }
-  }, [searchParams, initialDish]);
+  }, [searchParams, initialDish, openDishDialog, closeDishDialog]);
 
   const handleCloseDialog = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -66,6 +63,7 @@ export default function RestaurantClient({
       params.toString() ? `${pathname}?${params.toString()}` : pathname,
       { scroll: false }
     );
+    closeDishDialog();
   };
 
   const filteredDishes =
@@ -148,7 +146,7 @@ export default function RestaurantClient({
       </div>
       <DishDialog
         dish={selectedDish}
-        open={isDialogOpen}
+        open={isDishDialogOpen}
         onClose={handleCloseDialog}
       />
     </div>
