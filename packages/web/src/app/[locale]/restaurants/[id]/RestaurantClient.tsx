@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Dish, MEAL_TYPES, MealType } from '@/app/types/dishes.types';
 import { Restaurant } from '@/app/types/restaurants.types';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';

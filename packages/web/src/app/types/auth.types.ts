@@ -4,23 +4,22 @@ export enum AuthMode {
   SignUp = 'signup',
 }
 
-export interface LoginPayload {
+interface BaseUser {
   email: string;
-  password: string;
-}
-
-export interface RegisterPayload {
   firstName: string;
   lastName: string;
-  email: string;
-  password: string;
 }
 
-export interface AuthUser {
+export interface AuthUser extends BaseUser {
   id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
+}
+
+export interface RegisterPayload extends BaseUser {
+  password: string;
+}
+
+export interface LoginPayload extends Pick<BaseUser, 'email'> {
+  password: string;
 }
 export interface AuthResponse {
   token: string;
