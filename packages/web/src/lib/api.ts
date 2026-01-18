@@ -89,6 +89,7 @@ export async function login(payload: LoginPayload): Promise<AuthResponse> {
   const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGIN}`, {
     method: 'POST',
     headers: createHeaders(),
+    credentials: 'include',
     body: JSON.stringify(payload),
   });
 
@@ -103,10 +104,32 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.REGISTER}`, {
     method: 'POST',
     headers: createHeaders(),
+    credentials: 'include',
     body: JSON.stringify(payload),
   });
   if (!response.ok) {
     throw new Error('Registration failed');
+  }
+  return response.json();
+}
+
+export async function logout(): Promise<void> {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGOUT}`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error('Logout failed');
+  }
+}
+
+export async function getMe(){
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.ME}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch user');
   }
   return response.json();
 }

@@ -22,6 +22,6 @@ export interface LoginPayload extends Pick<BaseUser, 'email'> {
   password: string;
 }
 export interface AuthResponse {
-  token: string;
+  token?: string;
   user: AuthUser;
 }
