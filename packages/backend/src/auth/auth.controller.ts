@@ -6,6 +6,7 @@ import { RegisterDto } from '../../../shared/dto/auth/register.dto';
 import { AuthGuardJwt } from './guards/authGuardJwt';
 import { GetUser } from './decorators/getUser.decorator';
 import type { JwtPayload } from './interfaces/jwtPayload.interface';
+import { COOKIE_OPTIONS } from '../config/cookie.config';
 
 
 @Controller('auth')
@@ -48,20 +49,15 @@ export class AuthController {
 
   private setAuthCookie(res: Response, token: string): void {
     res.cookie('access_token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      ...COOKIE_OPTIONS,
       maxAge: 1000 * 60 * 60 * 24 * 7,
-      path: '/',
     });
   }
 
   private clearAuthCookie(res: Response): void {
     res.clearCookie('access_token', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/',
+      ...COOKIE_OPTIONS,
+      maxAge: 0,
     });
   }
 }
