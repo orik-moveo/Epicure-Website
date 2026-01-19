@@ -7,6 +7,8 @@ import { useIsMobile } from '../../hooks/useIsMobile';
 import SignInForm from './signInForm';
 import SignUpForm from './signUpForm';
 import styles from './authDialog.module.scss';
+import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface AuthDialogProps {
   open: boolean;
@@ -16,6 +18,13 @@ interface AuthDialogProps {
 export default function AuthDialog({ open, onClose }: AuthDialogProps) {
   const [mode, setMode] = useState<AuthMode>(AuthMode.SignIn);
   const isMobile = useIsMobile();
+  const {user , logout} = useAuth();
+  const dialog = useTranslation('auth.dialog');
+
+    const handleLogout = async () => {
+      await logout();
+      onClose();
+    };
 
   return (
     <Dialog
@@ -62,7 +71,21 @@ export default function AuthDialog({ open, onClose }: AuthDialogProps) {
         )}
 
         <div className={styles.contentContainer}>
-          {mode === AuthMode.SignIn ? (
+          {user ? (
+            <div className={styles.inputsBox}>
+              <div className={styles.subtitleBox}>
+                <h2 className={styles.subtitleTitle}>{dialog.hi} {user.firstName}</h2>
+              </div>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className={`${styles.submitButton} ${styles.active}`}
+              >
+                {dialog.logout}
+              </button>
+            </div>
+          ) : 
+          mode === AuthMode.SignIn ? (
             <SignInForm
               onSuccess={onClose}
               onSwitchToSignUp={() => setMode(AuthMode.SignUp)}

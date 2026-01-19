@@ -3,10 +3,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterFormData, registerSchema } from './schemas';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '@/lib/api';
 import { useTranslation } from '../../hooks/useTranslation';
 import styles from './authDialog.module.scss';
 import FormInput from './formInput';
+import { useAuth } from '@/hooks/useAuth';
 
 interface SignUpFormProps {
   onSuccess: () => void;
@@ -31,6 +31,7 @@ export default function SignUpForm({
   const form = useTranslation('auth.form');
   const dialog = useTranslation('auth.dialog');
   const errorsT = useTranslation('auth.errors');
+  const { register: registerUser } = useAuth();
 
   const firstName = watch('firstName');
   const lastName = watch('lastName');

@@ -73,7 +73,9 @@
       "signInSubtitle": "To continue the order, please sign in",
       "signUpSubtitle": "To continue the order, please sign up",
       "forgetPassword": "Forget password?",
-      "or": "or"
+      "or": "or",
+      "hi": "Hi",
+      "logout": "Logout"
     },
     "form": {
       "email": "Email",
