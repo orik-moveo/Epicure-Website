@@ -5,7 +5,11 @@ import { RegisterFormData, registerSchema } from './schemas';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from '../../hooks/useTranslation';
 import styles from './authDialog.module.scss';
-import FormInput from './formInput';
+import FormInput from './components/formInput';
+import OrDivider from './components/OrDivider';
+import SwitchButton from './components/SwitchButton';
+import SubmitButton from './components/SubmitButton';
+import FormHeader from './components/FormHeader';
 import { useAuth } from '@/hooks/useAuth';
 
 interface SignUpFormProps {
@@ -28,8 +32,8 @@ export default function SignUpForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
   });
-  const form = useTranslation('auth.form');
-  const dialog = useTranslation('auth.dialog');
+  const formT = useTranslation('auth.form');
+  const dialogT = useTranslation('auth.dialog');
   const errorsT = useTranslation('auth.errors');
   const { register: registerUser } = useAuth();
 
@@ -51,14 +55,14 @@ export default function SignUpForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.inputsBox}>
-      <div className={styles.subtitleBox}>
-        <h2 className={styles.subtitleTitle}>{dialog.titleSignUp}</h2>
-        <p className={styles.subtitleText}>{dialog.signUpSubtitle}</p>
-      </div>
+      <FormHeader
+        title={dialogT.titleSignUp}
+        subtitle={dialogT.signUpSubtitle}
+      />
 
       <FormInput
         name="firstName"
-        label={form.firstName}
+        label={formT.firstName}
         register={register}
         errors={errors}
         value={firstName}
@@ -66,7 +70,7 @@ export default function SignUpForm({
 
       <FormInput
         name="lastName"
-        label={form.lastName}
+        label={formT.lastName}
         register={register}
         errors={errors}
         value={lastName}
@@ -74,7 +78,7 @@ export default function SignUpForm({
 
       <FormInput
         name="email"
-        label={form.email}
+        label={formT.email}
         type="email"
         register={register}
         errors={errors}
@@ -83,7 +87,7 @@ export default function SignUpForm({
 
       <FormInput
         name="password"
-        label={form.password}
+        label={formT.password}
         type="password"
         register={register}
         errors={errors}
@@ -92,27 +96,16 @@ export default function SignUpForm({
 
       {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
 
-      <button
-        type="submit"
-        disabled={isSubmitting || !isValid}
-        className={`${styles.submitButton} ${isValid ? styles.active : ''}`}
-      >
-        {isSubmitting ? form.signingUp : form.signUp}
-      </button>
+      <SubmitButton
+        isSubmitting={isSubmitting}
+        isValid={isValid}
+        loadingText={formT.signingUp}
+        submitText={formT.signUp}
+      />
 
-      <div className={styles.orRow}>
-        <div className={styles.orLine}></div>
-        <span className={styles.orText}>{dialog.or}</span>
-        <div className={styles.orLine}></div>
-      </div>
+      <OrDivider text={dialogT.or} />
 
-      <button
-        type="button"
-        onClick={onSwitchToSignIn}
-        className={styles.switchButton}
-      >
-        {dialog.titleSignIn}
-      </button>
+      <SwitchButton text={dialogT.titleSignIn} onClick={onSwitchToSignIn} />
     </form>
   );
 }

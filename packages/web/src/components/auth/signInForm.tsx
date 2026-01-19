@@ -5,7 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginFormData, loginSchema } from './schemas';
 import { useTranslation } from '../../hooks/useTranslation';
 import styles from './authDialog.module.scss';
-import FormInput from './formInput';
+import FormInput from './components/formInput';
+import OrDivider from './components/OrDivider';
+import SwitchButton from './components/SwitchButton';
+import SubmitButton from './components/SubmitButton';
+import FormHeader from './components/FormHeader';
 import { useAuth } from '@/hooks/useAuth';
 
 interface SignInFormProps {
@@ -28,8 +32,8 @@ export default function SignInForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
   });
-  const form = useTranslation('auth.form');
-  const dialog = useTranslation('auth.dialog');
+  const formT = useTranslation('auth.form');
+  const dialogT = useTranslation('auth.dialog');
   const errorsT = useTranslation('auth.errors');
   const { login } = useAuth();
 
@@ -49,14 +53,14 @@ export default function SignInForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.inputsBox}>
-      <div className={styles.subtitleBox}>
-        <h2 className={styles.subtitleTitle}>{dialog.titleSignIn}</h2>
-        <p className={styles.subtitleText}>{dialog.signInSubtitle}</p>
-      </div>
+      <FormHeader
+        title={dialogT.titleSignIn}
+        subtitle={dialogT.signInSubtitle}
+      />
 
       <FormInput
         name="email"
-        label={form.email}
+        label={formT.email}
         type="email"
         register={register}
         errors={errors}
@@ -65,7 +69,7 @@ export default function SignInForm({
 
       <FormInput
         name="password"
-        label={form.password}
+        label={formT.password}
         type="password"
         register={register}
         errors={errors}
@@ -74,31 +78,20 @@ export default function SignInForm({
 
       {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
 
-      <button
-        type="submit"
-        disabled={isSubmitting || !isValid}
-        className={`${styles.submitButton} ${isValid ? styles.active : ''}`}
-      >
-        {isSubmitting ? form.signingIn : form.login}
-      </button>
+      <SubmitButton
+        isSubmitting={isSubmitting}
+        isValid={isValid}
+        loadingText={formT.signingIn}
+        submitText={formT.login}
+      />
 
       <button type="button" className={styles.forgetPassword}>
-        {dialog.forgetPassword}
+        {dialogT.forgetPassword}
       </button>
 
-      <div className={styles.orRow}>
-        <div className={styles.orLine}></div>
-        <span className={styles.orText}>{dialog.or}</span>
-        <div className={styles.orLine}></div>
-      </div>
+      <OrDivider text={dialogT.or} />
 
-      <button
-        type="button"
-        onClick={onSwitchToSignUp}
-        className={styles.switchButton}
-      >
-        {dialog.titleSignUp}
-      </button>
+      <SwitchButton text={dialogT.titleSignUp} onClick={onSwitchToSignUp} />
     </form>
   );
 }

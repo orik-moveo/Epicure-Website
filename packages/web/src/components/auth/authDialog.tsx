@@ -6,6 +6,7 @@ import { AuthMode } from '../../app/types/auth.types';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import SignInForm from './signInForm';
 import SignUpForm from './signUpForm';
+import CloseButton from './components/CloseButton';
 import styles from './authDialog.module.scss';
 import { useAuth } from '@/hooks/useAuth';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -18,13 +19,13 @@ interface AuthDialogProps {
 export default function AuthDialog({ open, onClose }: AuthDialogProps) {
   const [mode, setMode] = useState<AuthMode>(AuthMode.SignIn);
   const isMobile = useIsMobile();
-  const {user , logout} = useAuth();
+  const { user, logout } = useAuth();
   const dialog = useTranslation('auth.dialog');
 
-    const handleLogout = async () => {
-      await logout();
-      onClose();
-    };
+  const handleLogout = async () => {
+    await logout();
+    onClose();
+  };
 
   return (
     <Dialog
@@ -45,36 +46,18 @@ export default function AuthDialog({ open, onClose }: AuthDialogProps) {
         },
       }}
     >
-      {!isMobile && (
-        <div className={styles.closeButtonRow}>
-          <button className={styles.closeButton} onClick={onClose}>
-            <img
-              src="/assets/icons/x-white.svg"
-              alt="Close"
-              className={styles.closeIconDesktop}
-            />
-          </button>
-        </div>
-      )}
+      {!isMobile && <CloseButton onClose={onClose} />}
 
       <div className={styles.dialogContent}>
-        {isMobile && (
-          <div className={styles.closeButtonRow}>
-            <button className={styles.closeButton} onClick={onClose}>
-              <img
-                src="/assets/icons/x.svg"
-                alt="Close"
-                className={styles.closeIconMobile}
-              />
-            </button>
-          </div>
-        )}
+        {isMobile && <CloseButton onClose={onClose} />}
 
         <div className={styles.contentContainer}>
           {user ? (
             <div className={styles.inputsBox}>
               <div className={styles.subtitleBox}>
-                <h2 className={styles.subtitleTitle}>{dialog.hi} {user.firstName}</h2>
+                <h2 className={styles.subtitleTitle}>
+                  {dialog.hi} {user.firstName}
+                </h2>
               </div>
               <button
                 type="button"
@@ -84,8 +67,7 @@ export default function AuthDialog({ open, onClose }: AuthDialogProps) {
                 {dialog.logout}
               </button>
             </div>
-          ) : 
-          mode === AuthMode.SignIn ? (
+          ) : mode === AuthMode.SignIn ? (
             <SignInForm
               onSuccess={onClose}
               onSwitchToSignUp={() => setMode(AuthMode.SignUp)}

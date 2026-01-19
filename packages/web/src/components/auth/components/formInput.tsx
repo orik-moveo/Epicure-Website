@@ -6,7 +6,7 @@ import {
   FieldValues,
   Path,
 } from 'react-hook-form';
-import styles from './authDialog.module.scss';
+import styles from '../authDialog.module.scss';
 
 interface FormInputProps<T extends FieldValues> {
   name: Path<T>;
