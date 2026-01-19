@@ -1,24 +1,41 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterFormData, registerSchema } from './schemas';
 import { useForm } from 'react-hook-form';
 import { registerUser } from '@/lib/api';
 import { useTranslation } from '../../hooks/useTranslation';
+import styles from './authDialog.module.scss';
+import FormInput from './formInput';
 
 interface SignUpFormProps {
   onSuccess: () => void;
+  onSwitchToSignIn: () => void;
 }
 
-export default function SignUpForm({ onSuccess }: SignUpFormProps) {
+export default function SignUpForm({
+  onSuccess,
+  onSwitchToSignIn,
+}: SignUpFormProps) {
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    watch,
+    formState: { errors, isSubmitting, isValid },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   });
   const form = useTranslation('auth.form');
+  const dialog = useTranslation('auth.dialog');
   const errorsT = useTranslation('auth.errors');
+
+  const firstName = watch('firstName');
+  const lastName = watch('lastName');
+  const email = watch('email');
+  const password = watch('password');
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
@@ -32,35 +49,68 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <input placeholder={form.firstName} {...register('firstName')} />
-        {errors.firstName && <p>{errors.firstName.message}</p>}
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.inputsBox}>
+      <div className={styles.subtitleBox}>
+        <h2 className={styles.subtitleTitle}>{dialog.titleSignUp}</h2>
+        <p className={styles.subtitleText}>{dialog.signUpSubtitle}</p>
       </div>
 
-      <div>
-        <input placeholder={form.lastName} {...register('lastName')} />
-        {errors.lastName && <p>{errors.lastName.message}</p>}
-      </div>
+      <FormInput
+        name="firstName"
+        label={form.firstName}
+        register={register}
+        errors={errors}
+        value={firstName}
+      />
 
-      <div>
-        <input type="email" placeholder={form.email} {...register('email')} />
-        {errors.email && <p>{errors.email.message}</p>}
-      </div>
+      <FormInput
+        name="lastName"
+        label={form.lastName}
+        register={register}
+        errors={errors}
+        value={lastName}
+      />
 
-      <div>
-        <input
-          type="password"
-          placeholder={form.password}
-          {...register('password')}
-        />
-        {errors.password && <p>{errors.password.message}</p>}
-      </div>
+      <FormInput
+        name="email"
+        label={form.email}
+        type="email"
+        register={register}
+        errors={errors}
+        value={email}
+      />
 
-      {errors.root && <p>{errors.root.message}</p>}
+      <FormInput
+        name="password"
+        label={form.password}
+        type="password"
+        register={register}
+        errors={errors}
+        value={password}
+      />
 
-      <button type="submit" disabled={isSubmitting}>
+      {errors.root && <p className={styles.rootError}>{errors.root.message}</p>}
+
+      <button
+        type="submit"
+        disabled={isSubmitting || !isValid}
+        className={`${styles.submitButton} ${isValid ? styles.active : ''}`}
+      >
         {isSubmitting ? form.signingUp : form.signUp}
+      </button>
+
+      <div className={styles.orRow}>
+        <div className={styles.orLine}></div>
+        <span className={styles.orText}>{dialog.or}</span>
+        <div className={styles.orLine}></div>
+      </div>
+
+      <button
+        type="button"
+        onClick={onSwitchToSignIn}
+        className={styles.switchButton}
+      >
+        {dialog.titleSignIn}
       </button>
     </form>
   );
