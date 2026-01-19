@@ -8,12 +8,14 @@ import { API_ENDPOINTS } from './apiEndpoints';
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
 
-function createHeaders(): HeadersInit {
+function createHeaders(options?: HeadersInit): HeadersInit {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
+    'x-requested-with': 'XMLHttpRequest',
+    ...options,
   };
   return headers;
-  }
+}
 
 export async function getHomepage() {
   const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.HOMEPAGE}`, {
@@ -116,6 +118,7 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
 export async function logout(): Promise<void> {
   const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGOUT}`, {
     method: 'POST',
+    headers: createHeaders(),
     credentials: 'include',
   });
   if (!response.ok) {

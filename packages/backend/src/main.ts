@@ -2,6 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import cookieParser from 'cookie-parser';
+import { CsrfGuard } from './auth/guards/csrfGuard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,8 @@ async function bootstrap() {
     origin: process.env.FRONTEND_URL || 'http://localhost:3001',
     credentials: true,
   });
+
+  app.useGlobalGuards(new CsrfGuard());
 
   app.useGlobalPipes(
     new ValidationPipe({
