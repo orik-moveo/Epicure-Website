@@ -25,3 +25,10 @@ export interface AuthResponse {
   token?: string;
   user: AuthUser;
 }
+export interface AuthContextType {
+  user: AuthUser | null;
+  isLoading: boolean;
+  login: (payload: LoginPayload) => Promise<void>;
+  register: (payload: RegisterPayload) => Promise<void>;
+  logout: () => Promise<void>;
+}

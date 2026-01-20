@@ -1,9 +1,15 @@
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+'use client';
+
+import { Dialog } from '@mui/material';
 import { useState } from 'react';
 import { AuthMode } from '../../app/types/auth.types';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import SignInForm from './signInForm';
 import SignUpForm from './signUpForm';
+import CloseButton from './components/CloseButton';
+import styles from './authDialog.module.scss';
+import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface AuthDialogProps {
   open: boolean;
@@ -12,31 +18,68 @@ interface AuthDialogProps {
 
 export default function AuthDialog({ open, onClose }: AuthDialogProps) {
   const [mode, setMode] = useState<AuthMode>(AuthMode.SignIn);
+  const isMobile = useIsMobile();
+  const { user, logout } = useAuth();
   const dialog = useTranslation('auth.dialog');
 
-  return (
-    <Dialog open={open} onClose={onClose} fullWidth>
-      <DialogTitle>
-        {mode === AuthMode.SignIn ? dialog.signIn : dialog.signUp}
-      </DialogTitle>
+  const handleLogout = async () => {
+    await logout();
+    onClose();
+  };
 
-      <DialogContent>
-        {mode === AuthMode.SignIn ? (
-          <>
-            <SignInForm onSuccess={onClose} />
-            <button onClick={() => setMode(AuthMode.SignUp)}>
-              {dialog.goToSignUp}
-            </button>
-          </>
-        ) : (
-          <>
-            <SignUpForm onSuccess={onClose} />
-            <button onClick={() => setMode(AuthMode.SignIn)}>
-              {dialog.goToSignIn}
-            </button>
-          </>
-        )}
-      </DialogContent>
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullScreen={isMobile === true}
+      PaperProps={{ className: styles.dialogPaper }}
+      sx={{
+        '& .MuiBackdrop-root': {
+          backgroundColor: 'var(--c-backdrop)',
+        },
+        '& .MuiDialog-paper': {
+          overflow: isMobile ? 'hidden' : 'visible',
+        },
+        '& .MuiDialog-container': {
+          paddingTop: isMobile ? 0 : '30px',
+          overflow: isMobile ? 'hidden' : 'visible',
+        },
+      }}
+    >
+      {!isMobile && <CloseButton onClose={onClose} />}
+
+      <div className={styles.dialogContent}>
+        {isMobile && <CloseButton onClose={onClose} />}
+
+        <div className={styles.contentContainer}>
+          {user ? (
+            <div className={styles.inputsBox}>
+              <div className={styles.subtitleBox}>
+                <h2 className={styles.subtitleTitle}>
+                  {dialog.hi} {user.firstName}
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className={`${styles.submitButton} ${styles.active}`}
+              >
+                {dialog.logout}
+              </button>
+            </div>
+          ) : mode === AuthMode.SignIn ? (
+            <SignInForm
+              onSuccess={onClose}
+              onSwitchToSignUp={() => setMode(AuthMode.SignUp)}
+            />
+          ) : (
+            <SignUpForm
+              onSuccess={onClose}
+              onSwitchToSignIn={() => setMode(AuthMode.SignIn)}
+            />
+          )}
+        </div>
+      </div>
     </Dialog>
   );
 }

@@ -67,15 +67,24 @@
       "signIn": "Sign In",
       "signUp": "Sign Up",
       "goToSignUp": "Go to Sign up",
-      "goToSignIn": "Go to Sign in"
+      "goToSignIn": "Go to Sign in",
+      "titleSignIn": "SIGN IN",
+      "titleSignUp": "SIGN UP",
+      "signInSubtitle": "To continue the order, please sign in",
+      "signUpSubtitle": "To continue the order, please sign up",
+      "forgetPassword": "Forget password?",
+      "or": "or",
+      "hi": "Hi",
+      "logout": "Logout"
     },
     "form": {
       "email": "Email",
       "password": "Password",
       "firstName": "First name",
       "lastName": "Last name",
-      "signIn": "Sign In",
-      "signUp": "Sign Up",
+      "login": "LOGIN",
+      "signUp": "SIGN UP",
+      "signIn": "SIGN IN",
       "signingIn": "Signing in...",
       "signingUp": "Signing up..."
     },

@@ -8,19 +8,22 @@ import { API_ENDPOINTS } from './apiEndpoints';
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
 
-function createHeaders(options?: HeadersInit): HeadersInit {
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    'x-requested-with': 'XMLHttpRequest',
+function createDefaultOptions(options?: RequestInit): RequestInit {
+  return {
     ...options,
+    credentials: 'include',
+    headers: {
+      'x-requested-with': 'XMLHttpRequest',
+      ...(options?.body && { 'Content-Type': 'application/json' }),
+      ...options?.headers,
+    },
   };
-  return headers;
 }
 
 export async function getHomepage() {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.HOMEPAGE}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.HOMEPAGE}`,
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch homepage');
   }
@@ -42,9 +45,9 @@ export async function getRestaurants(filter?: string) {
     url.searchParams.set('filter', filter);
   }
 
-  const response = await fetch(url.toString(), {
-    cache: 'no-store',
-  });
+  const response = await fetch(url.toString(),
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch restaurants');
   }
@@ -52,9 +55,9 @@ export async function getRestaurants(filter?: string) {
 }
 
 export async function getRestaurant(id: string) {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.RESTAURANT_BY_ID(id)}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.RESTAURANT_BY_ID(id)}`,
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch restaurant');
   }
@@ -65,9 +68,9 @@ export async function getRestaurant(id: string) {
 export async function getRestaurantLocations() {
   const url = `${BACKEND_URL}${API_ENDPOINTS.RESTAURANT_LOCATIONS}`;
 
-  const response = await fetch(url, {
-    next: { revalidate: 3600 }, // Cache for 1 hour (3600 seconds)
-  });
+  const response = await fetch(url,
+    createDefaultOptions({next: { revalidate: 3600 },})
+  );
 
   if (!response.ok) {
     throw new Error('Failed to fetch restaurant locations');
@@ -76,9 +79,9 @@ export async function getRestaurantLocations() {
 }
 
 export async function getDish(id: string) {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.DISH_BY_ID(id)}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.DISH_BY_ID(id)}`,
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch dish');
   }
@@ -88,12 +91,11 @@ export async function getDish(id: string) {
 }
 
 export async function login(payload: LoginPayload): Promise<AuthResponse> {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGIN}`, {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGIN}`, 
+    createDefaultOptions({
     method: 'POST',
-    headers: createHeaders(),
-    credentials: 'include',
     body: JSON.stringify(payload),
-  });
+  }));
 
   if (!response.ok) {
     throw new Error('Login failed');
@@ -103,12 +105,11 @@ export async function login(payload: LoginPayload): Promise<AuthResponse> {
 }
 
 export async function registerUser(payload: RegisterPayload): Promise<AuthResponse> {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.REGISTER}`, {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.REGISTER}`, 
+    createDefaultOptions({
     method: 'POST',
-    headers: createHeaders(),
-    credentials: 'include',
     body: JSON.stringify(payload),
-  });
+  }));
   if (!response.ok) {
     throw new Error('Registration failed');
   }
@@ -116,21 +117,20 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
 }
 
 export async function logout(): Promise<void> {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGOUT}`, {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.LOGOUT}`, 
+    createDefaultOptions({
     method: 'POST',
-    headers: createHeaders(),
-    credentials: 'include',
-  });
+  }));
   if (!response.ok) {
     throw new Error('Logout failed');
   }
 }
 
 export async function getMe(){
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.ME}`, {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.ME}`, 
+    createDefaultOptions({
     method: 'GET',
-    credentials: 'include',
-  });
+  }));
   if (!response.ok) {
     throw new Error('Failed to fetch user');
   }
