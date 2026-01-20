@@ -10,27 +10,15 @@ interface CloseButtonProps {
 export default function CloseButton({ onClose }: CloseButtonProps) {
   const isMobile = useIsMobile();
 
-  if (!isMobile) {
-    return (
-      <div className={styles.closeButtonRow}>
-        <button className={styles.closeButton} onClick={onClose}>
-          <img
-            src="/assets/icons/x-white.svg"
-            alt="Close"
-            className={styles.closeIconDesktop}
-          />
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.closeButtonRow}>
       <button className={styles.closeButton} onClick={onClose}>
         <img
-          src="/assets/icons/x.svg"
+          src={isMobile ? '/assets/icons/x.svg' : '/assets/icons/x-white.svg'}
           alt="Close"
-          className={styles.closeIconMobile}
+          className={
+            isMobile ? styles.closeIconMobile : styles.closeIconDesktop
+          }
         />
       </button>
     </div>
