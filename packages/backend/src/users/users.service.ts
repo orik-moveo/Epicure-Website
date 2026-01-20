@@ -3,7 +3,6 @@ import { User } from '../../../shared/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { CreateUserData } from './interfaces/createUserData.interface';
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -13,6 +12,10 @@ export class UsersService {
 
   async findByEmail(email: string): Promise<User | null> {
     return this.usersRepository.findOne({ where: { email } });
+  }
+
+  async findById(id: string): Promise<User | null> {
+    return this.usersRepository.findOne({ where: { id } });
   }
 
   async createUser(data: CreateUserData): Promise<User> {
