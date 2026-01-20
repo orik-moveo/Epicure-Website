@@ -11,19 +11,19 @@ const BACKEND_URL =
 function createDefaultOptions(options?: RequestInit): RequestInit {
   return {
     ...options,
-    credentials: 'include', // Automatically handles cookies for EVERY call
+    credentials: 'include',
     headers: {
-      'Content-Type': 'application/json',
-      'x-requested-with': 'XMLHttpRequest', // Automatically handles CSRF for EVERY call
+      'x-requested-with': 'XMLHttpRequest',
+      ...(options?.body && { 'Content-Type': 'application/json' }),
       ...options?.headers,
     },
   };
 }
 
 export async function getHomepage() {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.HOMEPAGE}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.HOMEPAGE}`,
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch homepage');
   }
@@ -45,9 +45,9 @@ export async function getRestaurants(filter?: string) {
     url.searchParams.set('filter', filter);
   }
 
-  const response = await fetch(url.toString(), {
-    cache: 'no-store',
-  });
+  const response = await fetch(url.toString(),
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch restaurants');
   }
@@ -55,9 +55,9 @@ export async function getRestaurants(filter?: string) {
 }
 
 export async function getRestaurant(id: string) {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.RESTAURANT_BY_ID(id)}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.RESTAURANT_BY_ID(id)}`,
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch restaurant');
   }
@@ -68,9 +68,9 @@ export async function getRestaurant(id: string) {
 export async function getRestaurantLocations() {
   const url = `${BACKEND_URL}${API_ENDPOINTS.RESTAURANT_LOCATIONS}`;
 
-  const response = await fetch(url, {
-    next: { revalidate: 3600 }, // Cache for 1 hour (3600 seconds)
-  });
+  const response = await fetch(url,
+    createDefaultOptions({next: { revalidate: 3600 },})
+  );
 
   if (!response.ok) {
     throw new Error('Failed to fetch restaurant locations');
@@ -79,9 +79,9 @@ export async function getRestaurantLocations() {
 }
 
 export async function getDish(id: string) {
-  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.DISH_BY_ID(id)}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.DISH_BY_ID(id)}`,
+    createDefaultOptions({cache: 'no-store',})
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch dish');
   }
