@@ -9,6 +9,7 @@ import { RestaurantModule } from '../restaurant/restaurant.module';
 import { HomepageModule } from '../homepage/homepage.module';
 import { AuthModule } from '../auth/auth.module';
 import { typeOrmConfig } from '../config/typeorm.config';
+import { CartModule } from '../cart/cart.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { typeOrmConfig } from '../config/typeorm.config';
     DishModule,
     RestaurantModule,
     HomepageModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],

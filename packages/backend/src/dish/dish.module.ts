@@ -7,6 +7,7 @@ import { DishService } from './dish.service';
   imports: [HttpModule],
   controllers: [DishController],
   providers: [DishService],
+  exports: [DishService],
 })
 export class DishModule {}
 

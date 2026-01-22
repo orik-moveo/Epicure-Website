@@ -21,11 +21,18 @@ export class DishService {
     const response = await firstValueFrom(this.httpService.get(url));
     return response.data;
   }
+
+  async getMany(documentIds: string[]): Promise<any> {
+    if (documentIds.length === 0) {
+      return { data: [] };
+    }
+
+    const filterParams = documentIds
+      .map((id, index) => `filters[documentId][$in][${index}]=${id}`)
+      .join('&');
+
+    const url = `${this.baseUrl}/api/${this.resource}?populate=*&${filterParams}`;
+    const response = await firstValueFrom(this.httpService.get(url));
+    return response.data;
+  }
 }
-
-
-
-
-
-
-
