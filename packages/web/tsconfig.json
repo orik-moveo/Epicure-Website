@@ -23,7 +23,7 @@
     },
     "types": ["jest", "node"],
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "../..",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [
@@ -31,6 +31,7 @@
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx",
+    "../shared/**/*.ts",
     "../../packages/web/.next/types/**/*.ts",
     "../../dist/packages/web/.next/types/**/*.ts",
     "next-env.d.ts"
