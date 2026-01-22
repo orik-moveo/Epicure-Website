@@ -1,6 +1,7 @@
 import { CartItemDishDto } from "../../../../shared/dto/cart/cartItemDish.dto";
 import { CartItemResponseDto } from "../../../../shared/dto/cart/cartItemResponse.dto";
 import { CartItem } from "../../../../shared/entities/cartItem.entity";
+import { StrapiDishData } from "../../../../shared/types/strapiDish.types";
 
 export function normalizeArray(
   arr: string[] | null | undefined
@@ -15,18 +16,13 @@ export function itemsMatch(
 ): boolean {
   if (item1.dishId !== item2.dishId) return false;
 
-  const sides1 = normalizeArray(item1.sides);
-  const sides2 = normalizeArray(item2.sides);
-  const changes1 = normalizeArray(item1.changes);
-  const changes2 = normalizeArray(item2.changes);
-
   return (
-    JSON.stringify(sides1) === JSON.stringify(sides2) &&
-    JSON.stringify(changes1) === JSON.stringify(changes2)
+    JSON.stringify(item1.sides) === JSON.stringify(item2.sides) &&
+    JSON.stringify(item1.changes) === JSON.stringify(item2.changes)
   );
 }
 
-export function mapDishToDto(dishData: any): CartItemDishDto | null {
+export function mapDishToDto(dishData: StrapiDishData | null | undefined): CartItemDishDto | null {
     if (!dishData) return null;
 
     const imageUrl =
