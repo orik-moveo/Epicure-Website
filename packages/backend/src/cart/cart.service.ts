@@ -5,7 +5,8 @@ import { CartItem } from '../../../shared/entities/cartItem.entity';
 import { AddToCartDto } from '../../../shared/dto/cart/addToCart.dto';
 import { UpdateCartItemDto } from '../../../shared/dto/cart/updateCartItem.dto';
 import { MergeCartDto } from '../../../shared/dto/cart/mergeCart.dto';
-import { normalizeArray, itemsMatch, mapDishToDto, mapCartItemToResponseDto } from './utils/cart.utils';
+import { normalizeArray, itemsMatch } from '../../../shared/utils/cart.utils';
+import { mapDishToDto, mapCartItemToResponseDto } from './utils/cart.utils';
 import { CartItemResponseDto } from '../../../shared/dto/cart/cartItemResponse.dto';
 import { DishService } from '../dish/dish.service';
 import { CartItemDishDto } from '../../../shared/dto/cart/cartItemDish.dto';
@@ -52,7 +53,7 @@ export class CartService {
     if (!dish) {
       throw new NotFoundException(`Dish with id ${dishId} does not exist`);
     }
-    
+
     const normalizedSides = normalizeArray(sides);
     const normalizedChanges = normalizeArray(changes);
 
