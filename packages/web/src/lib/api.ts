@@ -4,6 +4,10 @@ import {
   RegisterPayload,
 } from '@/app/types/auth.types';
 import { API_ENDPOINTS } from './apiEndpoints';
+import { AddToCartDto } from '../../../shared/dto/cart/addToCart.dto';
+import { CartItemResponseDto } from '../../../shared/dto/cart/cartItemResponse.dto';
+import { UpdateCartItemDto } from '../../../shared/dto/cart/updateCartItem.dto';
+import { MergeCartDto } from '../../../shared/dto/cart/mergeCart.dto';
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
@@ -133,6 +137,69 @@ export async function getMe(){
   }));
   if (!response.ok) {
     throw new Error('Failed to fetch user');
+  }
+  return response.json();
+}
+
+export async function addToCart(dto: AddToCartDto): Promise<CartItemResponseDto> {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.CART.BASE}`,
+    createDefaultOptions({
+      method: 'POST',
+      body: JSON.stringify(dto),
+    })
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to add to cart');
+  }
+  return response.json();
+}
+
+export async function getCart(): Promise<CartItemResponseDto[]> {
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.CART.BASE}`,
+    createDefaultOptions({
+      method: 'GET',
+    })
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch cart');
+  }
+  return response.json();
+}
+
+export async function updateCartItem(id: string,quantity: number): Promise<CartItemResponseDto | null> {
+  const updateDto: UpdateCartItemDto = { quantity };
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.CART.BY_ID(id)}`,
+    createDefaultOptions({
+      method: 'PUT',
+      body: JSON.stringify(updateDto),
+    })
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to update cart item');
+  }
+
+  if (quantity === 0) {
+    return null;
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function mergeCart(items: AddToCartDto[]): Promise<CartItemResponseDto[]> {
+  const mergeDto: MergeCartDto = { items };
+  const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.CART.MERGE}`,
+    createDefaultOptions({
+      method: 'POST',
+      body: JSON.stringify(mergeDto),
+    })
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to merge cart');
   }
   return response.json();
 }

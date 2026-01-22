@@ -10,4 +10,9 @@ export const API_ENDPOINTS = {
     LOGOUT: '/api/auth/logout',
     ME: '/api/auth/me',
   },
+  CART: {
+    BASE: '/api/cart',
+    BY_ID: (id: string) => `/api/cart/${id}`,
+    MERGE: '/api/cart/merge',
+  },
 } as const;

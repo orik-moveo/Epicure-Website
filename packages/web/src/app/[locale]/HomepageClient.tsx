@@ -1,8 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../lib/hooks';
-import { setHomepage } from '../../lib/slices/homepageSlice';
 import Hero from '../../components/homepage/hero/Hero';
 import PopularRestaurants from '../../components/homepage/popularRestaurants/PopularRestaurants';
 import PopularDishes from '../../components/homepage/popularDishes/PopularDishes';
@@ -15,11 +12,6 @@ interface HomepageClientProps {
 }
 
 export default function HomepageClient({ data }: HomepageClientProps) {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setHomepage(data));
-  }, [data, dispatch]);
 
   const { hero, popularRestaurants, popularDishes, chefOfWeek, about } = data;
 
